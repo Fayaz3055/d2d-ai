@@ -1,24 +1,53 @@
-import { createFileRoute } from "@tanstack/react-router";
+import { createFileRoute, Link, useNavigate } from "@tanstack/react-router";
+import { useEffect } from "react";
+import { NovaLogo } from "@/components/nova/logo";
 
-// No head() here: the home route inherits title/description/og/twitter from
-// __root.tsx, and ships no og:image so serve-time hosting can inject the
-// project's social preview (explicit og:image or latest screenshot).
 export const Route = createFileRoute("/")({
-  component: Index,
+  head: () => ({
+    meta: [
+      { title: "Nova — Organize. Focus. Achieve." },
+      {
+        name: "description",
+        content:
+          "Nova is a premium AI life assistant that helps students and professionals organize tasks, notes, and time in one calm space.",
+      },
+      { property: "og:title", content: "Nova — Organize. Focus. Achieve." },
+      {
+        property: "og:description",
+        content: "Your AI-powered life assistant. Organize. Focus. Achieve.",
+      },
+    ],
+  }),
+  component: Splash,
 });
 
-// IMPORTANT: Replace this placeholder. See ./README.md for routing conventions.
-function Index() {
+function Splash() {
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    const t = setTimeout(() => navigate({ to: "/onboarding" }), 1800);
+    return () => clearTimeout(t);
+  }, [navigate]);
+
   return (
-    <div
-      className="flex min-h-screen items-center justify-center"
-      style={{ backgroundColor: "#fcfbf8" }}
-    >
-      <img
-        data-lovable-blank-page-placeholder="REMOVE_THIS"
-        src="https://cdn.gpteng.co/blank-app-v1.svg"
-        alt="Your app will live here!"
-      />
-    </div>
+    <main className="relative flex min-h-dvh flex-col items-center justify-center overflow-hidden bg-background px-6">
+      {/* soft ambient glow */}
+      <div className="pointer-events-none absolute inset-0 -z-10">
+        <div className="absolute left-1/2 top-1/3 h-[520px] w-[520px] -translate-x-1/2 -translate-y-1/2 rounded-full bg-primary/15 blur-3xl" />
+      </div>
+
+      <div className="flex flex-col items-center animate-fade-up">
+        <NovaLogo size={84} />
+        <h1 className="mt-8 text-4xl font-semibold tracking-tight">Nova</h1>
+        <p className="mt-3 text-sm text-muted-foreground">Organize. Focus. Achieve.</p>
+      </div>
+
+      <Link
+        to="/onboarding"
+        className="absolute bottom-10 text-xs font-medium text-muted-foreground/70 hover:text-foreground"
+      >
+        Skip
+      </Link>
+    </main>
   );
 }
