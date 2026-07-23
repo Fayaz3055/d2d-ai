@@ -8,9 +8,9 @@ export const Route = createFileRoute("/onboarding")({
   head: () => ({
     meta: [
       { title: "Welcome to D2D AI" },
-      { name: "description", content: "A quick tour of Nova — your AI life assistant." },
+      { name: "description", content: "A quick tour of D2D AI — your intelligent daily companion." },
       { property: "og:title", content: "Welcome to D2D AI" },
-      { property: "og:description", content: "A quick tour of Nova." },
+      { property: "og:description", content: "A quick tour of D2D AI." },
     ],
   }),
   component: Onboarding,
