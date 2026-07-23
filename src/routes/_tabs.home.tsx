@@ -8,7 +8,6 @@ import {
   TrendingUp,
   Sparkles,
   BookOpen,
-  Bell as BellIcon,
 } from "lucide-react";
 import { ScreenHeader } from "@/components/nova/screen-header";
 import { DashboardCard } from "@/components/nova/dashboard-card";
