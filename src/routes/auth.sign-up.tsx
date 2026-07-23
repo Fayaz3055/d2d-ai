@@ -7,10 +7,10 @@ import { AuthShell, SocialButtons, Divider } from "@/features/auth/auth-shell";
 export const Route = createFileRoute("/auth/sign-up")({
   head: () => ({
     meta: [
-      { title: "Create your account — Nova" },
-      { name: "description", content: "Join Nova and start organizing your life." },
-      { property: "og:title", content: "Create your account — Nova" },
-      { property: "og:description", content: "Join Nova today." },
+      { title: "Create your account — D2D AI" },
+      { name: "description", content: "Join D2D AI and start organizing your life." },
+      { property: "og:title", content: "Create your account — D2D AI" },
+      { property: "og:description", content: "Join D2D AI today." },
     ],
   }),
   component: SignUp,
@@ -21,7 +21,7 @@ function SignUp() {
   return (
     <AuthShell
       title="Create your account"
-      subtitle="Start your calm, organized life with Nova."
+      subtitle="Start your calm, organized life with D2D AI."
       backTo="/onboarding"
       footer={
         <span className="text-muted-foreground">
@@ -63,7 +63,7 @@ function SignUp() {
           Create account
         </Button>
         <p className="text-center text-[11px] leading-relaxed text-muted-foreground">
-          By continuing you agree to Nova's Terms and Privacy Policy.
+          By continuing you agree to D2D AI's Terms and Privacy Policy.
         </p>
       </form>
     </AuthShell>

@@ -15,9 +15,9 @@ import { DashboardCard } from "@/components/nova/dashboard-card";
 export const Route = createFileRoute("/_tabs/home")({
   head: () => ({
     meta: [
-      { title: "Home — Nova" },
-      { name: "description", content: "Your calm daily overview in Nova." },
-      { property: "og:title", content: "Home — Nova" },
+      { title: "Home — D2D AI" },
+      { name: "description", content: "Your calm daily overview in D2D AI." },
+      { property: "og:title", content: "Home — D2D AI" },
       { property: "og:description", content: "Your calm daily overview." },
     ],
   }),
@@ -49,14 +49,14 @@ function Home() {
       />
 
       {/* Focus strip */}
-      <div className="mx-5 mt-2 rounded-3xl bg-gradient-to-br from-primary to-[oklch(0.58_0.16_300)] p-5 text-primary-foreground shadow-[var(--shadow-float)]">
-        <p className="text-[11px] font-medium uppercase tracking-[0.18em] opacity-80">
+      <div className="mx-5 mt-2 rounded-3xl bg-gradient-to-br from-[oklch(0.78_0.13_85)] to-[oklch(0.62_0.14_75)] p-5 text-white shadow-[var(--shadow-float)]">
+        <p className="text-[11px] font-medium uppercase tracking-[0.18em] opacity-85">
           Today's focus
         </p>
         <h2 className="mt-2 text-xl font-semibold tracking-tight">
           A quiet mind, one task at a time.
         </h2>
-        <p className="mt-2 text-sm opacity-85">
+        <p className="mt-2 text-sm opacity-90">
           You have 0 tasks scheduled — a fresh start awaits.
         </p>
       </div>

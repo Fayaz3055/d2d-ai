@@ -7,10 +7,10 @@ import { Button } from "@/components/ui/button";
 export const Route = createFileRoute("/onboarding")({
   head: () => ({
     meta: [
-      { title: "Welcome to Nova" },
-      { name: "description", content: "A quick tour of Nova — your AI life assistant." },
-      { property: "og:title", content: "Welcome to Nova" },
-      { property: "og:description", content: "A quick tour of Nova." },
+      { title: "Welcome to D2D AI" },
+      { name: "description", content: "A quick tour of D2D AI — your intelligent daily companion." },
+      { property: "og:title", content: "Welcome to D2D AI" },
+      { property: "og:description", content: "A quick tour of D2D AI." },
     ],
   }),
   component: Onboarding,
@@ -20,14 +20,14 @@ const slides = [
   {
     icon: Compass,
     eyebrow: "Welcome",
-    title: "Meet Nova",
+    title: "Meet D2D AI",
     body: "A calm, beautiful home for your tasks, notes, and thoughts — designed for a focused life.",
   },
   {
     icon: Sparkles,
     eyebrow: "AI-Powered",
     title: "Effortless organization",
-    body: "Nova learns your rhythm. Capture anything and let intelligent structure emerge — without the busywork.",
+    body: "D2D AI learns your rhythm. Capture anything and let intelligent structure emerge — without the busywork.",
   },
   {
     icon: Rocket,
@@ -59,7 +59,7 @@ function Onboarding() {
       </button>
 
       <section key={step} className="mt-10 flex flex-1 flex-col items-center justify-center text-center animate-fade-up">
-        <div className="flex h-24 w-24 items-center justify-center rounded-3xl bg-gradient-to-br from-primary to-[oklch(0.62_0.18_310)] text-primary-foreground shadow-[var(--shadow-float)]">
+        <div className="flex h-24 w-24 items-center justify-center rounded-3xl bg-gradient-to-br from-[oklch(0.78_0.13_85)] to-[oklch(0.62_0.14_75)] text-white shadow-[var(--shadow-float)]">
           <Icon className="h-11 w-11" strokeWidth={1.8} />
         </div>
         <p className="mt-8 text-[11px] font-medium uppercase tracking-[0.18em] text-primary">

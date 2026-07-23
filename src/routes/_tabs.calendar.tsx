@@ -6,9 +6,9 @@ import { EmptyState } from "@/components/nova/empty-state";
 export const Route = createFileRoute("/_tabs/calendar")({
   head: () => ({
     meta: [
-      { title: "Calendar — Nova" },
+      { title: "Calendar — D2D AI" },
       { name: "description", content: "Your schedule, beautifully organized." },
-      { property: "og:title", content: "Calendar — Nova" },
+      { property: "og:title", content: "Calendar — D2D AI" },
       { property: "og:description", content: "Your schedule, beautifully organized." },
     ],
   }),

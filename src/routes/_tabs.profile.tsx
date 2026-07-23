@@ -7,10 +7,10 @@ import { cn } from "@/lib/utils";
 export const Route = createFileRoute("/_tabs/profile")({
   head: () => ({
     meta: [
-      { title: "Profile — Nova" },
-      { name: "description", content: "Your Nova account and preferences." },
-      { property: "og:title", content: "Profile — Nova" },
-      { property: "og:description", content: "Your Nova account and preferences." },
+      { title: "Profile — D2D AI" },
+      { name: "description", content: "Your D2D AI account and preferences." },
+      { property: "og:title", content: "Profile — D2D AI" },
+      { property: "og:description", content: "Your D2D AI account and preferences." },
     ],
   }),
   component: Profile,
@@ -28,7 +28,7 @@ function Profile() {
 
       {/* Profile card */}
       <div className="mx-5 nova-card flex items-center gap-4 p-5">
-        <div className="flex h-14 w-14 items-center justify-center rounded-full bg-gradient-to-br from-primary to-[oklch(0.62_0.18_310)] text-lg font-semibold text-primary-foreground">
+        <div className="flex h-14 w-14 items-center justify-center rounded-full bg-gradient-to-br from-[oklch(0.78_0.13_85)] to-[oklch(0.62_0.14_75)] text-lg font-semibold text-white">
           A
         </div>
         <div className="min-w-0 flex-1">
@@ -77,7 +77,7 @@ function Profile() {
         </p>
         <div className="nova-card divide-y divide-border overflow-hidden">
           <Row icon={Settings} label="Settings" />
-          <Row icon={Info} label="About Nova" />
+          <Row icon={Info} label="About D2D AI" />
         </div>
       </section>
 
@@ -94,7 +94,7 @@ function Profile() {
       </section>
 
       <p className="mt-8 text-center text-[11px] text-muted-foreground">
-        Nova · v{APP_VERSION}
+        D2D AI · v{APP_VERSION}
       </p>
     </div>
   );

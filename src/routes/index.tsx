@@ -5,16 +5,16 @@ import { NovaLogo } from "@/components/nova/logo";
 export const Route = createFileRoute("/")({
   head: () => ({
     meta: [
-      { title: "Nova — Organize. Focus. Achieve." },
+      { title: "D2D AI — Your Intelligent Daily Companion" },
       {
         name: "description",
         content:
-          "Nova is a premium AI life assistant that helps students and professionals organize tasks, notes, and time in one calm space.",
+          "D2D AI is a premium AI life assistant that helps students and professionals organize tasks, notes, and time in one calm space.",
       },
-      { property: "og:title", content: "Nova — Organize. Focus. Achieve." },
+      { property: "og:title", content: "D2D AI — Your Intelligent Daily Companion" },
       {
         property: "og:description",
-        content: "Your AI-powered life assistant. Organize. Focus. Achieve.",
+        content: "Your AI-powered life assistant. Your Intelligent Daily Companion",
       },
     ],
   }),
@@ -38,8 +38,8 @@ function Splash() {
 
       <div className="flex flex-col items-center animate-fade-up">
         <NovaLogo size={84} />
-        <h1 className="mt-8 text-4xl font-semibold tracking-tight">Nova</h1>
-        <p className="mt-3 text-sm text-muted-foreground">Organize. Focus. Achieve.</p>
+        <h1 className="mt-8 text-4xl font-semibold tracking-tight">D2D AI</h1>
+        <p className="mt-3 text-sm text-muted-foreground tracking-wide">Your Intelligent Daily Companion</p>
       </div>
 
       <Link
