@@ -15,9 +15,9 @@ import { DashboardCard } from "@/components/nova/dashboard-card";
 export const Route = createFileRoute("/_tabs/home")({
   head: () => ({
     meta: [
-      { title: "Home — Nova" },
-      { name: "description", content: "Your calm daily overview in Nova." },
-      { property: "og:title", content: "Home — Nova" },
+      { title: "Home — D2D AI" },
+      { name: "description", content: "Your calm daily overview in D2D AI." },
+      { property: "og:title", content: "Home — D2D AI" },
       { property: "og:description", content: "Your calm daily overview." },
     ],
   }),

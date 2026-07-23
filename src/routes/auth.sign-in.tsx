@@ -7,10 +7,10 @@ import { AuthShell, SocialButtons, Divider } from "@/features/auth/auth-shell";
 export const Route = createFileRoute("/auth/sign-in")({
   head: () => ({
     meta: [
-      { title: "Sign in — Nova" },
-      { name: "description", content: "Sign in to your Nova account." },
-      { property: "og:title", content: "Sign in — Nova" },
-      { property: "og:description", content: "Sign in to Nova." },
+      { title: "Sign in — D2D AI" },
+      { name: "description", content: "Sign in to your D2D AI account." },
+      { property: "og:title", content: "Sign in — D2D AI" },
+      { property: "og:description", content: "Sign in to D2D AI." },
     ],
   }),
   component: SignIn,
@@ -21,7 +21,7 @@ function SignIn() {
   return (
     <AuthShell
       title="Welcome back"
-      subtitle="Sign in to continue your journey with Nova."
+      subtitle="Sign in to continue your journey with D2D AI."
       backTo="/onboarding"
       footer={
         <span className="text-muted-foreground">

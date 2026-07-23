@@ -7,10 +7,10 @@ import { cn } from "@/lib/utils";
 export const Route = createFileRoute("/_tabs/profile")({
   head: () => ({
     meta: [
-      { title: "Profile — Nova" },
-      { name: "description", content: "Your Nova account and preferences." },
-      { property: "og:title", content: "Profile — Nova" },
-      { property: "og:description", content: "Your Nova account and preferences." },
+      { title: "Profile — D2D AI" },
+      { name: "description", content: "Your D2D AI account and preferences." },
+      { property: "og:title", content: "Profile — D2D AI" },
+      { property: "og:description", content: "Your D2D AI account and preferences." },
     ],
   }),
   component: Profile,
@@ -77,7 +77,7 @@ function Profile() {
         </p>
         <div className="nova-card divide-y divide-border overflow-hidden">
           <Row icon={Settings} label="Settings" />
-          <Row icon={Info} label="About Nova" />
+          <Row icon={Info} label="About D2D AI" />
         </div>
       </section>
 
@@ -94,7 +94,7 @@ function Profile() {
       </section>
 
       <p className="mt-8 text-center text-[11px] text-muted-foreground">
-        Nova · v{APP_VERSION}
+        D2D AI · v{APP_VERSION}
       </p>
     </div>
   );

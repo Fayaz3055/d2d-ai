@@ -79,17 +79,17 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       { charSet: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1, viewport-fit=cover" },
       { name: "theme-color", content: "#fbfaf6" },
-      { title: "Nova — Organize. Focus. Achieve." },
+      { title: "Nova — Your Intelligent Daily Companion" },
       {
         name: "description",
         content:
-          "Nova is a premium AI life assistant for students and professionals. Organize tasks, notes, and time in one calm space.",
+          "D2D AI is a premium AI life assistant for students and professionals. Organize tasks, notes, and time in one calm space.",
       },
-      { name: "author", content: "Nova" },
-      { property: "og:title", content: "Nova — Organize. Focus. Achieve." },
+      { name: "author", content: "D2D AI" },
+      { property: "og:title", content: "Nova — Your Intelligent Daily Companion" },
       {
         property: "og:description",
-        content: "Your AI-powered life assistant. Organize. Focus. Achieve.",
+        content: "Your AI-powered life assistant. Your Intelligent Daily Companion",
       },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },

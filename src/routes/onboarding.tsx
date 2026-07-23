@@ -7,9 +7,9 @@ import { Button } from "@/components/ui/button";
 export const Route = createFileRoute("/onboarding")({
   head: () => ({
     meta: [
-      { title: "Welcome to Nova" },
+      { title: "Welcome to D2D AI" },
       { name: "description", content: "A quick tour of Nova — your AI life assistant." },
-      { property: "og:title", content: "Welcome to Nova" },
+      { property: "og:title", content: "Welcome to D2D AI" },
       { property: "og:description", content: "A quick tour of Nova." },
     ],
   }),
@@ -20,14 +20,14 @@ const slides = [
   {
     icon: Compass,
     eyebrow: "Welcome",
-    title: "Meet Nova",
+    title: "Meet D2D AI",
     body: "A calm, beautiful home for your tasks, notes, and thoughts — designed for a focused life.",
   },
   {
     icon: Sparkles,
     eyebrow: "AI-Powered",
     title: "Effortless organization",
-    body: "Nova learns your rhythm. Capture anything and let intelligent structure emerge — without the busywork.",
+    body: "D2D AI learns your rhythm. Capture anything and let intelligent structure emerge — without the busywork.",
   },
   {
     icon: Rocket,

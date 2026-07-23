@@ -5,9 +5,9 @@ import { ScreenHeader } from "@/components/nova/screen-header";
 export const Route = createFileRoute("/_tabs/ai")({
   head: () => ({
     meta: [
-      { title: "AI Assistant — Nova" },
+      { title: "AI Assistant — D2D AI" },
       { name: "description", content: "Your calm, personal AI companion." },
-      { property: "og:title", content: "AI Assistant — Nova" },
+      { property: "og:title", content: "AI Assistant — D2D AI" },
       { property: "og:description", content: "Your calm, personal AI companion." },
     ],
   }),
@@ -23,7 +23,7 @@ const suggestions = [
 function AI() {
   return (
     <div className="animate-fade-up">
-      <ScreenHeader title="Nova AI" subtitle="Your quiet, thoughtful companion." />
+      <ScreenHeader title="D2D AI" subtitle="Your quiet, thoughtful companion." />
 
       <div className="mx-5 rounded-3xl bg-gradient-to-br from-primary to-[oklch(0.58_0.16_300)] p-6 text-primary-foreground shadow-[var(--shadow-float)]">
         <div className="flex h-12 w-12 items-center justify-center rounded-2xl bg-white/15 backdrop-blur">
@@ -33,7 +33,7 @@ function AI() {
           Something magical is coming.
         </h2>
         <p className="mt-2 text-sm opacity-85">
-          Nova AI will help you plan, study, and reflect — all in one calm space.
+          D2D AI will help you plan, study, and reflect — all in one calm space.
         </p>
       </div>
 

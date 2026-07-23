@@ -6,9 +6,9 @@ import { EmptyState } from "@/components/nova/empty-state";
 export const Route = createFileRoute("/_tabs/tasks")({
   head: () => ({
     meta: [
-      { title: "Tasks — Nova" },
-      { name: "description", content: "Plan and complete your day in Nova." },
-      { property: "og:title", content: "Tasks — Nova" },
+      { title: "Tasks — D2D AI" },
+      { name: "description", content: "Plan and complete your day in D2D AI." },
+      { property: "og:title", content: "Tasks — D2D AI" },
       { property: "og:description", content: "Plan and complete your day." },
     ],
   }),

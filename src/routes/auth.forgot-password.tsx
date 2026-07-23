@@ -9,10 +9,10 @@ import { CheckCircle2 } from "lucide-react";
 export const Route = createFileRoute("/auth/forgot-password")({
   head: () => ({
     meta: [
-      { title: "Reset your password — Nova" },
-      { name: "description", content: "Recover access to your Nova account." },
-      { property: "og:title", content: "Reset your password — Nova" },
-      { property: "og:description", content: "Recover access to Nova." },
+      { title: "Reset your password — D2D AI" },
+      { name: "description", content: "Recover access to your D2D AI account." },
+      { property: "og:title", content: "Reset your password — D2D AI" },
+      { property: "og:description", content: "Recover access to D2D AI." },
     ],
   }),
   component: Forgot,
