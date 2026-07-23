@@ -39,7 +39,7 @@ function Splash() {
       <div className="flex flex-col items-center animate-fade-up">
         <NovaLogo size={84} />
         <h1 className="mt-8 text-4xl font-semibold tracking-tight">D2D AI</h1>
-        <p className="mt-3 text-sm text-muted-foreground">Your Intelligent Daily Companion</p>
+        <p className="mt-3 text-sm text-muted-foreground tracking-wide">Your Intelligent Daily Companion</p>
       </div>
 
       <Link
