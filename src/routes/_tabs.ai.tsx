@@ -25,7 +25,7 @@ function AI() {
     <div className="animate-fade-up">
       <ScreenHeader title="D2D AI" subtitle="Your quiet, thoughtful companion." />
 
-      <div className="mx-5 rounded-3xl bg-gradient-to-br from-primary to-[oklch(0.58_0.16_300)] p-6 text-primary-foreground shadow-[var(--shadow-float)]">
+      <div className="mx-5 rounded-3xl bg-gradient-to-br from-[oklch(0.78_0.13_85)] to-[oklch(0.62_0.14_75)] p-6 text-white shadow-[var(--shadow-float)]">
         <div className="flex h-12 w-12 items-center justify-center rounded-2xl bg-white/15 backdrop-blur">
           <Sparkles className="h-6 w-6" />
         </div>

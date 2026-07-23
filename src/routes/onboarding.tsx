@@ -59,7 +59,7 @@ function Onboarding() {
       </button>
 
       <section key={step} className="mt-10 flex flex-1 flex-col items-center justify-center text-center animate-fade-up">
-        <div className="flex h-24 w-24 items-center justify-center rounded-3xl bg-gradient-to-br from-primary to-[oklch(0.62_0.18_310)] text-primary-foreground shadow-[var(--shadow-float)]">
+        <div className="flex h-24 w-24 items-center justify-center rounded-3xl bg-gradient-to-br from-[oklch(0.78_0.13_85)] to-[oklch(0.62_0.14_75)] text-white shadow-[var(--shadow-float)]">
           <Icon className="h-11 w-11" strokeWidth={1.8} />
         </div>
         <p className="mt-8 text-[11px] font-medium uppercase tracking-[0.18em] text-primary">
