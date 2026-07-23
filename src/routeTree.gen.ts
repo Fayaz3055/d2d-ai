@@ -12,6 +12,11 @@ import { Route as rootRouteImport } from './routes/__root'
 import { Route as OnboardingRouteImport } from './routes/onboarding'
 import { Route as TabsRouteImport } from './routes/_tabs'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as CaptureThoughtRouteImport } from './routes/capture.thought'
+import { Route as CaptureTaskRouteImport } from './routes/capture.task'
+import { Route as CaptureReminderRouteImport } from './routes/capture.reminder'
+import { Route as CaptureNoteRouteImport } from './routes/capture.note'
+import { Route as CaptureEventRouteImport } from './routes/capture.event'
 import { Route as AuthSignUpRouteImport } from './routes/auth.sign-up'
 import { Route as AuthSignInRouteImport } from './routes/auth.sign-in'
 import { Route as AuthForgotPasswordRouteImport } from './routes/auth.forgot-password'
@@ -33,6 +38,31 @@ const TabsRoute = TabsRouteImport.update({
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const CaptureThoughtRoute = CaptureThoughtRouteImport.update({
+  id: '/capture/thought',
+  path: '/capture/thought',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const CaptureTaskRoute = CaptureTaskRouteImport.update({
+  id: '/capture/task',
+  path: '/capture/task',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const CaptureReminderRoute = CaptureReminderRouteImport.update({
+  id: '/capture/reminder',
+  path: '/capture/reminder',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const CaptureNoteRoute = CaptureNoteRouteImport.update({
+  id: '/capture/note',
+  path: '/capture/note',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const CaptureEventRoute = CaptureEventRouteImport.update({
+  id: '/capture/event',
+  path: '/capture/event',
   getParentRoute: () => rootRouteImport,
 } as any)
 const AuthSignUpRoute = AuthSignUpRouteImport.update({
@@ -87,6 +117,11 @@ export interface FileRoutesByFullPath {
   '/auth/forgot-password': typeof AuthForgotPasswordRoute
   '/auth/sign-in': typeof AuthSignInRoute
   '/auth/sign-up': typeof AuthSignUpRoute
+  '/capture/event': typeof CaptureEventRoute
+  '/capture/note': typeof CaptureNoteRoute
+  '/capture/reminder': typeof CaptureReminderRoute
+  '/capture/task': typeof CaptureTaskRoute
+  '/capture/thought': typeof CaptureThoughtRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
@@ -99,6 +134,11 @@ export interface FileRoutesByTo {
   '/auth/forgot-password': typeof AuthForgotPasswordRoute
   '/auth/sign-in': typeof AuthSignInRoute
   '/auth/sign-up': typeof AuthSignUpRoute
+  '/capture/event': typeof CaptureEventRoute
+  '/capture/note': typeof CaptureNoteRoute
+  '/capture/reminder': typeof CaptureReminderRoute
+  '/capture/task': typeof CaptureTaskRoute
+  '/capture/thought': typeof CaptureThoughtRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
@@ -113,6 +153,11 @@ export interface FileRoutesById {
   '/auth/forgot-password': typeof AuthForgotPasswordRoute
   '/auth/sign-in': typeof AuthSignInRoute
   '/auth/sign-up': typeof AuthSignUpRoute
+  '/capture/event': typeof CaptureEventRoute
+  '/capture/note': typeof CaptureNoteRoute
+  '/capture/reminder': typeof CaptureReminderRoute
+  '/capture/task': typeof CaptureTaskRoute
+  '/capture/thought': typeof CaptureThoughtRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
@@ -127,6 +172,11 @@ export interface FileRouteTypes {
     | '/auth/forgot-password'
     | '/auth/sign-in'
     | '/auth/sign-up'
+    | '/capture/event'
+    | '/capture/note'
+    | '/capture/reminder'
+    | '/capture/task'
+    | '/capture/thought'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
@@ -139,6 +189,11 @@ export interface FileRouteTypes {
     | '/auth/forgot-password'
     | '/auth/sign-in'
     | '/auth/sign-up'
+    | '/capture/event'
+    | '/capture/note'
+    | '/capture/reminder'
+    | '/capture/task'
+    | '/capture/thought'
   id:
     | '__root__'
     | '/'
@@ -152,6 +207,11 @@ export interface FileRouteTypes {
     | '/auth/forgot-password'
     | '/auth/sign-in'
     | '/auth/sign-up'
+    | '/capture/event'
+    | '/capture/note'
+    | '/capture/reminder'
+    | '/capture/task'
+    | '/capture/thought'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -161,6 +221,11 @@ export interface RootRouteChildren {
   AuthForgotPasswordRoute: typeof AuthForgotPasswordRoute
   AuthSignInRoute: typeof AuthSignInRoute
   AuthSignUpRoute: typeof AuthSignUpRoute
+  CaptureEventRoute: typeof CaptureEventRoute
+  CaptureNoteRoute: typeof CaptureNoteRoute
+  CaptureReminderRoute: typeof CaptureReminderRoute
+  CaptureTaskRoute: typeof CaptureTaskRoute
+  CaptureThoughtRoute: typeof CaptureThoughtRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -184,6 +249,41 @@ declare module '@tanstack/react-router' {
       path: '/'
       fullPath: '/'
       preLoaderRoute: typeof IndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/capture/thought': {
+      id: '/capture/thought'
+      path: '/capture/thought'
+      fullPath: '/capture/thought'
+      preLoaderRoute: typeof CaptureThoughtRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/capture/task': {
+      id: '/capture/task'
+      path: '/capture/task'
+      fullPath: '/capture/task'
+      preLoaderRoute: typeof CaptureTaskRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/capture/reminder': {
+      id: '/capture/reminder'
+      path: '/capture/reminder'
+      fullPath: '/capture/reminder'
+      preLoaderRoute: typeof CaptureReminderRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/capture/note': {
+      id: '/capture/note'
+      path: '/capture/note'
+      fullPath: '/capture/note'
+      preLoaderRoute: typeof CaptureNoteRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/capture/event': {
+      id: '/capture/event'
+      path: '/capture/event'
+      fullPath: '/capture/event'
+      preLoaderRoute: typeof CaptureEventRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/auth/sign-up': {
@@ -270,17 +370,12 @@ const rootRouteChildren: RootRouteChildren = {
   AuthForgotPasswordRoute: AuthForgotPasswordRoute,
   AuthSignInRoute: AuthSignInRoute,
   AuthSignUpRoute: AuthSignUpRoute,
+  CaptureEventRoute: CaptureEventRoute,
+  CaptureNoteRoute: CaptureNoteRoute,
+  CaptureReminderRoute: CaptureReminderRoute,
+  CaptureTaskRoute: CaptureTaskRoute,
+  CaptureThoughtRoute: CaptureThoughtRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
   ._addFileTypes<FileRouteTypes>()
-
-import type { getRouter } from './router.tsx'
-import type { startInstance } from './start.ts'
-declare module '@tanstack/react-start' {
-  interface Register {
-    ssr: true
-    router: Awaited<ReturnType<typeof getRouter>>
-    config: Awaited<ReturnType<typeof startInstance.getOptions>>
-  }
-}
