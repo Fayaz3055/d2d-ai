@@ -49,6 +49,13 @@ function NewTaskPage() {
   const handleSave = () => {
     if (!data.title.trim() || saving) return;
     setSaving(true);
+    tasksStore.add({
+      title: data.title.trim(),
+      description: data.description.trim(),
+      dueDate: data.dueDate,
+      priority: data.priority,
+      category: data.category,
+    });
     clear();
     toast.success("Task saved", { description: "Added to your task list." });
     setTimeout(() => {
