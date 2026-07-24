@@ -8,6 +8,7 @@ import {
   fieldInputCn,
 } from "@/features/quick-capture/capture-page";
 import { useDraft } from "@/features/quick-capture/use-draft";
+import { tasksStore } from "@/features/tasks/use-tasks";
 
 export const Route = createFileRoute("/capture/task")({
   head: () => ({

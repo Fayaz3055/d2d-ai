@@ -26,6 +26,7 @@ import { Route as TabsProfileRouteImport } from './routes/_tabs.profile'
 import { Route as TabsHomeRouteImport } from './routes/_tabs.home'
 import { Route as TabsCalendarRouteImport } from './routes/_tabs.calendar'
 import { Route as TabsAiRouteImport } from './routes/_tabs.ai'
+import { Route as TasksIdEditRouteImport } from './routes/tasks.$id.edit'
 
 const OnboardingRoute = OnboardingRouteImport.update({
   id: '/onboarding',
@@ -111,6 +112,11 @@ const TabsAiRoute = TabsAiRouteImport.update({
   path: '/ai',
   getParentRoute: () => TabsRoute,
 } as any)
+const TasksIdEditRoute = TasksIdEditRouteImport.update({
+  id: '/edit',
+  path: '/edit',
+  getParentRoute: () => TasksIdRoute,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
@@ -128,7 +134,8 @@ export interface FileRoutesByFullPath {
   '/capture/reminder': typeof CaptureReminderRoute
   '/capture/task': typeof CaptureTaskRoute
   '/capture/thought': typeof CaptureThoughtRoute
-  '/tasks/$id': typeof TasksIdRoute
+  '/tasks/$id': typeof TasksIdRouteWithChildren
+  '/tasks/$id/edit': typeof TasksIdEditRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
@@ -146,7 +153,8 @@ export interface FileRoutesByTo {
   '/capture/reminder': typeof CaptureReminderRoute
   '/capture/task': typeof CaptureTaskRoute
   '/capture/thought': typeof CaptureThoughtRoute
-  '/tasks/$id': typeof TasksIdRoute
+  '/tasks/$id': typeof TasksIdRouteWithChildren
+  '/tasks/$id/edit': typeof TasksIdEditRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
@@ -166,7 +174,8 @@ export interface FileRoutesById {
   '/capture/reminder': typeof CaptureReminderRoute
   '/capture/task': typeof CaptureTaskRoute
   '/capture/thought': typeof CaptureThoughtRoute
-  '/tasks/$id': typeof TasksIdRoute
+  '/tasks/$id': typeof TasksIdRouteWithChildren
+  '/tasks/$id/edit': typeof TasksIdEditRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
@@ -187,6 +196,7 @@ export interface FileRouteTypes {
     | '/capture/task'
     | '/capture/thought'
     | '/tasks/$id'
+    | '/tasks/$id/edit'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
@@ -205,6 +215,7 @@ export interface FileRouteTypes {
     | '/capture/task'
     | '/capture/thought'
     | '/tasks/$id'
+    | '/tasks/$id/edit'
   id:
     | '__root__'
     | '/'
@@ -224,6 +235,7 @@ export interface FileRouteTypes {
     | '/capture/task'
     | '/capture/thought'
     | '/tasks/$id'
+    | '/tasks/$id/edit'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -238,7 +250,7 @@ export interface RootRouteChildren {
   CaptureReminderRoute: typeof CaptureReminderRoute
   CaptureTaskRoute: typeof CaptureTaskRoute
   CaptureThoughtRoute: typeof CaptureThoughtRoute
-  TasksIdRoute: typeof TasksIdRoute
+  TasksIdRoute: typeof TasksIdRouteWithChildren
 }
 
 declare module '@tanstack/react-router' {
@@ -362,6 +374,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof TabsAiRouteImport
       parentRoute: typeof TabsRoute
     }
+    '/tasks/$id/edit': {
+      id: '/tasks/$id/edit'
+      path: '/edit'
+      fullPath: '/tasks/$id/edit'
+      preLoaderRoute: typeof TasksIdEditRouteImport
+      parentRoute: typeof TasksIdRoute
+    }
   }
 }
 
@@ -383,6 +402,17 @@ const TabsRouteChildren: TabsRouteChildren = {
 
 const TabsRouteWithChildren = TabsRoute._addFileChildren(TabsRouteChildren)
 
+interface TasksIdRouteChildren {
+  TasksIdEditRoute: typeof TasksIdEditRoute
+}
+
+const TasksIdRouteChildren: TasksIdRouteChildren = {
+  TasksIdEditRoute: TasksIdEditRoute,
+}
+
+const TasksIdRouteWithChildren =
+  TasksIdRoute._addFileChildren(TasksIdRouteChildren)
+
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   TabsRoute: TabsRouteWithChildren,
@@ -395,7 +425,7 @@ const rootRouteChildren: RootRouteChildren = {
   CaptureReminderRoute: CaptureReminderRoute,
   CaptureTaskRoute: CaptureTaskRoute,
   CaptureThoughtRoute: CaptureThoughtRoute,
-  TasksIdRoute: TasksIdRoute,
+  TasksIdRoute: TasksIdRouteWithChildren,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
