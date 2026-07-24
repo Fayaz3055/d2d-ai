@@ -1,16 +1,15 @@
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { useNavigate } from "@tanstack/react-router";
 import {
-  Plus,
   CheckCircle2,
   StickyNote,
   Sparkles,
   CalendarPlus,
   BellRing,
-  X,
   ChevronRight,
 } from "lucide-react";
 import { cn } from "@/lib/utils";
+import { quickCapture, useQuickCaptureOpen } from "@/features/quick-capture/quick-capture-store";
 
 type CaptureRoute =
   | "/capture/task"
@@ -24,55 +23,22 @@ const actions: {
   label: string;
   description: string;
   icon: typeof CheckCircle2;
-  emoji: string;
 }[] = [
-  {
-    to: "/capture/task",
-    label: "New Task",
-    description: "Something to do — with a due date & priority.",
-    icon: CheckCircle2,
-    emoji: "✅",
-  },
-  {
-    to: "/capture/note",
-    label: "New Note",
-    description: "Save a longer idea or write it out in full.",
-    icon: StickyNote,
-    emoji: "📝",
-  },
-  {
-    to: "/capture/thought",
-    label: "New Thought",
-    description: "Drop it here — I'll help you remember later.",
-    icon: Sparkles,
-    emoji: "💭",
-  },
-  {
-    to: "/capture/event",
-    label: "New Event",
-    description: "Add something to your calendar.",
-    icon: CalendarPlus,
-    emoji: "📅",
-  },
-  {
-    to: "/capture/reminder",
-    label: "New Reminder",
-    description: "Get a nudge at the right time.",
-    icon: BellRing,
-    emoji: "⏰",
-  },
+  { to: "/capture/task", label: "New Task", description: "Something to do — with a due date & priority.", icon: CheckCircle2 },
+  { to: "/capture/note", label: "New Note", description: "Save a longer idea or write it out in full.", icon: StickyNote },
+  { to: "/capture/thought", label: "New Thought", description: "Drop it here — I'll help you remember later.", icon: Sparkles },
+  { to: "/capture/event", label: "New Event", description: "Add something to your calendar.", icon: CalendarPlus },
+  { to: "/capture/reminder", label: "New Reminder", description: "Get a nudge at the right time.", icon: BellRing },
 ];
 
-export function QuickCaptureFab() {
-  const [open, setOpen] = useState(false);
+export function QuickCaptureSheet() {
+  const open = useQuickCaptureOpen();
   const navigate = useNavigate();
 
-  // Close on escape
   useEffect(() => {
     if (!open) return;
-    const onKey = (e: KeyboardEvent) => e.key === "Escape" && setOpen(false);
+    const onKey = (e: KeyboardEvent) => e.key === "Escape" && quickCapture.close();
     window.addEventListener("keydown", onKey);
-    // Prevent body scroll
     const prev = document.body.style.overflow;
     document.body.style.overflow = "hidden";
     return () => {
@@ -82,16 +48,14 @@ export function QuickCaptureFab() {
   }, [open]);
 
   const handlePick = (to: CaptureRoute) => {
-    setOpen(false);
-    // let the sheet start closing before navigating
+    quickCapture.close();
     setTimeout(() => navigate({ to }), 80);
   };
 
   return (
     <>
-      {/* Backdrop */}
       <div
-        onClick={() => setOpen(false)}
+        onClick={() => quickCapture.close()}
         aria-hidden
         className={cn(
           "fixed inset-0 z-40 bg-foreground/25 backdrop-blur-md transition-opacity duration-300",
@@ -99,7 +63,6 @@ export function QuickCaptureFab() {
         )}
       />
 
-      {/* Bottom sheet */}
       <div
         role="dialog"
         aria-modal="true"
@@ -111,7 +74,6 @@ export function QuickCaptureFab() {
         )}
       >
         <div className="overflow-hidden rounded-[28px] border border-border/60 bg-background/95 shadow-[0_-12px_60px_oklch(0_0_0/0.15)] backdrop-blur-2xl">
-          {/* Grabber */}
           <div className="flex justify-center pt-3">
             <span className="h-1.5 w-10 rounded-full bg-border" />
           </div>
@@ -164,24 +126,6 @@ export function QuickCaptureFab() {
           </ul>
         </div>
       </div>
-
-      {/* FAB */}
-      <button
-        type="button"
-        aria-label="Quick capture"
-        aria-expanded={open}
-        onClick={() => setOpen((v) => !v)}
-        className={cn(
-          "fixed bottom-[calc(env(safe-area-inset-bottom)+4.75rem)] right-5 z-50",
-          "flex h-14 w-14 items-center justify-center rounded-full",
-          "bg-primary text-primary-foreground",
-          "shadow-[var(--shadow-float)] transition-all duration-300",
-          "hover:scale-105 active:scale-95",
-          open && "rotate-45",
-        )}
-      >
-        {open ? <X className="h-6 w-6" /> : <Plus className="h-6 w-6" strokeWidth={2.4} />}
-      </button>
     </>
   );
 }
