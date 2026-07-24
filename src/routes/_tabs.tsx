@@ -1,6 +1,6 @@
 import { createFileRoute, Outlet } from "@tanstack/react-router";
 import { BottomNav } from "@/components/nova/bottom-nav";
-import { QuickCaptureFab } from "@/components/nova/quick-capture-fab";
+import { QuickCaptureSheet } from "@/components/nova/quick-capture-fab";
 
 export const Route = createFileRoute("/_tabs")({
   component: TabsLayout,
@@ -12,7 +12,7 @@ function TabsLayout() {
       <div className="mx-auto max-w-xl pb-32">
         <Outlet />
       </div>
-      <QuickCaptureFab />
+      <QuickCaptureSheet />
       <BottomNav />
     </div>
   );
