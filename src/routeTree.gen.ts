@@ -10,6 +10,7 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as OnboardingRouteImport } from './routes/onboarding'
+import { Route as NotificationsRouteImport } from './routes/notifications'
 import { Route as TabsRouteImport } from './routes/_tabs'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as TasksIdRouteImport } from './routes/tasks.$id'
@@ -31,6 +32,11 @@ import { Route as TasksIdEditRouteImport } from './routes/tasks.$id.edit'
 const OnboardingRoute = OnboardingRouteImport.update({
   id: '/onboarding',
   path: '/onboarding',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const NotificationsRoute = NotificationsRouteImport.update({
+  id: '/notifications',
+  path: '/notifications',
   getParentRoute: () => rootRouteImport,
 } as any)
 const TabsRoute = TabsRouteImport.update({
@@ -120,6 +126,7 @@ const TasksIdEditRoute = TasksIdEditRouteImport.update({
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/notifications': typeof NotificationsRoute
   '/onboarding': typeof OnboardingRoute
   '/ai': typeof TabsAiRoute
   '/calendar': typeof TabsCalendarRoute
@@ -139,6 +146,7 @@ export interface FileRoutesByFullPath {
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/notifications': typeof NotificationsRoute
   '/onboarding': typeof OnboardingRoute
   '/ai': typeof TabsAiRoute
   '/calendar': typeof TabsCalendarRoute
@@ -160,6 +168,7 @@ export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
   '/_tabs': typeof TabsRouteWithChildren
+  '/notifications': typeof NotificationsRoute
   '/onboarding': typeof OnboardingRoute
   '/_tabs/ai': typeof TabsAiRoute
   '/_tabs/calendar': typeof TabsCalendarRoute
@@ -181,6 +190,7 @@ export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
   fullPaths:
     | '/'
+    | '/notifications'
     | '/onboarding'
     | '/ai'
     | '/calendar'
@@ -200,6 +210,7 @@ export interface FileRouteTypes {
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
+    | '/notifications'
     | '/onboarding'
     | '/ai'
     | '/calendar'
@@ -220,6 +231,7 @@ export interface FileRouteTypes {
     | '__root__'
     | '/'
     | '/_tabs'
+    | '/notifications'
     | '/onboarding'
     | '/_tabs/ai'
     | '/_tabs/calendar'
@@ -241,6 +253,7 @@ export interface FileRouteTypes {
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   TabsRoute: typeof TabsRouteWithChildren
+  NotificationsRoute: typeof NotificationsRoute
   OnboardingRoute: typeof OnboardingRoute
   AuthForgotPasswordRoute: typeof AuthForgotPasswordRoute
   AuthSignInRoute: typeof AuthSignInRoute
@@ -260,6 +273,13 @@ declare module '@tanstack/react-router' {
       path: '/onboarding'
       fullPath: '/onboarding'
       preLoaderRoute: typeof OnboardingRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/notifications': {
+      id: '/notifications'
+      path: '/notifications'
+      fullPath: '/notifications'
+      preLoaderRoute: typeof NotificationsRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/_tabs': {
@@ -416,6 +436,7 @@ const TasksIdRouteWithChildren =
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   TabsRoute: TabsRouteWithChildren,
+  NotificationsRoute: NotificationsRoute,
   OnboardingRoute: OnboardingRoute,
   AuthForgotPasswordRoute: AuthForgotPasswordRoute,
   AuthSignInRoute: AuthSignInRoute,
