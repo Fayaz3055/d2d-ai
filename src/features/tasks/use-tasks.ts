@@ -1,5 +1,6 @@
 import { useSyncExternalStore } from "react";
 import type { Task, TaskInput } from "./types";
+import { notificationsStore } from "@/features/notifications/use-notifications";
 
 const STORAGE_KEY = "d2d.tasks.v1";
 
@@ -54,17 +55,27 @@ export const tasksStore = {
     persist();
   },
   toggle(id: string) {
-    tasks = tasks.map((t) =>
-      t.id === id
-        ? {
-            ...t,
-            completed: !t.completed,
-            completedAt: !t.completed ? Date.now() : undefined,
-            updatedAt: Date.now(),
-          }
-        : t,
-    );
+    let justCompleted: Task | null = null;
+    tasks = tasks.map((t) => {
+      if (t.id !== id) return t;
+      const nextCompleted = !t.completed;
+      const updated: Task = {
+        ...t,
+        completed: nextCompleted,
+        completedAt: nextCompleted ? Date.now() : undefined,
+        updatedAt: Date.now(),
+      };
+      if (nextCompleted) justCompleted = updated;
+      return updated;
+    });
     persist();
+    if (justCompleted) {
+      notificationsStore.push({
+        kind: "task_completed",
+        title: "Task completed",
+        description: (justCompleted as Task).title,
+      });
+    }
   },
   remove(id: string) {
     tasks = tasks.filter((t) => t.id !== id);
