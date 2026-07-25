@@ -2,6 +2,7 @@ import { createFileRoute, useRouter } from "@tanstack/react-router";
 import { toast } from "sonner";
 import { CapturePage, Field, fieldInputCn } from "@/features/quick-capture/capture-page";
 import { useDraft } from "@/features/quick-capture/use-draft";
+import { eventsStore } from "@/features/events/use-events";
 
 export const Route = createFileRoute("/capture/event")({
   head: () => ({
@@ -24,6 +25,12 @@ function NewEventPage() {
 
   const handleSave = () => {
     if (!data.title.trim()) return;
+    eventsStore.add({
+      title: data.title.trim(),
+      date: data.date,
+      time: data.time,
+      notes: data.notes.trim(),
+    });
     clear();
     toast.success("Event added", { description: "Saved to your calendar." });
     setTimeout(() => {

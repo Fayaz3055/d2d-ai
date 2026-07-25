@@ -1,5 +1,5 @@
 import { Link } from "@tanstack/react-router";
-import { Home, ListChecks, Calendar, Sparkles, User, Plus, X, type LucideIcon } from "lucide-react";
+import { Home, ListChecks, Calendar, Sparkles, Plus, X, type LucideIcon } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { quickCapture, useQuickCaptureOpen } from "@/features/quick-capture/quick-capture-store";
 
@@ -7,10 +7,9 @@ const leftItems: { to: "/home" | "/tasks"; label: string; icon: LucideIcon }[] =
   { to: "/home", label: "Home", icon: Home },
   { to: "/tasks", label: "Tasks", icon: ListChecks },
 ];
-const rightItems: { to: "/calendar" | "/ai" | "/profile"; label: string; icon: LucideIcon }[] = [
+const rightItems: { to: "/calendar" | "/ai"; label: string; icon: LucideIcon }[] = [
   { to: "/calendar", label: "Calendar", icon: Calendar },
   { to: "/ai", label: "AI", icon: Sparkles },
-  { to: "/profile", label: "Profile", icon: User },
 ];
 
 function NavItem({ to, label, icon: Icon }: { to: string; label: string; icon: LucideIcon }) {

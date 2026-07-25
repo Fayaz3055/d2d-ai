@@ -12,6 +12,7 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import { toast } from "sonner";
+import { ConfirmDeleteDialog } from "@/components/nova/confirm-delete";
 
 function formatDue(due: string): string | null {
   if (!due) return null;
@@ -34,6 +35,7 @@ export function TaskCard({ task, index = 0 }: { task: Task; index?: number }) {
   const [completing, setCompleting] = useState(false);
   const [removed, setRemoved] = useState(false);
   const [sparkle, setSparkle] = useState(false);
+  const [confirmDelete, setConfirmDelete] = useState(false);
   const startX = useRef<number | null>(null);
   const dragging = useRef(false);
 
@@ -229,13 +231,7 @@ export function TaskCard({ task, index = 0 }: { task: Task; index?: number }) {
               </DropdownMenuItem>
               <DropdownMenuItem
                 className="text-destructive focus:text-destructive"
-                onClick={() => {
-                  setRemoved(true);
-                  window.setTimeout(() => {
-                    tasksStore.remove(task.id);
-                    toast("Task deleted");
-                  }, 260);
-                }}
+                onClick={() => setConfirmDelete(true)}
               >
                 <Trash2 className="mr-2 h-3.5 w-3.5" /> Delete
               </DropdownMenuItem>
@@ -243,6 +239,17 @@ export function TaskCard({ task, index = 0 }: { task: Task; index?: number }) {
           </DropdownMenu>
         </div>
       </div>
+      <ConfirmDeleteDialog
+        open={confirmDelete}
+        onOpenChange={setConfirmDelete}
+        onConfirm={() => {
+          setRemoved(true);
+          window.setTimeout(() => {
+            tasksStore.remove(task.id);
+            toast("Task deleted");
+          }, 260);
+        }}
+      />
     </div>
   );
 }

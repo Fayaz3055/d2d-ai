@@ -1,4 +1,5 @@
 import { createFileRoute, notFound, useNavigate, useRouter } from "@tanstack/react-router";
+import { useState } from "react";
 import {
   ChevronLeft,
   Pencil,
@@ -16,6 +17,7 @@ import { useTask, tasksStore } from "@/features/tasks/use-tasks";
 import { PriorityBadge, CategoryBadge } from "@/features/tasks/badges";
 import { cn } from "@/lib/utils";
 import { toast } from "sonner";
+import { ConfirmDeleteDialog } from "@/components/nova/confirm-delete";
 import type { ReactNode } from "react";
 
 export const Route = createFileRoute("/tasks/$id")({
@@ -62,6 +64,7 @@ function TaskDetail() {
   const task = useTask(id);
   const router = useRouter();
   const navigate = useNavigate();
+  const [confirm, setConfirm] = useState(false);
 
   if (!task) throw notFound();
 
@@ -181,7 +184,7 @@ function TaskDetail() {
           {/* Danger */}
           <button
             type="button"
-            onClick={handleDelete}
+            onClick={() => setConfirm(true)}
             className="flex w-full items-center justify-center gap-2 rounded-2xl border border-destructive/25 bg-background px-4 py-3 text-sm font-semibold text-destructive transition-all hover:bg-destructive/5 active:scale-[0.98]"
           >
             <Trash2 className="h-4 w-4" />
@@ -189,6 +192,7 @@ function TaskDetail() {
           </button>
         </div>
       </div>
+      <ConfirmDeleteDialog open={confirm} onOpenChange={setConfirm} onConfirm={handleDelete} />
     </div>
   );
 }

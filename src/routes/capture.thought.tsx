@@ -3,6 +3,7 @@ import { Sparkles } from "lucide-react";
 import { toast } from "sonner";
 import { CapturePage, Field, fieldInputCn } from "@/features/quick-capture/capture-page";
 import { useDraft } from "@/features/quick-capture/use-draft";
+import { thoughtsStore } from "@/features/thoughts/use-thoughts";
 
 export const Route = createFileRoute("/capture/thought")({
   head: () => ({
@@ -25,6 +26,7 @@ function NewThoughtPage() {
 
   const handleSave = () => {
     if (!data.thought.trim()) return;
+    thoughtsStore.add({ thought: data.thought.trim(), tag: data.tag.trim() });
     clear();
     toast.success("Thought saved.", {
       description: "Now get back to what you were doing. I'll help you remember this later.",
