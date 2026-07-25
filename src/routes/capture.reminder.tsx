@@ -2,6 +2,7 @@ import { createFileRoute, useRouter } from "@tanstack/react-router";
 import { toast } from "sonner";
 import { CapturePage, Field, fieldInputCn } from "@/features/quick-capture/capture-page";
 import { useDraft } from "@/features/quick-capture/use-draft";
+import { remindersStore } from "@/features/reminders/use-reminders";
 
 export const Route = createFileRoute("/capture/reminder")({
   head: () => ({
@@ -24,6 +25,11 @@ function NewReminderPage() {
 
   const handleSave = () => {
     if (!data.title.trim()) return;
+    remindersStore.add({
+      title: data.title.trim(),
+      date: data.date,
+      time: data.time,
+    });
     clear();
     toast.success("Reminder set", { description: "We'll ping you when it's time." });
     setTimeout(() => {

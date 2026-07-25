@@ -2,6 +2,7 @@ import { createFileRoute, useRouter } from "@tanstack/react-router";
 import { toast } from "sonner";
 import { CapturePage, Field, fieldInputCn } from "@/features/quick-capture/capture-page";
 import { useDraft } from "@/features/quick-capture/use-draft";
+import { notesStore } from "@/features/notes/use-notes";
 
 export const Route = createFileRoute("/capture/note")({
   head: () => ({
@@ -26,6 +27,7 @@ function NewNotePage() {
 
   const handleSave = () => {
     if (!hasContent) return;
+    notesStore.add({ title: data.title.trim(), body: data.body.trim() });
     clear();
     toast.success("Note saved", { description: "Tucked away in your notes." });
     setTimeout(() => {
