@@ -9,11 +9,19 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
+import { Route as ThoughtsRouteImport } from './routes/thoughts'
+import { Route as RemindersRouteImport } from './routes/reminders'
 import { Route as OnboardingRouteImport } from './routes/onboarding'
 import { Route as NotificationsRouteImport } from './routes/notifications'
+import { Route as NotesRouteImport } from './routes/notes'
+import { Route as EventsRouteImport } from './routes/events'
 import { Route as TabsRouteImport } from './routes/_tabs'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as ThoughtsIdRouteImport } from './routes/thoughts.$id'
 import { Route as TasksIdRouteImport } from './routes/tasks.$id'
+import { Route as RemindersIdRouteImport } from './routes/reminders.$id'
+import { Route as NotesIdRouteImport } from './routes/notes.$id'
+import { Route as EventsIdRouteImport } from './routes/events.$id'
 import { Route as CaptureThoughtRouteImport } from './routes/capture.thought'
 import { Route as CaptureTaskRouteImport } from './routes/capture.task'
 import { Route as CaptureReminderRouteImport } from './routes/capture.reminder'
@@ -27,8 +35,22 @@ import { Route as TabsProfileRouteImport } from './routes/_tabs.profile'
 import { Route as TabsHomeRouteImport } from './routes/_tabs.home'
 import { Route as TabsCalendarRouteImport } from './routes/_tabs.calendar'
 import { Route as TabsAiRouteImport } from './routes/_tabs.ai'
+import { Route as ThoughtsIdEditRouteImport } from './routes/thoughts.$id.edit'
 import { Route as TasksIdEditRouteImport } from './routes/tasks.$id.edit'
+import { Route as RemindersIdEditRouteImport } from './routes/reminders.$id.edit'
+import { Route as NotesIdEditRouteImport } from './routes/notes.$id.edit'
+import { Route as EventsIdEditRouteImport } from './routes/events.$id.edit'
 
+const ThoughtsRoute = ThoughtsRouteImport.update({
+  id: '/thoughts',
+  path: '/thoughts',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const RemindersRoute = RemindersRouteImport.update({
+  id: '/reminders',
+  path: '/reminders',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const OnboardingRoute = OnboardingRouteImport.update({
   id: '/onboarding',
   path: '/onboarding',
@@ -37,6 +59,16 @@ const OnboardingRoute = OnboardingRouteImport.update({
 const NotificationsRoute = NotificationsRouteImport.update({
   id: '/notifications',
   path: '/notifications',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const NotesRoute = NotesRouteImport.update({
+  id: '/notes',
+  path: '/notes',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const EventsRoute = EventsRouteImport.update({
+  id: '/events',
+  path: '/events',
   getParentRoute: () => rootRouteImport,
 } as any)
 const TabsRoute = TabsRouteImport.update({
@@ -48,10 +80,30 @@ const IndexRoute = IndexRouteImport.update({
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const ThoughtsIdRoute = ThoughtsIdRouteImport.update({
+  id: '/$id',
+  path: '/$id',
+  getParentRoute: () => ThoughtsRoute,
+} as any)
 const TasksIdRoute = TasksIdRouteImport.update({
   id: '/tasks/$id',
   path: '/tasks/$id',
   getParentRoute: () => rootRouteImport,
+} as any)
+const RemindersIdRoute = RemindersIdRouteImport.update({
+  id: '/$id',
+  path: '/$id',
+  getParentRoute: () => RemindersRoute,
+} as any)
+const NotesIdRoute = NotesIdRouteImport.update({
+  id: '/$id',
+  path: '/$id',
+  getParentRoute: () => NotesRoute,
+} as any)
+const EventsIdRoute = EventsIdRouteImport.update({
+  id: '/$id',
+  path: '/$id',
+  getParentRoute: () => EventsRoute,
 } as any)
 const CaptureThoughtRoute = CaptureThoughtRouteImport.update({
   id: '/capture/thought',
@@ -118,16 +170,40 @@ const TabsAiRoute = TabsAiRouteImport.update({
   path: '/ai',
   getParentRoute: () => TabsRoute,
 } as any)
+const ThoughtsIdEditRoute = ThoughtsIdEditRouteImport.update({
+  id: '/edit',
+  path: '/edit',
+  getParentRoute: () => ThoughtsIdRoute,
+} as any)
 const TasksIdEditRoute = TasksIdEditRouteImport.update({
   id: '/edit',
   path: '/edit',
   getParentRoute: () => TasksIdRoute,
 } as any)
+const RemindersIdEditRoute = RemindersIdEditRouteImport.update({
+  id: '/edit',
+  path: '/edit',
+  getParentRoute: () => RemindersIdRoute,
+} as any)
+const NotesIdEditRoute = NotesIdEditRouteImport.update({
+  id: '/edit',
+  path: '/edit',
+  getParentRoute: () => NotesIdRoute,
+} as any)
+const EventsIdEditRoute = EventsIdEditRouteImport.update({
+  id: '/edit',
+  path: '/edit',
+  getParentRoute: () => EventsIdRoute,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/events': typeof EventsRouteWithChildren
+  '/notes': typeof NotesRouteWithChildren
   '/notifications': typeof NotificationsRoute
   '/onboarding': typeof OnboardingRoute
+  '/reminders': typeof RemindersRouteWithChildren
+  '/thoughts': typeof ThoughtsRouteWithChildren
   '/ai': typeof TabsAiRoute
   '/calendar': typeof TabsCalendarRoute
   '/home': typeof TabsHomeRoute
@@ -141,13 +217,25 @@ export interface FileRoutesByFullPath {
   '/capture/reminder': typeof CaptureReminderRoute
   '/capture/task': typeof CaptureTaskRoute
   '/capture/thought': typeof CaptureThoughtRoute
+  '/events/$id': typeof EventsIdRouteWithChildren
+  '/notes/$id': typeof NotesIdRouteWithChildren
+  '/reminders/$id': typeof RemindersIdRouteWithChildren
   '/tasks/$id': typeof TasksIdRouteWithChildren
+  '/thoughts/$id': typeof ThoughtsIdRouteWithChildren
+  '/events/$id/edit': typeof EventsIdEditRoute
+  '/notes/$id/edit': typeof NotesIdEditRoute
+  '/reminders/$id/edit': typeof RemindersIdEditRoute
   '/tasks/$id/edit': typeof TasksIdEditRoute
+  '/thoughts/$id/edit': typeof ThoughtsIdEditRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/events': typeof EventsRouteWithChildren
+  '/notes': typeof NotesRouteWithChildren
   '/notifications': typeof NotificationsRoute
   '/onboarding': typeof OnboardingRoute
+  '/reminders': typeof RemindersRouteWithChildren
+  '/thoughts': typeof ThoughtsRouteWithChildren
   '/ai': typeof TabsAiRoute
   '/calendar': typeof TabsCalendarRoute
   '/home': typeof TabsHomeRoute
@@ -161,15 +249,27 @@ export interface FileRoutesByTo {
   '/capture/reminder': typeof CaptureReminderRoute
   '/capture/task': typeof CaptureTaskRoute
   '/capture/thought': typeof CaptureThoughtRoute
+  '/events/$id': typeof EventsIdRouteWithChildren
+  '/notes/$id': typeof NotesIdRouteWithChildren
+  '/reminders/$id': typeof RemindersIdRouteWithChildren
   '/tasks/$id': typeof TasksIdRouteWithChildren
+  '/thoughts/$id': typeof ThoughtsIdRouteWithChildren
+  '/events/$id/edit': typeof EventsIdEditRoute
+  '/notes/$id/edit': typeof NotesIdEditRoute
+  '/reminders/$id/edit': typeof RemindersIdEditRoute
   '/tasks/$id/edit': typeof TasksIdEditRoute
+  '/thoughts/$id/edit': typeof ThoughtsIdEditRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
   '/_tabs': typeof TabsRouteWithChildren
+  '/events': typeof EventsRouteWithChildren
+  '/notes': typeof NotesRouteWithChildren
   '/notifications': typeof NotificationsRoute
   '/onboarding': typeof OnboardingRoute
+  '/reminders': typeof RemindersRouteWithChildren
+  '/thoughts': typeof ThoughtsRouteWithChildren
   '/_tabs/ai': typeof TabsAiRoute
   '/_tabs/calendar': typeof TabsCalendarRoute
   '/_tabs/home': typeof TabsHomeRoute
@@ -183,15 +283,27 @@ export interface FileRoutesById {
   '/capture/reminder': typeof CaptureReminderRoute
   '/capture/task': typeof CaptureTaskRoute
   '/capture/thought': typeof CaptureThoughtRoute
+  '/events/$id': typeof EventsIdRouteWithChildren
+  '/notes/$id': typeof NotesIdRouteWithChildren
+  '/reminders/$id': typeof RemindersIdRouteWithChildren
   '/tasks/$id': typeof TasksIdRouteWithChildren
+  '/thoughts/$id': typeof ThoughtsIdRouteWithChildren
+  '/events/$id/edit': typeof EventsIdEditRoute
+  '/notes/$id/edit': typeof NotesIdEditRoute
+  '/reminders/$id/edit': typeof RemindersIdEditRoute
   '/tasks/$id/edit': typeof TasksIdEditRoute
+  '/thoughts/$id/edit': typeof ThoughtsIdEditRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
   fullPaths:
     | '/'
+    | '/events'
+    | '/notes'
     | '/notifications'
     | '/onboarding'
+    | '/reminders'
+    | '/thoughts'
     | '/ai'
     | '/calendar'
     | '/home'
@@ -205,13 +317,25 @@ export interface FileRouteTypes {
     | '/capture/reminder'
     | '/capture/task'
     | '/capture/thought'
+    | '/events/$id'
+    | '/notes/$id'
+    | '/reminders/$id'
     | '/tasks/$id'
+    | '/thoughts/$id'
+    | '/events/$id/edit'
+    | '/notes/$id/edit'
+    | '/reminders/$id/edit'
     | '/tasks/$id/edit'
+    | '/thoughts/$id/edit'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
+    | '/events'
+    | '/notes'
     | '/notifications'
     | '/onboarding'
+    | '/reminders'
+    | '/thoughts'
     | '/ai'
     | '/calendar'
     | '/home'
@@ -225,14 +349,26 @@ export interface FileRouteTypes {
     | '/capture/reminder'
     | '/capture/task'
     | '/capture/thought'
+    | '/events/$id'
+    | '/notes/$id'
+    | '/reminders/$id'
     | '/tasks/$id'
+    | '/thoughts/$id'
+    | '/events/$id/edit'
+    | '/notes/$id/edit'
+    | '/reminders/$id/edit'
     | '/tasks/$id/edit'
+    | '/thoughts/$id/edit'
   id:
     | '__root__'
     | '/'
     | '/_tabs'
+    | '/events'
+    | '/notes'
     | '/notifications'
     | '/onboarding'
+    | '/reminders'
+    | '/thoughts'
     | '/_tabs/ai'
     | '/_tabs/calendar'
     | '/_tabs/home'
@@ -246,15 +382,27 @@ export interface FileRouteTypes {
     | '/capture/reminder'
     | '/capture/task'
     | '/capture/thought'
+    | '/events/$id'
+    | '/notes/$id'
+    | '/reminders/$id'
     | '/tasks/$id'
+    | '/thoughts/$id'
+    | '/events/$id/edit'
+    | '/notes/$id/edit'
+    | '/reminders/$id/edit'
     | '/tasks/$id/edit'
+    | '/thoughts/$id/edit'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   TabsRoute: typeof TabsRouteWithChildren
+  EventsRoute: typeof EventsRouteWithChildren
+  NotesRoute: typeof NotesRouteWithChildren
   NotificationsRoute: typeof NotificationsRoute
   OnboardingRoute: typeof OnboardingRoute
+  RemindersRoute: typeof RemindersRouteWithChildren
+  ThoughtsRoute: typeof ThoughtsRouteWithChildren
   AuthForgotPasswordRoute: typeof AuthForgotPasswordRoute
   AuthSignInRoute: typeof AuthSignInRoute
   AuthSignUpRoute: typeof AuthSignUpRoute
@@ -268,6 +416,20 @@ export interface RootRouteChildren {
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
+    '/thoughts': {
+      id: '/thoughts'
+      path: '/thoughts'
+      fullPath: '/thoughts'
+      preLoaderRoute: typeof ThoughtsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/reminders': {
+      id: '/reminders'
+      path: '/reminders'
+      fullPath: '/reminders'
+      preLoaderRoute: typeof RemindersRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/onboarding': {
       id: '/onboarding'
       path: '/onboarding'
@@ -280,6 +442,20 @@ declare module '@tanstack/react-router' {
       path: '/notifications'
       fullPath: '/notifications'
       preLoaderRoute: typeof NotificationsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/notes': {
+      id: '/notes'
+      path: '/notes'
+      fullPath: '/notes'
+      preLoaderRoute: typeof NotesRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/events': {
+      id: '/events'
+      path: '/events'
+      fullPath: '/events'
+      preLoaderRoute: typeof EventsRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/_tabs': {
@@ -296,12 +472,40 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/thoughts/$id': {
+      id: '/thoughts/$id'
+      path: '/$id'
+      fullPath: '/thoughts/$id'
+      preLoaderRoute: typeof ThoughtsIdRouteImport
+      parentRoute: typeof ThoughtsRoute
+    }
     '/tasks/$id': {
       id: '/tasks/$id'
       path: '/tasks/$id'
       fullPath: '/tasks/$id'
       preLoaderRoute: typeof TasksIdRouteImport
       parentRoute: typeof rootRouteImport
+    }
+    '/reminders/$id': {
+      id: '/reminders/$id'
+      path: '/$id'
+      fullPath: '/reminders/$id'
+      preLoaderRoute: typeof RemindersIdRouteImport
+      parentRoute: typeof RemindersRoute
+    }
+    '/notes/$id': {
+      id: '/notes/$id'
+      path: '/$id'
+      fullPath: '/notes/$id'
+      preLoaderRoute: typeof NotesIdRouteImport
+      parentRoute: typeof NotesRoute
+    }
+    '/events/$id': {
+      id: '/events/$id'
+      path: '/$id'
+      fullPath: '/events/$id'
+      preLoaderRoute: typeof EventsIdRouteImport
+      parentRoute: typeof EventsRoute
     }
     '/capture/thought': {
       id: '/capture/thought'
@@ -394,12 +598,40 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof TabsAiRouteImport
       parentRoute: typeof TabsRoute
     }
+    '/thoughts/$id/edit': {
+      id: '/thoughts/$id/edit'
+      path: '/edit'
+      fullPath: '/thoughts/$id/edit'
+      preLoaderRoute: typeof ThoughtsIdEditRouteImport
+      parentRoute: typeof ThoughtsIdRoute
+    }
     '/tasks/$id/edit': {
       id: '/tasks/$id/edit'
       path: '/edit'
       fullPath: '/tasks/$id/edit'
       preLoaderRoute: typeof TasksIdEditRouteImport
       parentRoute: typeof TasksIdRoute
+    }
+    '/reminders/$id/edit': {
+      id: '/reminders/$id/edit'
+      path: '/edit'
+      fullPath: '/reminders/$id/edit'
+      preLoaderRoute: typeof RemindersIdEditRouteImport
+      parentRoute: typeof RemindersIdRoute
+    }
+    '/notes/$id/edit': {
+      id: '/notes/$id/edit'
+      path: '/edit'
+      fullPath: '/notes/$id/edit'
+      preLoaderRoute: typeof NotesIdEditRouteImport
+      parentRoute: typeof NotesIdRoute
+    }
+    '/events/$id/edit': {
+      id: '/events/$id/edit'
+      path: '/edit'
+      fullPath: '/events/$id/edit'
+      preLoaderRoute: typeof EventsIdEditRouteImport
+      parentRoute: typeof EventsIdRoute
     }
   }
 }
@@ -422,6 +654,98 @@ const TabsRouteChildren: TabsRouteChildren = {
 
 const TabsRouteWithChildren = TabsRoute._addFileChildren(TabsRouteChildren)
 
+interface EventsIdRouteChildren {
+  EventsIdEditRoute: typeof EventsIdEditRoute
+}
+
+const EventsIdRouteChildren: EventsIdRouteChildren = {
+  EventsIdEditRoute: EventsIdEditRoute,
+}
+
+const EventsIdRouteWithChildren = EventsIdRoute._addFileChildren(
+  EventsIdRouteChildren,
+)
+
+interface EventsRouteChildren {
+  EventsIdRoute: typeof EventsIdRouteWithChildren
+}
+
+const EventsRouteChildren: EventsRouteChildren = {
+  EventsIdRoute: EventsIdRouteWithChildren,
+}
+
+const EventsRouteWithChildren =
+  EventsRoute._addFileChildren(EventsRouteChildren)
+
+interface NotesIdRouteChildren {
+  NotesIdEditRoute: typeof NotesIdEditRoute
+}
+
+const NotesIdRouteChildren: NotesIdRouteChildren = {
+  NotesIdEditRoute: NotesIdEditRoute,
+}
+
+const NotesIdRouteWithChildren =
+  NotesIdRoute._addFileChildren(NotesIdRouteChildren)
+
+interface NotesRouteChildren {
+  NotesIdRoute: typeof NotesIdRouteWithChildren
+}
+
+const NotesRouteChildren: NotesRouteChildren = {
+  NotesIdRoute: NotesIdRouteWithChildren,
+}
+
+const NotesRouteWithChildren = NotesRoute._addFileChildren(NotesRouteChildren)
+
+interface RemindersIdRouteChildren {
+  RemindersIdEditRoute: typeof RemindersIdEditRoute
+}
+
+const RemindersIdRouteChildren: RemindersIdRouteChildren = {
+  RemindersIdEditRoute: RemindersIdEditRoute,
+}
+
+const RemindersIdRouteWithChildren = RemindersIdRoute._addFileChildren(
+  RemindersIdRouteChildren,
+)
+
+interface RemindersRouteChildren {
+  RemindersIdRoute: typeof RemindersIdRouteWithChildren
+}
+
+const RemindersRouteChildren: RemindersRouteChildren = {
+  RemindersIdRoute: RemindersIdRouteWithChildren,
+}
+
+const RemindersRouteWithChildren = RemindersRoute._addFileChildren(
+  RemindersRouteChildren,
+)
+
+interface ThoughtsIdRouteChildren {
+  ThoughtsIdEditRoute: typeof ThoughtsIdEditRoute
+}
+
+const ThoughtsIdRouteChildren: ThoughtsIdRouteChildren = {
+  ThoughtsIdEditRoute: ThoughtsIdEditRoute,
+}
+
+const ThoughtsIdRouteWithChildren = ThoughtsIdRoute._addFileChildren(
+  ThoughtsIdRouteChildren,
+)
+
+interface ThoughtsRouteChildren {
+  ThoughtsIdRoute: typeof ThoughtsIdRouteWithChildren
+}
+
+const ThoughtsRouteChildren: ThoughtsRouteChildren = {
+  ThoughtsIdRoute: ThoughtsIdRouteWithChildren,
+}
+
+const ThoughtsRouteWithChildren = ThoughtsRoute._addFileChildren(
+  ThoughtsRouteChildren,
+)
+
 interface TasksIdRouteChildren {
   TasksIdEditRoute: typeof TasksIdEditRoute
 }
@@ -436,8 +760,12 @@ const TasksIdRouteWithChildren =
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   TabsRoute: TabsRouteWithChildren,
+  EventsRoute: EventsRouteWithChildren,
+  NotesRoute: NotesRouteWithChildren,
   NotificationsRoute: NotificationsRoute,
   OnboardingRoute: OnboardingRoute,
+  RemindersRoute: RemindersRouteWithChildren,
+  ThoughtsRoute: ThoughtsRouteWithChildren,
   AuthForgotPasswordRoute: AuthForgotPasswordRoute,
   AuthSignInRoute: AuthSignInRoute,
   AuthSignUpRoute: AuthSignUpRoute,
