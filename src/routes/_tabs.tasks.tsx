@@ -6,6 +6,8 @@ import {
   ArrowUpDown,
   ListFilter,
   Plus,
+  Check,
+
   Sparkles as SparklesIcon,
 } from "lucide-react";
 import { ScreenHeader } from "@/components/nova/screen-header";
@@ -59,22 +61,15 @@ function Tasks() {
   const todayDone = tasks.filter((t) => isToday(t.dueDate) && t.completed).length;
   const pct = todayTotal === 0 ? 0 : Math.round((todayDone / todayTotal) * 100);
 
-  const visible = useMemo(() => {
-    let list = tasks;
-    if (filter === "today") list = list.filter((t) => isToday(t.dueDate) && !t.completed);
-    else if (filter === "upcoming") list = list.filter((t) => isFuture(t.dueDate) && !t.completed);
-    else if (filter === "completed") list = list.filter((t) => t.completed);
-    else list = list.filter((t) => !t.completed).concat(tasks.filter((t) => t.completed));
+  const matchesQuery = (t: (typeof tasks)[number]) => {
+    const q = query.trim().toLowerCase();
+    if (!q) return true;
+    return (
+      t.title.toLowerCase().includes(q) || t.description.toLowerCase().includes(q)
+    );
+  };
 
-    if (query.trim()) {
-      const q = query.trim().toLowerCase();
-      list = list.filter(
-        (t) =>
-          t.title.toLowerCase().includes(q) ||
-          t.description.toLowerCase().includes(q),
-      );
-    }
-
+  const sortList = <T extends (typeof tasks)[number]>(list: T[]) => {
     const sorted = [...list];
     if (sort === "due") {
       sorted.sort((a, b) => {
@@ -88,7 +83,28 @@ function Tasks() {
       sorted.sort((a, b) => b.createdAt - a.createdAt);
     }
     return sorted;
+  };
+
+  const { visible, completed } = useMemo(() => {
+    let pending = tasks.filter((t) => !t.completed);
+    if (filter === "today") pending = pending.filter((t) => isToday(t.dueDate));
+    else if (filter === "upcoming") pending = pending.filter((t) => isFuture(t.dueDate));
+    else if (filter === "completed") pending = [];
+
+    const done =
+      filter === "completed"
+        ? tasks.filter((t) => t.completed)
+        : filter === "all"
+          ? tasks.filter((t) => t.completed)
+          : [];
+
+    return {
+      visible: sortList(pending.filter(matchesQuery)),
+      completed: sortList(done.filter(matchesQuery)),
+    };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [tasks, filter, query, sort]);
+
 
   const filters: { value: Filter; label: string }[] = [
     { value: "all", label: "All" },
@@ -186,7 +202,7 @@ function Tasks() {
         </div>
 
         {/* List / Empty */}
-        {visible.length === 0 ? (
+        {visible.length === 0 && completed.length === 0 ? (
           <div className="nova-card mt-2 flex flex-col items-center justify-center px-6 py-14 text-center">
             <div className="relative flex h-20 w-20 items-center justify-center rounded-3xl bg-gradient-to-br from-[oklch(0.97_0.03_85)] to-[oklch(0.94_0.06_85)] shadow-[0_10px_28px_-10px_oklch(0.68_0.14_75/0.35)] ring-1 ring-[oklch(0.72_0.14_85/0.2)]">
               <ListChecks className="h-8 w-8 text-primary" strokeWidth={1.8} />
@@ -212,15 +228,32 @@ function Tasks() {
           </div>
         ) : (
           <div className="space-y-2.5">
-            <p className="flex items-center gap-1.5 pl-1 text-[10px] font-semibold uppercase tracking-[0.16em] text-muted-foreground">
-              <ListFilter className="h-3 w-3" />
-              {visible.length} {visible.length === 1 ? "task" : "tasks"}
-            </p>
-            {visible.map((t, i) => (
-              <TaskCard key={t.id} task={t} index={i} />
-            ))}
+            {visible.length > 0 && (
+              <>
+                <p className="flex items-center gap-1.5 pl-1 text-[10px] font-semibold uppercase tracking-[0.16em] text-muted-foreground">
+                  <ListFilter className="h-3 w-3" />
+                  {visible.length} {visible.length === 1 ? "task" : "tasks"}
+                </p>
+                {visible.map((t, i) => (
+                  <TaskCard key={t.id} task={t} index={i} />
+                ))}
+              </>
+            )}
+
+            {completed.length > 0 && (
+              <div className="space-y-2.5 pt-3">
+                <p className="flex items-center gap-1.5 pl-1 text-[10px] font-semibold uppercase tracking-[0.16em] text-muted-foreground">
+                  <Check className="h-3 w-3" />
+                  Completed · {completed.length}
+                </p>
+                {completed.map((t, i) => (
+                  <TaskCard key={t.id} task={t} index={i} />
+                ))}
+              </div>
+            )}
           </div>
         )}
+
       </div>
     </div>
   );
