@@ -136,27 +136,28 @@ function NotificationsPage() {
                   );
                 })}
               </ul>
-
-              <div className="mt-6">
-                <div className="nova-card flex items-center gap-3 p-4 opacity-70">
-                  <span className="flex h-10 w-10 flex-none items-center justify-center rounded-xl bg-accent text-accent-foreground">
-                    <Sparkles className="h-4 w-4" />
-                  </span>
-                  <div className="min-w-0 flex-1">
-                    <div className="flex items-center gap-2">
-                      <p className="text-[15px] font-semibold tracking-tight">Daily Summary</p>
-                      <span className="rounded-full border border-primary/30 bg-primary/5 px-1.5 py-0.5 text-[9px] font-semibold uppercase tracking-wider text-primary">
-                        Soon
-                      </span>
-                    </div>
-                    <p className="mt-0.5 text-xs text-muted-foreground">
-                      Your AI-generated daily brief will appear here.
-                    </p>
-                  </div>
-                </div>
-              </div>
             </>
           )}
+
+          <div className="mt-6">
+            <div className="nova-card flex items-center gap-3 p-4 opacity-70">
+              <span className="flex h-10 w-10 flex-none items-center justify-center rounded-xl bg-accent text-accent-foreground">
+                <Sparkles className="h-4 w-4" />
+              </span>
+              <div className="min-w-0 flex-1">
+                <div className="flex items-center gap-2">
+                  <p className="text-[15px] font-semibold tracking-tight">Daily Summary</p>
+                  <span className="rounded-full border border-primary/30 bg-primary/5 px-1.5 py-0.5 text-[9px] font-semibold uppercase tracking-wider text-primary">
+                    Soon
+                  </span>
+                </div>
+                <p className="mt-0.5 text-xs text-muted-foreground">
+                  Your AI-generated daily brief will appear here.
+                </p>
+              </div>
+            </div>
+          </div>
+
 
           <div className="mt-8 text-center">
             <Link to="/home" className="text-xs font-semibold text-primary hover:underline">
