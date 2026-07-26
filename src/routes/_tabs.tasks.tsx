@@ -59,22 +59,15 @@ function Tasks() {
   const todayDone = tasks.filter((t) => isToday(t.dueDate) && t.completed).length;
   const pct = todayTotal === 0 ? 0 : Math.round((todayDone / todayTotal) * 100);
 
-  const visible = useMemo(() => {
-    let list = tasks;
-    if (filter === "today") list = list.filter((t) => isToday(t.dueDate) && !t.completed);
-    else if (filter === "upcoming") list = list.filter((t) => isFuture(t.dueDate) && !t.completed);
-    else if (filter === "completed") list = list.filter((t) => t.completed);
-    else list = list.filter((t) => !t.completed).concat(tasks.filter((t) => t.completed));
+  const matchesQuery = (t: (typeof tasks)[number]) => {
+    const q = query.trim().toLowerCase();
+    if (!q) return true;
+    return (
+      t.title.toLowerCase().includes(q) || t.description.toLowerCase().includes(q)
+    );
+  };
 
-    if (query.trim()) {
-      const q = query.trim().toLowerCase();
-      list = list.filter(
-        (t) =>
-          t.title.toLowerCase().includes(q) ||
-          t.description.toLowerCase().includes(q),
-      );
-    }
-
+  const sortList = <T extends (typeof tasks)[number]>(list: T[]) => {
     const sorted = [...list];
     if (sort === "due") {
       sorted.sort((a, b) => {
@@ -88,7 +81,28 @@ function Tasks() {
       sorted.sort((a, b) => b.createdAt - a.createdAt);
     }
     return sorted;
+  };
+
+  const { visible, completed } = useMemo(() => {
+    let pending = tasks.filter((t) => !t.completed);
+    if (filter === "today") pending = pending.filter((t) => isToday(t.dueDate));
+    else if (filter === "upcoming") pending = pending.filter((t) => isFuture(t.dueDate));
+    else if (filter === "completed") pending = [];
+
+    const done =
+      filter === "completed"
+        ? tasks.filter((t) => t.completed)
+        : filter === "all"
+          ? tasks.filter((t) => t.completed)
+          : [];
+
+    return {
+      visible: sortList(pending.filter(matchesQuery)),
+      completed: sortList(done.filter(matchesQuery)),
+    };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [tasks, filter, query, sort]);
+
 
   const filters: { value: Filter; label: string }[] = [
     { value: "all", label: "All" },
