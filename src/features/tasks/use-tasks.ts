@@ -87,13 +87,16 @@ export const tasksStore = {
   },
 };
 
+const EMPTY_TASKS: Task[] = [];
+
 export function useTasks(): Task[] {
   return useSyncExternalStore(
     tasksStore.subscribe,
     () => tasks,
-    () => [] as Task[],
+    () => EMPTY_TASKS,
   );
 }
+
 
 export function useTask(id: string): Task | undefined {
   const all = useTasks();
