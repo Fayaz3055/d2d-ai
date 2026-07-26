@@ -6,6 +6,8 @@ import {
   ArrowUpDown,
   ListFilter,
   Plus,
+  Check,
+
   Sparkles as SparklesIcon,
 } from "lucide-react";
 import { ScreenHeader } from "@/components/nova/screen-header";
