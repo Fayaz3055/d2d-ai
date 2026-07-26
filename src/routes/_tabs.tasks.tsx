@@ -200,7 +200,7 @@ function Tasks() {
         </div>
 
         {/* List / Empty */}
-        {visible.length === 0 ? (
+        {visible.length === 0 && completed.length === 0 ? (
           <div className="nova-card mt-2 flex flex-col items-center justify-center px-6 py-14 text-center">
             <div className="relative flex h-20 w-20 items-center justify-center rounded-3xl bg-gradient-to-br from-[oklch(0.97_0.03_85)] to-[oklch(0.94_0.06_85)] shadow-[0_10px_28px_-10px_oklch(0.68_0.14_75/0.35)] ring-1 ring-[oklch(0.72_0.14_85/0.2)]">
               <ListChecks className="h-8 w-8 text-primary" strokeWidth={1.8} />
@@ -226,15 +226,32 @@ function Tasks() {
           </div>
         ) : (
           <div className="space-y-2.5">
-            <p className="flex items-center gap-1.5 pl-1 text-[10px] font-semibold uppercase tracking-[0.16em] text-muted-foreground">
-              <ListFilter className="h-3 w-3" />
-              {visible.length} {visible.length === 1 ? "task" : "tasks"}
-            </p>
-            {visible.map((t, i) => (
-              <TaskCard key={t.id} task={t} index={i} />
-            ))}
+            {visible.length > 0 && (
+              <>
+                <p className="flex items-center gap-1.5 pl-1 text-[10px] font-semibold uppercase tracking-[0.16em] text-muted-foreground">
+                  <ListFilter className="h-3 w-3" />
+                  {visible.length} {visible.length === 1 ? "task" : "tasks"}
+                </p>
+                {visible.map((t, i) => (
+                  <TaskCard key={t.id} task={t} index={i} />
+                ))}
+              </>
+            )}
+
+            {completed.length > 0 && (
+              <div className="space-y-2.5 pt-3">
+                <p className="flex items-center gap-1.5 pl-1 text-[10px] font-semibold uppercase tracking-[0.16em] text-muted-foreground">
+                  <Check className="h-3 w-3" />
+                  Completed · {completed.length}
+                </p>
+                {completed.map((t, i) => (
+                  <TaskCard key={t.id} task={t} index={i} />
+                ))}
+              </div>
+            )}
           </div>
         )}
+
       </div>
     </div>
   );
