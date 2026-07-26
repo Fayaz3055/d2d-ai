@@ -66,13 +66,16 @@ export function createCollectionStore<T extends BaseItem>(storageKey: string) {
     },
   };
 
+  const EMPTY: T[] = [];
+
   function useAll(): T[] {
     return useSyncExternalStore(
       store.subscribe,
       () => items,
-      () => [] as T[],
+      () => EMPTY,
     );
   }
+
 
   function useOne(id: string): T | undefined {
     const all = useAll();
