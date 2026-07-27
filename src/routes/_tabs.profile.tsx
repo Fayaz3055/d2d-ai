@@ -1,8 +1,12 @@
 import { createFileRoute, useNavigate } from "@tanstack/react-router";
+import { useQueryClient } from "@tanstack/react-query";
 import { Moon, Sun, Monitor, Settings, Info, LogOut, ChevronRight } from "lucide-react";
 import { ScreenHeader } from "@/components/nova/screen-header";
 import { useTheme, type Theme } from "@/lib/theme-provider";
 import { cn } from "@/lib/utils";
+import { useSession, useProfile, displayNameOf } from "@/features/auth/use-auth";
+import { supabase } from "@/integrations/supabase/client";
+
 
 export const Route = createFileRoute("/_tabs/profile")({
   head: () => ({
