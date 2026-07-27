@@ -25,6 +25,18 @@ const APP_VERSION = "0.1.0";
 function Profile() {
   const { theme, setTheme } = useTheme();
   const navigate = useNavigate();
+  const queryClient = useQueryClient();
+  const { user } = useSession();
+  const profile = useProfile(user);
+  const name = displayNameOf(user, profile);
+  const initial = name.charAt(0).toUpperCase();
+
+  const handleSignOut = async () => {
+    await queryClient.cancelQueries();
+    queryClient.clear();
+    await supabase.auth.signOut();
+    navigate({ to: "/auth/sign-in", replace: true });
+  };
 
   return (
     <div className="animate-fade-up">
@@ -32,14 +44,22 @@ function Profile() {
 
       {/* Profile card */}
       <div className="mx-5 nova-card flex items-center gap-4 p-5">
-        <div className="flex h-14 w-14 items-center justify-center rounded-full bg-gradient-to-br from-[oklch(0.78_0.13_85)] to-[oklch(0.62_0.14_75)] text-lg font-semibold text-white">
-          A
-        </div>
+        {profile?.avatar_url ? (
+          <img
+            src={profile.avatar_url}
+            alt={`${name}'s avatar`}
+            className="h-14 w-14 rounded-full object-cover"
+          />
+        ) : (
+          <div className="flex h-14 w-14 items-center justify-center rounded-full bg-gradient-to-br from-[oklch(0.78_0.13_85)] to-[oklch(0.62_0.14_75)] text-lg font-semibold text-primary-foreground">
+            {initial}
+          </div>
+        )}
         <div className="min-w-0 flex-1">
-          <div className="truncate text-base font-semibold tracking-tight">Alex Chen</div>
-          <div className="truncate text-sm text-muted-foreground">alex@example.com</div>
+          <div className="truncate text-base font-semibold tracking-tight">{name}</div>
+          <div className="truncate text-sm text-muted-foreground">{user?.email ?? "—"}</div>
         </div>
-        <button className="text-xs font-medium text-primary hover:underline">Edit</button>
+
       </div>
 
       {/* Appearance */}
