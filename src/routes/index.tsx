@@ -25,9 +25,13 @@ function Splash() {
   const navigate = useNavigate();
 
   useEffect(() => {
-    const t = setTimeout(() => navigate({ to: "/onboarding" }), 1800);
+    const t = setTimeout(async () => {
+      const { data } = await supabase.auth.getSession();
+      navigate({ to: data.session ? "/home" : "/onboarding", replace: true });
+    }, 1800);
     return () => clearTimeout(t);
   }, [navigate]);
+
 
   return (
     <main className="relative flex min-h-dvh flex-col items-center justify-center overflow-hidden bg-background px-6">
