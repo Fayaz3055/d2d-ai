@@ -1,7 +1,10 @@
 import { Link } from "@tanstack/react-router";
-import type { ReactNode } from "react";
-import { ArrowLeft } from "lucide-react";
+import { useState, type ReactNode } from "react";
+import { ArrowLeft, Loader2 } from "lucide-react";
+import { toast } from "sonner";
+import { lovable } from "@/integrations/lovable/index";
 import { NovaLogo } from "@/components/nova/logo";
+
 
 export function AuthShell({
   title,
