@@ -107,7 +107,7 @@ function Profile() {
 
       <section className="mx-5 mt-6">
         <button
-          onClick={() => navigate({ to: "/auth/sign-in" })}
+          onClick={handleSignOut}
           className="nova-card flex w-full items-center gap-3 p-4 text-left text-destructive"
         >
           <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-destructive/10">
