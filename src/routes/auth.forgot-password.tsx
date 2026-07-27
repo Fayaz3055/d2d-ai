@@ -1,10 +1,13 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { useState } from "react";
+import { Loader2 } from "lucide-react";
+import { toast } from "sonner";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { AuthShell } from "@/features/auth/auth-shell";
 import { CheckCircle2 } from "lucide-react";
+import { supabase } from "@/integrations/supabase/client";
 
 export const Route = createFileRoute("/auth/forgot-password")({
   head: () => ({
@@ -20,6 +23,23 @@ export const Route = createFileRoute("/auth/forgot-password")({
 
 function Forgot() {
   const [sent, setSent] = useState(false);
+  const [email, setEmail] = useState("");
+  const [loading, setLoading] = useState(false);
+
+  const onSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setLoading(true);
+    const { error } = await supabase.auth.resetPasswordForEmail(email.trim(), {
+      redirectTo: `${window.location.origin}/auth/reset-password`,
+    });
+    setLoading(false);
+    if (error) {
+      toast.error("Couldn't send the reset link", { description: error.message });
+      return;
+    }
+    setSent(true);
+  };
+
   return (
     <AuthShell
       title="Forgot password?"
@@ -43,19 +63,27 @@ function Forgot() {
           </p>
         </div>
       ) : (
-        <form
-          className="space-y-4"
-          onSubmit={(e) => {
-            e.preventDefault();
-            setSent(true);
-          }}
-        >
+        <form className="space-y-4" onSubmit={onSubmit}>
           <div className="space-y-1.5">
             <Label htmlFor="email">Email</Label>
-            <Input id="email" type="email" placeholder="you@example.com" className="h-12 rounded-xl" />
+            <Input
+              id="email"
+              type="email"
+              required
+              autoComplete="email"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              placeholder="you@example.com"
+              className="h-12 rounded-xl"
+            />
           </div>
-          <Button type="submit" size="lg" className="h-12 w-full rounded-full text-[15px]">
-            Send reset link
+          <Button
+            type="submit"
+            size="lg"
+            disabled={loading}
+            className="h-12 w-full rounded-full text-[15px]"
+          >
+            {loading ? <Loader2 className="h-4 w-4 animate-spin" /> : "Send reset link"}
           </Button>
         </form>
       )}
