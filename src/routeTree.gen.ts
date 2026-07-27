@@ -29,6 +29,7 @@ import { Route as CaptureNoteRouteImport } from './routes/capture.note'
 import { Route as CaptureEventRouteImport } from './routes/capture.event'
 import { Route as AuthSignUpRouteImport } from './routes/auth.sign-up'
 import { Route as AuthSignInRouteImport } from './routes/auth.sign-in'
+import { Route as AuthResetPasswordRouteImport } from './routes/auth.reset-password'
 import { Route as AuthForgotPasswordRouteImport } from './routes/auth.forgot-password'
 import { Route as TabsTasksRouteImport } from './routes/_tabs.tasks'
 import { Route as TabsProfileRouteImport } from './routes/_tabs.profile'
@@ -140,6 +141,11 @@ const AuthSignInRoute = AuthSignInRouteImport.update({
   path: '/auth/sign-in',
   getParentRoute: () => rootRouteImport,
 } as any)
+const AuthResetPasswordRoute = AuthResetPasswordRouteImport.update({
+  id: '/auth/reset-password',
+  path: '/auth/reset-password',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const AuthForgotPasswordRoute = AuthForgotPasswordRouteImport.update({
   id: '/auth/forgot-password',
   path: '/auth/forgot-password',
@@ -210,6 +216,7 @@ export interface FileRoutesByFullPath {
   '/profile': typeof TabsProfileRoute
   '/tasks': typeof TabsTasksRoute
   '/auth/forgot-password': typeof AuthForgotPasswordRoute
+  '/auth/reset-password': typeof AuthResetPasswordRoute
   '/auth/sign-in': typeof AuthSignInRoute
   '/auth/sign-up': typeof AuthSignUpRoute
   '/capture/event': typeof CaptureEventRoute
@@ -242,6 +249,7 @@ export interface FileRoutesByTo {
   '/profile': typeof TabsProfileRoute
   '/tasks': typeof TabsTasksRoute
   '/auth/forgot-password': typeof AuthForgotPasswordRoute
+  '/auth/reset-password': typeof AuthResetPasswordRoute
   '/auth/sign-in': typeof AuthSignInRoute
   '/auth/sign-up': typeof AuthSignUpRoute
   '/capture/event': typeof CaptureEventRoute
@@ -276,6 +284,7 @@ export interface FileRoutesById {
   '/_tabs/profile': typeof TabsProfileRoute
   '/_tabs/tasks': typeof TabsTasksRoute
   '/auth/forgot-password': typeof AuthForgotPasswordRoute
+  '/auth/reset-password': typeof AuthResetPasswordRoute
   '/auth/sign-in': typeof AuthSignInRoute
   '/auth/sign-up': typeof AuthSignUpRoute
   '/capture/event': typeof CaptureEventRoute
@@ -310,6 +319,7 @@ export interface FileRouteTypes {
     | '/profile'
     | '/tasks'
     | '/auth/forgot-password'
+    | '/auth/reset-password'
     | '/auth/sign-in'
     | '/auth/sign-up'
     | '/capture/event'
@@ -342,6 +352,7 @@ export interface FileRouteTypes {
     | '/profile'
     | '/tasks'
     | '/auth/forgot-password'
+    | '/auth/reset-password'
     | '/auth/sign-in'
     | '/auth/sign-up'
     | '/capture/event'
@@ -375,6 +386,7 @@ export interface FileRouteTypes {
     | '/_tabs/profile'
     | '/_tabs/tasks'
     | '/auth/forgot-password'
+    | '/auth/reset-password'
     | '/auth/sign-in'
     | '/auth/sign-up'
     | '/capture/event'
@@ -404,6 +416,7 @@ export interface RootRouteChildren {
   RemindersRoute: typeof RemindersRouteWithChildren
   ThoughtsRoute: typeof ThoughtsRouteWithChildren
   AuthForgotPasswordRoute: typeof AuthForgotPasswordRoute
+  AuthResetPasswordRoute: typeof AuthResetPasswordRoute
   AuthSignInRoute: typeof AuthSignInRoute
   AuthSignUpRoute: typeof AuthSignUpRoute
   CaptureEventRoute: typeof CaptureEventRoute
@@ -554,6 +567,13 @@ declare module '@tanstack/react-router' {
       path: '/auth/sign-in'
       fullPath: '/auth/sign-in'
       preLoaderRoute: typeof AuthSignInRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/auth/reset-password': {
+      id: '/auth/reset-password'
+      path: '/auth/reset-password'
+      fullPath: '/auth/reset-password'
+      preLoaderRoute: typeof AuthResetPasswordRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/auth/forgot-password': {
@@ -767,6 +787,7 @@ const rootRouteChildren: RootRouteChildren = {
   RemindersRoute: RemindersRouteWithChildren,
   ThoughtsRoute: ThoughtsRouteWithChildren,
   AuthForgotPasswordRoute: AuthForgotPasswordRoute,
+  AuthResetPasswordRoute: AuthResetPasswordRoute,
   AuthSignInRoute: AuthSignInRoute,
   AuthSignUpRoute: AuthSignUpRoute,
   CaptureEventRoute: CaptureEventRoute,
