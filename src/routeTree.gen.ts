@@ -27,6 +27,7 @@ import { Route as CaptureTaskRouteImport } from './routes/capture.task'
 import { Route as CaptureReminderRouteImport } from './routes/capture.reminder'
 import { Route as CaptureNoteRouteImport } from './routes/capture.note'
 import { Route as CaptureEventRouteImport } from './routes/capture.event'
+import { Route as AuthVerifyEmailRouteImport } from './routes/auth.verify-email'
 import { Route as AuthSignUpRouteImport } from './routes/auth.sign-up'
 import { Route as AuthSignInRouteImport } from './routes/auth.sign-in'
 import { Route as AuthResetPasswordRouteImport } from './routes/auth.reset-password'
@@ -131,6 +132,11 @@ const CaptureEventRoute = CaptureEventRouteImport.update({
   path: '/capture/event',
   getParentRoute: () => rootRouteImport,
 } as any)
+const AuthVerifyEmailRoute = AuthVerifyEmailRouteImport.update({
+  id: '/auth/verify-email',
+  path: '/auth/verify-email',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const AuthSignUpRoute = AuthSignUpRouteImport.update({
   id: '/auth/sign-up',
   path: '/auth/sign-up',
@@ -219,6 +225,7 @@ export interface FileRoutesByFullPath {
   '/auth/reset-password': typeof AuthResetPasswordRoute
   '/auth/sign-in': typeof AuthSignInRoute
   '/auth/sign-up': typeof AuthSignUpRoute
+  '/auth/verify-email': typeof AuthVerifyEmailRoute
   '/capture/event': typeof CaptureEventRoute
   '/capture/note': typeof CaptureNoteRoute
   '/capture/reminder': typeof CaptureReminderRoute
@@ -252,6 +259,7 @@ export interface FileRoutesByTo {
   '/auth/reset-password': typeof AuthResetPasswordRoute
   '/auth/sign-in': typeof AuthSignInRoute
   '/auth/sign-up': typeof AuthSignUpRoute
+  '/auth/verify-email': typeof AuthVerifyEmailRoute
   '/capture/event': typeof CaptureEventRoute
   '/capture/note': typeof CaptureNoteRoute
   '/capture/reminder': typeof CaptureReminderRoute
@@ -287,6 +295,7 @@ export interface FileRoutesById {
   '/auth/reset-password': typeof AuthResetPasswordRoute
   '/auth/sign-in': typeof AuthSignInRoute
   '/auth/sign-up': typeof AuthSignUpRoute
+  '/auth/verify-email': typeof AuthVerifyEmailRoute
   '/capture/event': typeof CaptureEventRoute
   '/capture/note': typeof CaptureNoteRoute
   '/capture/reminder': typeof CaptureReminderRoute
@@ -322,6 +331,7 @@ export interface FileRouteTypes {
     | '/auth/reset-password'
     | '/auth/sign-in'
     | '/auth/sign-up'
+    | '/auth/verify-email'
     | '/capture/event'
     | '/capture/note'
     | '/capture/reminder'
@@ -355,6 +365,7 @@ export interface FileRouteTypes {
     | '/auth/reset-password'
     | '/auth/sign-in'
     | '/auth/sign-up'
+    | '/auth/verify-email'
     | '/capture/event'
     | '/capture/note'
     | '/capture/reminder'
@@ -389,6 +400,7 @@ export interface FileRouteTypes {
     | '/auth/reset-password'
     | '/auth/sign-in'
     | '/auth/sign-up'
+    | '/auth/verify-email'
     | '/capture/event'
     | '/capture/note'
     | '/capture/reminder'
@@ -419,6 +431,7 @@ export interface RootRouteChildren {
   AuthResetPasswordRoute: typeof AuthResetPasswordRoute
   AuthSignInRoute: typeof AuthSignInRoute
   AuthSignUpRoute: typeof AuthSignUpRoute
+  AuthVerifyEmailRoute: typeof AuthVerifyEmailRoute
   CaptureEventRoute: typeof CaptureEventRoute
   CaptureNoteRoute: typeof CaptureNoteRoute
   CaptureReminderRoute: typeof CaptureReminderRoute
@@ -553,6 +566,13 @@ declare module '@tanstack/react-router' {
       path: '/capture/event'
       fullPath: '/capture/event'
       preLoaderRoute: typeof CaptureEventRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/auth/verify-email': {
+      id: '/auth/verify-email'
+      path: '/auth/verify-email'
+      fullPath: '/auth/verify-email'
+      preLoaderRoute: typeof AuthVerifyEmailRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/auth/sign-up': {
@@ -790,6 +810,7 @@ const rootRouteChildren: RootRouteChildren = {
   AuthResetPasswordRoute: AuthResetPasswordRoute,
   AuthSignInRoute: AuthSignInRoute,
   AuthSignUpRoute: AuthSignUpRoute,
+  AuthVerifyEmailRoute: AuthVerifyEmailRoute,
   CaptureEventRoute: CaptureEventRoute,
   CaptureNoteRoute: CaptureNoteRoute,
   CaptureReminderRoute: CaptureReminderRoute,
