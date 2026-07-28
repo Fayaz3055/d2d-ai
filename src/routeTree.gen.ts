@@ -10,6 +10,7 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as ThoughtsRouteImport } from './routes/thoughts'
+import { Route as SettingsRouteImport } from './routes/settings'
 import { Route as RemindersRouteImport } from './routes/reminders'
 import { Route as OnboardingRouteImport } from './routes/onboarding'
 import { Route as NotificationsRouteImport } from './routes/notifications'
@@ -46,6 +47,11 @@ import { Route as EventsIdEditRouteImport } from './routes/events.$id.edit'
 const ThoughtsRoute = ThoughtsRouteImport.update({
   id: '/thoughts',
   path: '/thoughts',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const SettingsRoute = SettingsRouteImport.update({
+  id: '/settings',
+  path: '/settings',
   getParentRoute: () => rootRouteImport,
 } as any)
 const RemindersRoute = RemindersRouteImport.update({
@@ -215,6 +221,7 @@ export interface FileRoutesByFullPath {
   '/notifications': typeof NotificationsRoute
   '/onboarding': typeof OnboardingRoute
   '/reminders': typeof RemindersRouteWithChildren
+  '/settings': typeof SettingsRoute
   '/thoughts': typeof ThoughtsRouteWithChildren
   '/ai': typeof TabsAiRoute
   '/calendar': typeof TabsCalendarRoute
@@ -249,6 +256,7 @@ export interface FileRoutesByTo {
   '/notifications': typeof NotificationsRoute
   '/onboarding': typeof OnboardingRoute
   '/reminders': typeof RemindersRouteWithChildren
+  '/settings': typeof SettingsRoute
   '/thoughts': typeof ThoughtsRouteWithChildren
   '/ai': typeof TabsAiRoute
   '/calendar': typeof TabsCalendarRoute
@@ -285,6 +293,7 @@ export interface FileRoutesById {
   '/notifications': typeof NotificationsRoute
   '/onboarding': typeof OnboardingRoute
   '/reminders': typeof RemindersRouteWithChildren
+  '/settings': typeof SettingsRoute
   '/thoughts': typeof ThoughtsRouteWithChildren
   '/_tabs/ai': typeof TabsAiRoute
   '/_tabs/calendar': typeof TabsCalendarRoute
@@ -321,6 +330,7 @@ export interface FileRouteTypes {
     | '/notifications'
     | '/onboarding'
     | '/reminders'
+    | '/settings'
     | '/thoughts'
     | '/ai'
     | '/calendar'
@@ -355,6 +365,7 @@ export interface FileRouteTypes {
     | '/notifications'
     | '/onboarding'
     | '/reminders'
+    | '/settings'
     | '/thoughts'
     | '/ai'
     | '/calendar'
@@ -390,6 +401,7 @@ export interface FileRouteTypes {
     | '/notifications'
     | '/onboarding'
     | '/reminders'
+    | '/settings'
     | '/thoughts'
     | '/_tabs/ai'
     | '/_tabs/calendar'
@@ -426,6 +438,7 @@ export interface RootRouteChildren {
   NotificationsRoute: typeof NotificationsRoute
   OnboardingRoute: typeof OnboardingRoute
   RemindersRoute: typeof RemindersRouteWithChildren
+  SettingsRoute: typeof SettingsRoute
   ThoughtsRoute: typeof ThoughtsRouteWithChildren
   AuthForgotPasswordRoute: typeof AuthForgotPasswordRoute
   AuthResetPasswordRoute: typeof AuthResetPasswordRoute
@@ -447,6 +460,13 @@ declare module '@tanstack/react-router' {
       path: '/thoughts'
       fullPath: '/thoughts'
       preLoaderRoute: typeof ThoughtsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/settings': {
+      id: '/settings'
+      path: '/settings'
+      fullPath: '/settings'
+      preLoaderRoute: typeof SettingsRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/reminders': {
@@ -805,6 +825,7 @@ const rootRouteChildren: RootRouteChildren = {
   NotificationsRoute: NotificationsRoute,
   OnboardingRoute: OnboardingRoute,
   RemindersRoute: RemindersRouteWithChildren,
+  SettingsRoute: SettingsRoute,
   ThoughtsRoute: ThoughtsRouteWithChildren,
   AuthForgotPasswordRoute: AuthForgotPasswordRoute,
   AuthResetPasswordRoute: AuthResetPasswordRoute,

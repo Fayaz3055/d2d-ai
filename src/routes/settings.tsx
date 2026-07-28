@@ -38,7 +38,7 @@ function SettingsPage() {
   useSettingsSync((t) => setTheme(t as Theme));
 
   return (
-    <PageShell eyebrow="Preferences" title="Settings" fallbackTo="/profile">
+    <PageShell eyebrow="Preferences" title="Settings">
       {/* Theme */}
       <section>
         <SectionLabel>Appearance</SectionLabel>
