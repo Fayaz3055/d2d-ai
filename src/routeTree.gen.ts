@@ -10,6 +10,7 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as ThoughtsRouteImport } from './routes/thoughts'
+import { Route as SettingsRouteImport } from './routes/settings'
 import { Route as RemindersRouteImport } from './routes/reminders'
 import { Route as OnboardingRouteImport } from './routes/onboarding'
 import { Route as NotificationsRouteImport } from './routes/notifications'
@@ -27,6 +28,7 @@ import { Route as CaptureTaskRouteImport } from './routes/capture.task'
 import { Route as CaptureReminderRouteImport } from './routes/capture.reminder'
 import { Route as CaptureNoteRouteImport } from './routes/capture.note'
 import { Route as CaptureEventRouteImport } from './routes/capture.event'
+import { Route as AuthVerifyEmailRouteImport } from './routes/auth.verify-email'
 import { Route as AuthSignUpRouteImport } from './routes/auth.sign-up'
 import { Route as AuthSignInRouteImport } from './routes/auth.sign-in'
 import { Route as AuthResetPasswordRouteImport } from './routes/auth.reset-password'
@@ -45,6 +47,11 @@ import { Route as EventsIdEditRouteImport } from './routes/events.$id.edit'
 const ThoughtsRoute = ThoughtsRouteImport.update({
   id: '/thoughts',
   path: '/thoughts',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const SettingsRoute = SettingsRouteImport.update({
+  id: '/settings',
+  path: '/settings',
   getParentRoute: () => rootRouteImport,
 } as any)
 const RemindersRoute = RemindersRouteImport.update({
@@ -131,6 +138,11 @@ const CaptureEventRoute = CaptureEventRouteImport.update({
   path: '/capture/event',
   getParentRoute: () => rootRouteImport,
 } as any)
+const AuthVerifyEmailRoute = AuthVerifyEmailRouteImport.update({
+  id: '/auth/verify-email',
+  path: '/auth/verify-email',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const AuthSignUpRoute = AuthSignUpRouteImport.update({
   id: '/auth/sign-up',
   path: '/auth/sign-up',
@@ -209,6 +221,7 @@ export interface FileRoutesByFullPath {
   '/notifications': typeof NotificationsRoute
   '/onboarding': typeof OnboardingRoute
   '/reminders': typeof RemindersRouteWithChildren
+  '/settings': typeof SettingsRoute
   '/thoughts': typeof ThoughtsRouteWithChildren
   '/ai': typeof TabsAiRoute
   '/calendar': typeof TabsCalendarRoute
@@ -219,6 +232,7 @@ export interface FileRoutesByFullPath {
   '/auth/reset-password': typeof AuthResetPasswordRoute
   '/auth/sign-in': typeof AuthSignInRoute
   '/auth/sign-up': typeof AuthSignUpRoute
+  '/auth/verify-email': typeof AuthVerifyEmailRoute
   '/capture/event': typeof CaptureEventRoute
   '/capture/note': typeof CaptureNoteRoute
   '/capture/reminder': typeof CaptureReminderRoute
@@ -242,6 +256,7 @@ export interface FileRoutesByTo {
   '/notifications': typeof NotificationsRoute
   '/onboarding': typeof OnboardingRoute
   '/reminders': typeof RemindersRouteWithChildren
+  '/settings': typeof SettingsRoute
   '/thoughts': typeof ThoughtsRouteWithChildren
   '/ai': typeof TabsAiRoute
   '/calendar': typeof TabsCalendarRoute
@@ -252,6 +267,7 @@ export interface FileRoutesByTo {
   '/auth/reset-password': typeof AuthResetPasswordRoute
   '/auth/sign-in': typeof AuthSignInRoute
   '/auth/sign-up': typeof AuthSignUpRoute
+  '/auth/verify-email': typeof AuthVerifyEmailRoute
   '/capture/event': typeof CaptureEventRoute
   '/capture/note': typeof CaptureNoteRoute
   '/capture/reminder': typeof CaptureReminderRoute
@@ -277,6 +293,7 @@ export interface FileRoutesById {
   '/notifications': typeof NotificationsRoute
   '/onboarding': typeof OnboardingRoute
   '/reminders': typeof RemindersRouteWithChildren
+  '/settings': typeof SettingsRoute
   '/thoughts': typeof ThoughtsRouteWithChildren
   '/_tabs/ai': typeof TabsAiRoute
   '/_tabs/calendar': typeof TabsCalendarRoute
@@ -287,6 +304,7 @@ export interface FileRoutesById {
   '/auth/reset-password': typeof AuthResetPasswordRoute
   '/auth/sign-in': typeof AuthSignInRoute
   '/auth/sign-up': typeof AuthSignUpRoute
+  '/auth/verify-email': typeof AuthVerifyEmailRoute
   '/capture/event': typeof CaptureEventRoute
   '/capture/note': typeof CaptureNoteRoute
   '/capture/reminder': typeof CaptureReminderRoute
@@ -312,6 +330,7 @@ export interface FileRouteTypes {
     | '/notifications'
     | '/onboarding'
     | '/reminders'
+    | '/settings'
     | '/thoughts'
     | '/ai'
     | '/calendar'
@@ -322,6 +341,7 @@ export interface FileRouteTypes {
     | '/auth/reset-password'
     | '/auth/sign-in'
     | '/auth/sign-up'
+    | '/auth/verify-email'
     | '/capture/event'
     | '/capture/note'
     | '/capture/reminder'
@@ -345,6 +365,7 @@ export interface FileRouteTypes {
     | '/notifications'
     | '/onboarding'
     | '/reminders'
+    | '/settings'
     | '/thoughts'
     | '/ai'
     | '/calendar'
@@ -355,6 +376,7 @@ export interface FileRouteTypes {
     | '/auth/reset-password'
     | '/auth/sign-in'
     | '/auth/sign-up'
+    | '/auth/verify-email'
     | '/capture/event'
     | '/capture/note'
     | '/capture/reminder'
@@ -379,6 +401,7 @@ export interface FileRouteTypes {
     | '/notifications'
     | '/onboarding'
     | '/reminders'
+    | '/settings'
     | '/thoughts'
     | '/_tabs/ai'
     | '/_tabs/calendar'
@@ -389,6 +412,7 @@ export interface FileRouteTypes {
     | '/auth/reset-password'
     | '/auth/sign-in'
     | '/auth/sign-up'
+    | '/auth/verify-email'
     | '/capture/event'
     | '/capture/note'
     | '/capture/reminder'
@@ -414,11 +438,13 @@ export interface RootRouteChildren {
   NotificationsRoute: typeof NotificationsRoute
   OnboardingRoute: typeof OnboardingRoute
   RemindersRoute: typeof RemindersRouteWithChildren
+  SettingsRoute: typeof SettingsRoute
   ThoughtsRoute: typeof ThoughtsRouteWithChildren
   AuthForgotPasswordRoute: typeof AuthForgotPasswordRoute
   AuthResetPasswordRoute: typeof AuthResetPasswordRoute
   AuthSignInRoute: typeof AuthSignInRoute
   AuthSignUpRoute: typeof AuthSignUpRoute
+  AuthVerifyEmailRoute: typeof AuthVerifyEmailRoute
   CaptureEventRoute: typeof CaptureEventRoute
   CaptureNoteRoute: typeof CaptureNoteRoute
   CaptureReminderRoute: typeof CaptureReminderRoute
@@ -434,6 +460,13 @@ declare module '@tanstack/react-router' {
       path: '/thoughts'
       fullPath: '/thoughts'
       preLoaderRoute: typeof ThoughtsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/settings': {
+      id: '/settings'
+      path: '/settings'
+      fullPath: '/settings'
+      preLoaderRoute: typeof SettingsRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/reminders': {
@@ -553,6 +586,13 @@ declare module '@tanstack/react-router' {
       path: '/capture/event'
       fullPath: '/capture/event'
       preLoaderRoute: typeof CaptureEventRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/auth/verify-email': {
+      id: '/auth/verify-email'
+      path: '/auth/verify-email'
+      fullPath: '/auth/verify-email'
+      preLoaderRoute: typeof AuthVerifyEmailRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/auth/sign-up': {
@@ -785,11 +825,13 @@ const rootRouteChildren: RootRouteChildren = {
   NotificationsRoute: NotificationsRoute,
   OnboardingRoute: OnboardingRoute,
   RemindersRoute: RemindersRouteWithChildren,
+  SettingsRoute: SettingsRoute,
   ThoughtsRoute: ThoughtsRouteWithChildren,
   AuthForgotPasswordRoute: AuthForgotPasswordRoute,
   AuthResetPasswordRoute: AuthResetPasswordRoute,
   AuthSignInRoute: AuthSignInRoute,
   AuthSignUpRoute: AuthSignUpRoute,
+  AuthVerifyEmailRoute: AuthVerifyEmailRoute,
   CaptureEventRoute: CaptureEventRoute,
   CaptureNoteRoute: CaptureNoteRoute,
   CaptureReminderRoute: CaptureReminderRoute,

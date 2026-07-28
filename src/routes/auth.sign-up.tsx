@@ -7,6 +7,8 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { AuthShell, SocialButtons, Divider } from "@/features/auth/auth-shell";
 import { supabase } from "@/integrations/supabase/client";
+import { friendlyAuthError } from "@/features/auth/auth-errors";
+import { PasswordField } from "@/features/auth/password-field";
 
 export const Route = createFileRoute("/auth/sign-up")({
   head: () => ({
@@ -44,7 +46,9 @@ function SignUp() {
     });
     setLoading(false);
     if (error) {
-      toast.error("Couldn't create your account", { description: error.message });
+      toast.error("Couldn't create your account", {
+        description: friendlyAuthError(error.message),
+      });
       return;
     }
     if (data.session) {
@@ -52,10 +56,11 @@ function SignUp() {
       navigate({ to: "/home", replace: true });
       return;
     }
-    toast.success("Check your inbox", {
-      description: "Confirm your email to finish setting up your account.",
+    navigate({
+      to: "/auth/verify-email",
+      search: { email: email.trim() },
+      replace: true,
     });
-    navigate({ to: "/auth/sign-in", replace: true });
   };
 
   return (
@@ -103,15 +108,12 @@ function SignUp() {
         </div>
         <div className="space-y-1.5">
           <Label htmlFor="password">Password</Label>
-          <Input
+          <PasswordField
             id="password"
-            type="password"
-            required
             autoComplete="new-password"
             value={password}
-            onChange={(e) => setPassword(e.target.value)}
+            onChange={setPassword}
             placeholder="At least 8 characters"
-            className="h-12 rounded-xl"
           />
         </div>
         <Button

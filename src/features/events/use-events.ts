@@ -1,4 +1,4 @@
-import { createCollectionStore, type BaseItem } from "@/features/storage/create-collection-store";
+import { createCloudStore, type BaseItem } from "@/features/storage/create-cloud-store";
 
 export type CalendarEvent = BaseItem & {
   title: string;
@@ -7,7 +7,25 @@ export type CalendarEvent = BaseItem & {
   notes: string;
 };
 
-const { store, useAll, useOne } = createCollectionStore<CalendarEvent>("d2d.events.v1");
+const { store, useAll, useOne } = createCloudStore<CalendarEvent>("events", {
+  fromRow: (r) => ({
+    id: String(r.id),
+    title: (r.title as string) ?? "",
+    date: (r.event_date as string) ?? "",
+    time: (r.event_time as string) ?? "",
+    notes: (r.notes as string) ?? "",
+    createdAt: new Date(r.created_at as string).getTime(),
+    updatedAt: new Date(r.updated_at as string).getTime(),
+  }),
+  toRow: (p) => {
+    const row: Record<string, unknown> = {};
+    if (p.title !== undefined) row.title = p.title;
+    if (p.date !== undefined) row.event_date = p.date;
+    if (p.time !== undefined) row.event_time = p.time;
+    if (p.notes !== undefined) row.notes = p.notes;
+    return row;
+  },
+});
 
 export const eventsStore = store;
 export const useEvents = useAll;

@@ -1,104 +1,59 @@
-import { useSyncExternalStore } from "react";
-import type { Task, TaskInput } from "./types";
+import { createCloudStore } from "@/features/storage/create-cloud-store";
+import type { Category, Priority, Task, TaskInput } from "./types";
 import { notificationsStore } from "@/features/notifications/use-notifications";
 
-const STORAGE_KEY = "d2d.tasks.v1";
-
-function loadInitial(): Task[] {
-  if (typeof window === "undefined") return [];
-  try {
-    const raw = localStorage.getItem(STORAGE_KEY);
-    if (!raw) return [];
-    const parsed = JSON.parse(raw);
-    return Array.isArray(parsed) ? (parsed as Task[]) : [];
-  } catch {
-    return [];
-  }
-}
-
-let tasks: Task[] = loadInitial();
-const listeners = new Set<() => void>();
-
-function persist() {
-  try {
-    localStorage.setItem(STORAGE_KEY, JSON.stringify(tasks));
-  } catch {
-    /* noop */
-  }
-  listeners.forEach((l) => l());
-}
-
-function uid() {
-  return Math.random().toString(36).slice(2) + Date.now().toString(36);
-}
+const { store, useAll, useOne } = createCloudStore<Task>("tasks", {
+  fromRow: (r) => ({
+    id: String(r.id),
+    title: (r.title as string) ?? "",
+    description: (r.description as string) ?? "",
+    dueDate: (r.due_date as string) ?? "",
+    priority: ((r.priority as Priority) ?? "medium") as Priority,
+    category: ((r.category as Category) ?? "other") as Category,
+    completed: Boolean(r.completed),
+    completedAt: r.completed_at ? new Date(r.completed_at as string).getTime() : undefined,
+    createdAt: new Date(r.created_at as string).getTime(),
+    updatedAt: new Date(r.updated_at as string).getTime(),
+  }),
+  toRow: (p) => {
+    const row: Record<string, unknown> = {};
+    if (p.title !== undefined) row.title = p.title;
+    if (p.description !== undefined) row.description = p.description;
+    if (p.dueDate !== undefined) row.due_date = p.dueDate;
+    if (p.priority !== undefined) row.priority = p.priority;
+    if (p.category !== undefined) row.category = p.category;
+    if (p.completed !== undefined) row.completed = p.completed;
+    if ("completedAt" in p)
+      row.completed_at = p.completedAt ? new Date(p.completedAt).toISOString() : null;
+    return row;
+  },
+});
 
 export const tasksStore = {
-  getAll: () => tasks,
-  get: (id: string) => tasks.find((t) => t.id === id),
+  ...store,
   add(input: TaskInput): Task {
-    const now = Date.now();
-    const task: Task = {
-      id: uid(),
-      completed: false,
-      createdAt: now,
-      updatedAt: now,
-      ...input,
-    };
-    tasks = [task, ...tasks];
-    persist();
-    return task;
-  },
-  update(id: string, patch: Partial<Task>) {
-    tasks = tasks.map((t) =>
-      t.id === id ? { ...t, ...patch, updatedAt: Date.now() } : t,
-    );
-    persist();
+    return store.add({ ...input, completed: false } as Omit<
+      Task,
+      "id" | "createdAt" | "updatedAt"
+    >);
   },
   toggle(id: string) {
-    let justCompleted: Task | null = null;
-    tasks = tasks.map((t) => {
-      if (t.id !== id) return t;
-      const nextCompleted = !t.completed;
-      const updated: Task = {
-        ...t,
-        completed: nextCompleted,
-        completedAt: nextCompleted ? Date.now() : undefined,
-        updatedAt: Date.now(),
-      };
-      if (nextCompleted) justCompleted = updated;
-      return updated;
-    });
-    persist();
-    if (justCompleted) {
+    const task = store.get(id);
+    if (!task) return;
+    const nextCompleted = !task.completed;
+    store.update(id, {
+      completed: nextCompleted,
+      completedAt: nextCompleted ? Date.now() : undefined,
+    } as Partial<Task>);
+    if (nextCompleted) {
       notificationsStore.push({
         kind: "task_completed",
         title: "Task completed",
-        description: (justCompleted as Task).title,
+        description: task.title,
       });
     }
   },
-  remove(id: string) {
-    tasks = tasks.filter((t) => t.id !== id);
-    persist();
-  },
-  subscribe(l: () => void) {
-    listeners.add(l);
-    return () => listeners.delete(l);
-  },
 };
 
-const EMPTY_TASKS: Task[] = [];
-
-export function useTasks(): Task[] {
-  return useSyncExternalStore(
-    tasksStore.subscribe,
-    () => tasks,
-    () => EMPTY_TASKS,
-  );
-}
-
-
-export function useTask(id: string): Task | undefined {
-  const all = useTasks();
-  return all.find((t) => t.id === id);
-}
+export const useTasks = useAll;
+export const useTask = useOne;

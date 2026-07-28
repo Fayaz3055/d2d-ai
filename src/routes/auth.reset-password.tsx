@@ -3,9 +3,10 @@ import { useEffect, useState } from "react";
 import { Loader2 } from "lucide-react";
 import { toast } from "sonner";
 import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { AuthShell } from "@/features/auth/auth-shell";
+import { PasswordField } from "@/features/auth/password-field";
+import { friendlyAuthError } from "@/features/auth/auth-errors";
 import { supabase } from "@/integrations/supabase/client";
 
 export const Route = createFileRoute("/auth/reset-password")({
@@ -46,7 +47,7 @@ function ResetPassword() {
     const { error } = await supabase.auth.updateUser({ password });
     setLoading(false);
     if (error) {
-      toast.error("Couldn't update your password", { description: error.message });
+      toast.error("Couldn't update your password", { description: friendlyAuthError(error.message) });
       return;
     }
     toast.success("Password updated");
@@ -67,29 +68,24 @@ function ResetPassword() {
         <form className="space-y-4" onSubmit={onSubmit}>
           <div className="space-y-1.5">
             <Label htmlFor="password">New password</Label>
-            <Input
+            <PasswordField
               id="password"
-              type="password"
-              required
               autoComplete="new-password"
               value={password}
-              onChange={(e) => setPassword(e.target.value)}
+              onChange={setPassword}
               placeholder="At least 8 characters"
-              className="h-12 rounded-xl"
             />
           </div>
           <div className="space-y-1.5">
             <Label htmlFor="confirm">Confirm password</Label>
-            <Input
+            <PasswordField
               id="confirm"
-              type="password"
-              required
               autoComplete="new-password"
               value={confirm}
-              onChange={(e) => setConfirm(e.target.value)}
+              onChange={setConfirm}
               placeholder="Repeat your password"
-              className="h-12 rounded-xl"
             />
+
           </div>
           <Button
             type="submit"
