@@ -34,6 +34,12 @@ export function clearAllCloudStores() {
   registry.forEach((s) => s.clear());
 }
 
+/** Drops identity/timestamp fields so local edits can be merged onto a fresh row. */
+function stripMeta<T extends BaseItem>(item: T): Partial<T> {
+  const { id: _id, createdAt: _c, updatedAt: _u, ...rest } = item;
+  return rest as Partial<T>;
+}
+
 function tempId() {
   return `tmp_${Math.random().toString(36).slice(2)}${Date.now().toString(36)}`;
 }
