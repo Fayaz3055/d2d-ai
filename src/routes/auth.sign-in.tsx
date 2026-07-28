@@ -93,16 +93,14 @@ function SignIn() {
               Forgot?
             </Link>
           </div>
-          <Input
+          <PasswordField
             id="password"
-            type="password"
-            required
             autoComplete="current-password"
             value={password}
-            onChange={(e) => setPassword(e.target.value)}
+            onChange={setPassword}
             placeholder="••••••••"
-            className="h-12 rounded-xl"
           />
+
         </div>
         <Button
           type="submit"
