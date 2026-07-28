@@ -46,6 +46,8 @@ export function createCloudStore<T extends BaseItem>(
   let items: T[] = [];
   let loaded = false;
   const listeners = new Set<() => void>();
+  /** Maps an optimistic temp id to its real id once the insert lands. */
+  const resolvedIds = new Map<string, Promise<string | null>>();
 
   function emit() {
     listeners.forEach((l) => l());
@@ -54,6 +56,12 @@ export function createCloudStore<T extends BaseItem>(
   function replace(id: string, next: T) {
     items = items.map((i) => (i.id === id ? next : i));
     emit();
+  }
+
+  /** Resolves a possibly-optimistic id to the persisted database id. */
+  async function realId(id: string): Promise<string | null> {
+    if (!id.startsWith("tmp_")) return id;
+    return (await resolvedIds.get(id)) ?? null;
   }
 
   const store: CloudStore<T> = {
@@ -67,10 +75,19 @@ export function createCloudStore<T extends BaseItem>(
       items = [optimistic, ...items];
       emit();
 
-      void (async () => {
+      const pending = (async () => {
+        const { data: auth } = await supabase.auth.getUser();
+        if (!auth.user) {
+          items = items.filter((i) => i.id !== optimistic.id);
+          emit();
+          return null;
+        }
         const { data, error } = await supabase
           .from(table as never)
-          .insert(mapper.toRow(optimistic as Partial<T>) as never)
+          .insert({
+            ...mapper.toRow(optimistic as Partial<T>),
+            user_id: auth.user.id,
+          } as never)
           .select()
           .single();
         if (error || !data) {
@@ -78,11 +95,16 @@ export function createCloudStore<T extends BaseItem>(
           items = items.filter((i) => i.id !== optimistic.id);
           emit();
           console.error(`[${table}] insert failed`, error);
-          return;
+          return null;
         }
-        replace(optimistic.id, mapper.fromRow(data as Record<string, unknown>));
+        const row = mapper.fromRow(data as Record<string, unknown>);
+        // Keep any edits made while the insert was in flight.
+        const current = items.find((i) => i.id === optimistic.id);
+        replace(optimistic.id, { ...row, ...(current ? stripMeta(current) : {}) } as T);
+        return row.id;
       })();
 
+      resolvedIds.set(optimistic.id, pending);
       return optimistic;
     },
 
@@ -91,13 +113,14 @@ export function createCloudStore<T extends BaseItem>(
       if (!previous) return;
       items = items.map((i) => (i.id === id ? { ...i, ...patch, updatedAt: Date.now() } : i));
       emit();
-      if (id.startsWith("tmp_")) return;
 
       void (async () => {
+        const target = await realId(id);
+        if (!target) return;
         const { error } = await supabase
           .from(table as never)
           .update(mapper.toRow(patch) as never)
-          .eq("id", id);
+          .eq("id", target);
         if (error) {
           items = items.map((i) => (i.id === id ? previous : i));
           emit();
@@ -110,10 +133,12 @@ export function createCloudStore<T extends BaseItem>(
       const previous = items.find((i) => i.id === id);
       items = items.filter((i) => i.id !== id);
       emit();
-      if (!previous || id.startsWith("tmp_")) return;
+      if (!previous) return;
 
       void (async () => {
-        const { error } = await supabase.from(table as never).delete().eq("id", id);
+        const target = await realId(id);
+        if (!target) return;
+        const { error } = await supabase.from(table as never).delete().eq("id", target);
         if (error) {
           items = [previous, ...items];
           emit();
@@ -121,6 +146,7 @@ export function createCloudStore<T extends BaseItem>(
         }
       })();
     },
+
 
     async load() {
       const { data, error } = await supabase
