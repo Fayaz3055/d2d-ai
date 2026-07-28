@@ -2,6 +2,7 @@ import { createFileRoute, Outlet, redirect } from "@tanstack/react-router";
 import { BottomNav } from "@/components/nova/bottom-nav";
 import { QuickCaptureSheet } from "@/components/nova/quick-capture-fab";
 import { supabase } from "@/integrations/supabase/client";
+import { useCloudSync } from "@/features/storage/cloud-sync";
 
 export const Route = createFileRoute("/_tabs")({
   ssr: false,
@@ -15,6 +16,7 @@ export const Route = createFileRoute("/_tabs")({
 
 
 function TabsLayout() {
+  useCloudSync();
   return (
     <div className="relative min-h-dvh bg-background">
       <div className="mx-auto max-w-xl pb-32">
