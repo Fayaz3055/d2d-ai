@@ -7,6 +7,8 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { AuthShell, SocialButtons, Divider } from "@/features/auth/auth-shell";
 import { supabase } from "@/integrations/supabase/client";
+import { friendlyAuthError, isUnverifiedEmailError } from "@/features/auth/auth-errors";
+import { PasswordField } from "@/features/auth/password-field";
 
 export const Route = createFileRoute("/auth/sign-in")({
   head: () => ({
@@ -35,7 +37,15 @@ function SignIn() {
     });
     setLoading(false);
     if (error) {
-      toast.error("Couldn't sign you in", { description: error.message });
+      if (isUnverifiedEmailError(error.message)) {
+        toast.error("Email not verified", {
+          description:
+            "Your email hasn't been verified yet. Please verify your email before signing in.",
+        });
+        navigate({ to: "/auth/verify-email", search: { email: email.trim() } });
+        return;
+      }
+      toast.error("Couldn't sign you in", { description: friendlyAuthError(error.message) });
       return;
     }
     toast.success("Welcome back");
