@@ -62,7 +62,7 @@ function VerifyEmail() {
 
   return (
     <AuthShell
-      title="Check your email"
+      title="Almost there"
       subtitle="One quick step before you get started."
       backTo="/auth/sign-in"
     >
