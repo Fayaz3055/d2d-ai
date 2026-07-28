@@ -23,7 +23,7 @@ const { store, useAll, useOne } = createCloudStore<Task>("tasks", {
     if (p.priority !== undefined) row.priority = p.priority;
     if (p.category !== undefined) row.category = p.category;
     if (p.completed !== undefined) row.completed = p.completed;
-    if (p.completedAt !== undefined)
+    if ("completedAt" in p)
       row.completed_at = p.completedAt ? new Date(p.completedAt).toISOString() : null;
     return row;
   },
