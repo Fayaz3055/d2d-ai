@@ -7,6 +7,7 @@ import {
   Field,
   fieldInputCn,
 } from "@/features/quick-capture/capture-page";
+import { AiSuggestionCard } from "@/features/ai/components/ai-suggestion-card";
 import { useDraft } from "@/features/quick-capture/use-draft";
 import { tasksStore } from "@/features/tasks/use-tasks";
 
@@ -127,6 +128,8 @@ function NewTaskPage() {
             ]}
           />
         </Field>
+
+        <AiSuggestionCard kind="task" text={data.title} />
       </div>
     </CapturePage>
   );

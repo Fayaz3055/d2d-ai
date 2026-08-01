@@ -2,6 +2,7 @@ import { createFileRoute, useRouter } from "@tanstack/react-router";
 import { Sparkles } from "lucide-react";
 import { toast } from "sonner";
 import { CapturePage, Field, fieldInputCn } from "@/features/quick-capture/capture-page";
+import { AiSuggestionCard } from "@/features/ai/components/ai-suggestion-card";
 import { useDraft } from "@/features/quick-capture/use-draft";
 import { thoughtsStore } from "@/features/thoughts/use-thoughts";
 
@@ -80,6 +81,8 @@ function NewThoughtPage() {
             className={fieldInputCn}
           />
         </Field>
+
+        <AiSuggestionCard kind="thought" text={data.thought} />
       </div>
     </CapturePage>
   );
