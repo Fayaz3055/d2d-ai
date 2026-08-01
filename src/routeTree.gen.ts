@@ -33,6 +33,7 @@ import { Route as AuthSignUpRouteImport } from './routes/auth.sign-up'
 import { Route as AuthSignInRouteImport } from './routes/auth.sign-in'
 import { Route as AuthResetPasswordRouteImport } from './routes/auth.reset-password'
 import { Route as AuthForgotPasswordRouteImport } from './routes/auth.forgot-password'
+import { Route as ApiChatRouteImport } from './routes/api/chat'
 import { Route as TabsTasksRouteImport } from './routes/_tabs.tasks'
 import { Route as TabsProfileRouteImport } from './routes/_tabs.profile'
 import { Route as TabsHomeRouteImport } from './routes/_tabs.home'
@@ -163,6 +164,11 @@ const AuthForgotPasswordRoute = AuthForgotPasswordRouteImport.update({
   path: '/auth/forgot-password',
   getParentRoute: () => rootRouteImport,
 } as any)
+const ApiChatRoute = ApiChatRouteImport.update({
+  id: '/api/chat',
+  path: '/api/chat',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const TabsTasksRoute = TabsTasksRouteImport.update({
   id: '/tasks',
   path: '/tasks',
@@ -228,6 +234,7 @@ export interface FileRoutesByFullPath {
   '/home': typeof TabsHomeRoute
   '/profile': typeof TabsProfileRoute
   '/tasks': typeof TabsTasksRoute
+  '/api/chat': typeof ApiChatRoute
   '/auth/forgot-password': typeof AuthForgotPasswordRoute
   '/auth/reset-password': typeof AuthResetPasswordRoute
   '/auth/sign-in': typeof AuthSignInRoute
@@ -263,6 +270,7 @@ export interface FileRoutesByTo {
   '/home': typeof TabsHomeRoute
   '/profile': typeof TabsProfileRoute
   '/tasks': typeof TabsTasksRoute
+  '/api/chat': typeof ApiChatRoute
   '/auth/forgot-password': typeof AuthForgotPasswordRoute
   '/auth/reset-password': typeof AuthResetPasswordRoute
   '/auth/sign-in': typeof AuthSignInRoute
@@ -300,6 +308,7 @@ export interface FileRoutesById {
   '/_tabs/home': typeof TabsHomeRoute
   '/_tabs/profile': typeof TabsProfileRoute
   '/_tabs/tasks': typeof TabsTasksRoute
+  '/api/chat': typeof ApiChatRoute
   '/auth/forgot-password': typeof AuthForgotPasswordRoute
   '/auth/reset-password': typeof AuthResetPasswordRoute
   '/auth/sign-in': typeof AuthSignInRoute
@@ -337,6 +346,7 @@ export interface FileRouteTypes {
     | '/home'
     | '/profile'
     | '/tasks'
+    | '/api/chat'
     | '/auth/forgot-password'
     | '/auth/reset-password'
     | '/auth/sign-in'
@@ -372,6 +382,7 @@ export interface FileRouteTypes {
     | '/home'
     | '/profile'
     | '/tasks'
+    | '/api/chat'
     | '/auth/forgot-password'
     | '/auth/reset-password'
     | '/auth/sign-in'
@@ -408,6 +419,7 @@ export interface FileRouteTypes {
     | '/_tabs/home'
     | '/_tabs/profile'
     | '/_tabs/tasks'
+    | '/api/chat'
     | '/auth/forgot-password'
     | '/auth/reset-password'
     | '/auth/sign-in'
@@ -440,6 +452,7 @@ export interface RootRouteChildren {
   RemindersRoute: typeof RemindersRouteWithChildren
   SettingsRoute: typeof SettingsRoute
   ThoughtsRoute: typeof ThoughtsRouteWithChildren
+  ApiChatRoute: typeof ApiChatRoute
   AuthForgotPasswordRoute: typeof AuthForgotPasswordRoute
   AuthResetPasswordRoute: typeof AuthResetPasswordRoute
   AuthSignInRoute: typeof AuthSignInRoute
@@ -621,6 +634,13 @@ declare module '@tanstack/react-router' {
       path: '/auth/forgot-password'
       fullPath: '/auth/forgot-password'
       preLoaderRoute: typeof AuthForgotPasswordRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/api/chat': {
+      id: '/api/chat'
+      path: '/api/chat'
+      fullPath: '/api/chat'
+      preLoaderRoute: typeof ApiChatRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/_tabs/tasks': {
@@ -827,6 +847,7 @@ const rootRouteChildren: RootRouteChildren = {
   RemindersRoute: RemindersRouteWithChildren,
   SettingsRoute: SettingsRoute,
   ThoughtsRoute: ThoughtsRouteWithChildren,
+  ApiChatRoute: ApiChatRoute,
   AuthForgotPasswordRoute: AuthForgotPasswordRoute,
   AuthResetPasswordRoute: AuthResetPasswordRoute,
   AuthSignInRoute: AuthSignInRoute,
@@ -842,13 +863,3 @@ const rootRouteChildren: RootRouteChildren = {
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
   ._addFileTypes<FileRouteTypes>()
-
-import type { getRouter } from './router.tsx'
-import type { startInstance } from './start.ts'
-declare module '@tanstack/react-start' {
-  interface Register {
-    ssr: true
-    router: Awaited<ReturnType<typeof getRouter>>
-    config: Awaited<ReturnType<typeof startInstance.getOptions>>
-  }
-}
