@@ -21,6 +21,8 @@ import { supabase } from "@/integrations/supabase/client";
 import { useAiHistory } from "@/features/ai/use-ai-history";
 import { CaptureProposals } from "@/features/ai/components/capture-proposals";
 import { QUICK_ACTIONS, type CaptureProposalPayload } from "@/features/ai/types";
+import { useLifeContext } from "@/features/ai/context";
+import { takeAiPrompt } from "@/features/ai/pending-prompt";
 import companionMark from "@/assets/ai-companion.png";
 import { cn } from "@/lib/utils";
 
@@ -71,11 +73,15 @@ function ChatWindow({
 }) {
   const [input, setInput] = useState("");
   const textareaRef = useRef<HTMLTextAreaElement | null>(null);
+  const lifeContext = useLifeContext();
+  const contextRef = useRef(lifeContext);
+  contextRef.current = lifeContext;
 
   const transport = useMemo(
     () =>
       new DefaultChatTransport<UIMessage>({
         api: "/api/chat",
+        body: () => ({ context: JSON.stringify(contextRef.current) }),
         headers: async () => {
           const { data } = await supabase.auth.getSession();
           return data.session
@@ -127,6 +133,16 @@ function ChatWindow({
     },
     [busy, persist, sendMessage, focusInput],
   );
+
+  // A suggestion tapped elsewhere in the app (home briefing, insights) is sent on arrival.
+  const sentPending = useRef(false);
+  useEffect(() => {
+    if (sentPending.current) return;
+    const pending = takeAiPrompt();
+    if (!pending) return;
+    sentPending.current = true;
+    send(pending);
+  }, [send]);
 
   const handleClear = async () => {
     await clearHistory();
