@@ -1,7 +1,9 @@
-import { createFileRoute } from "@tanstack/react-router";
+import { createFileRoute, Link } from "@tanstack/react-router";
 import {
   Bell,
+  Brain,
   ChevronRight,
+  LineChart,
   Info,
   Monitor,
   Moon,
@@ -87,6 +89,33 @@ function SettingsPage() {
             checked={settings.notificationsEnabled}
             onCheckedChange={(v) => settingsStore.set({ notificationsEnabled: v })}
           />
+        </div>
+      </section>
+
+      {/* AI Companion */}
+      <section className="mt-6">
+        <SectionLabel>AI Companion</SectionLabel>
+        <div className="nova-card divide-y divide-border overflow-hidden">
+          <Link to="/ai-memory" className="flex items-center gap-3 p-4 transition-colors active:bg-accent/50">
+            <div className="flex h-9 w-9 items-center justify-center rounded-lg bg-accent text-accent-foreground">
+              <Brain className="h-4 w-4" />
+            </div>
+            <div className="min-w-0 flex-1">
+              <p className="text-[15px] font-medium">AI Memory</p>
+              <p className="text-xs text-muted-foreground">See and edit what your companion remembers.</p>
+            </div>
+            <ChevronRight className="h-4 w-4 shrink-0 text-muted-foreground" />
+          </Link>
+          <Link to="/insights" className="flex items-center gap-3 p-4 transition-colors active:bg-accent/50">
+            <div className="flex h-9 w-9 items-center justify-center rounded-lg bg-accent text-accent-foreground">
+              <LineChart className="h-4 w-4" />
+            </div>
+            <div className="min-w-0 flex-1">
+              <p className="text-[15px] font-medium">Weekly Insights</p>
+              <p className="text-xs text-muted-foreground">Your AI review of the week.</p>
+            </div>
+            <ChevronRight className="h-4 w-4 shrink-0 text-muted-foreground" />
+          </Link>
         </div>
       </section>
 
