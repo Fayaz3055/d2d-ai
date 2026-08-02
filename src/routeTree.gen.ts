@@ -17,6 +17,7 @@ import { Route as NotificationsRouteImport } from './routes/notifications'
 import { Route as NotesRouteImport } from './routes/notes'
 import { Route as InsightsRouteImport } from './routes/insights'
 import { Route as EventsRouteImport } from './routes/events'
+import { Route as AiMemoryRouteImport } from './routes/ai-memory'
 import { Route as TabsRouteImport } from './routes/_tabs'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as ThoughtsIdRouteImport } from './routes/thoughts.$id'
@@ -84,6 +85,11 @@ const InsightsRoute = InsightsRouteImport.update({
 const EventsRoute = EventsRouteImport.update({
   id: '/events',
   path: '/events',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AiMemoryRoute = AiMemoryRouteImport.update({
+  id: '/ai-memory',
+  path: '/ai-memory',
   getParentRoute: () => rootRouteImport,
 } as any)
 const TabsRoute = TabsRouteImport.update({
@@ -228,6 +234,7 @@ const EventsIdEditRoute = EventsIdEditRouteImport.update({
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/ai-memory': typeof AiMemoryRoute
   '/events': typeof EventsRouteWithChildren
   '/insights': typeof InsightsRoute
   '/notes': typeof NotesRouteWithChildren
@@ -265,6 +272,7 @@ export interface FileRoutesByFullPath {
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/ai-memory': typeof AiMemoryRoute
   '/events': typeof EventsRouteWithChildren
   '/insights': typeof InsightsRoute
   '/notes': typeof NotesRouteWithChildren
@@ -304,6 +312,7 @@ export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
   '/_tabs': typeof TabsRouteWithChildren
+  '/ai-memory': typeof AiMemoryRoute
   '/events': typeof EventsRouteWithChildren
   '/insights': typeof InsightsRoute
   '/notes': typeof NotesRouteWithChildren
@@ -343,6 +352,7 @@ export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
   fullPaths:
     | '/'
+    | '/ai-memory'
     | '/events'
     | '/insights'
     | '/notes'
@@ -380,6 +390,7 @@ export interface FileRouteTypes {
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
+    | '/ai-memory'
     | '/events'
     | '/insights'
     | '/notes'
@@ -418,6 +429,7 @@ export interface FileRouteTypes {
     | '__root__'
     | '/'
     | '/_tabs'
+    | '/ai-memory'
     | '/events'
     | '/insights'
     | '/notes'
@@ -457,6 +469,7 @@ export interface FileRouteTypes {
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   TabsRoute: typeof TabsRouteWithChildren
+  AiMemoryRoute: typeof AiMemoryRoute
   EventsRoute: typeof EventsRouteWithChildren
   InsightsRoute: typeof InsightsRoute
   NotesRoute: typeof NotesRouteWithChildren
@@ -535,6 +548,13 @@ declare module '@tanstack/react-router' {
       path: '/events'
       fullPath: '/events'
       preLoaderRoute: typeof EventsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/ai-memory': {
+      id: '/ai-memory'
+      path: '/ai-memory'
+      fullPath: '/ai-memory'
+      preLoaderRoute: typeof AiMemoryRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/_tabs': {
@@ -860,6 +880,7 @@ const TasksIdRouteWithChildren =
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   TabsRoute: TabsRouteWithChildren,
+  AiMemoryRoute: AiMemoryRoute,
   EventsRoute: EventsRouteWithChildren,
   InsightsRoute: InsightsRoute,
   NotesRoute: NotesRouteWithChildren,
