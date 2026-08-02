@@ -66,6 +66,15 @@ function Home() {
   const events = useEvents();
   const reminders = useReminders();
   const unread = useUnreadCount();
+  const tasksLoaded = useTasksLoaded();
+  const { user } = useSession();
+  const profile = useProfile(user);
+  const lifeContext = useLifeContext();
+  const { briefing, loading: briefingLoading, refresh } = useDailyBriefing(
+    lifeContext,
+    tasksLoaded && !!user,
+  );
+  const firstName = displayNameOf(user, profile).split(" ")[0];
 
   const { overdue, todayTasks, doneToday, totalToday } = useMemo(() => {
     const t0 = startOfToday();
