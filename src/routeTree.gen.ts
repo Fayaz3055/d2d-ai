@@ -15,6 +15,7 @@ import { Route as RemindersRouteImport } from './routes/reminders'
 import { Route as OnboardingRouteImport } from './routes/onboarding'
 import { Route as NotificationsRouteImport } from './routes/notifications'
 import { Route as NotesRouteImport } from './routes/notes'
+import { Route as InsightsRouteImport } from './routes/insights'
 import { Route as EventsRouteImport } from './routes/events'
 import { Route as TabsRouteImport } from './routes/_tabs'
 import { Route as IndexRouteImport } from './routes/index'
@@ -73,6 +74,11 @@ const NotificationsRoute = NotificationsRouteImport.update({
 const NotesRoute = NotesRouteImport.update({
   id: '/notes',
   path: '/notes',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const InsightsRoute = InsightsRouteImport.update({
+  id: '/insights',
+  path: '/insights',
   getParentRoute: () => rootRouteImport,
 } as any)
 const EventsRoute = EventsRouteImport.update({
@@ -223,6 +229,7 @@ const EventsIdEditRoute = EventsIdEditRouteImport.update({
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/events': typeof EventsRouteWithChildren
+  '/insights': typeof InsightsRoute
   '/notes': typeof NotesRouteWithChildren
   '/notifications': typeof NotificationsRoute
   '/onboarding': typeof OnboardingRoute
@@ -259,6 +266,7 @@ export interface FileRoutesByFullPath {
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/events': typeof EventsRouteWithChildren
+  '/insights': typeof InsightsRoute
   '/notes': typeof NotesRouteWithChildren
   '/notifications': typeof NotificationsRoute
   '/onboarding': typeof OnboardingRoute
@@ -297,6 +305,7 @@ export interface FileRoutesById {
   '/': typeof IndexRoute
   '/_tabs': typeof TabsRouteWithChildren
   '/events': typeof EventsRouteWithChildren
+  '/insights': typeof InsightsRoute
   '/notes': typeof NotesRouteWithChildren
   '/notifications': typeof NotificationsRoute
   '/onboarding': typeof OnboardingRoute
@@ -335,6 +344,7 @@ export interface FileRouteTypes {
   fullPaths:
     | '/'
     | '/events'
+    | '/insights'
     | '/notes'
     | '/notifications'
     | '/onboarding'
@@ -371,6 +381,7 @@ export interface FileRouteTypes {
   to:
     | '/'
     | '/events'
+    | '/insights'
     | '/notes'
     | '/notifications'
     | '/onboarding'
@@ -408,6 +419,7 @@ export interface FileRouteTypes {
     | '/'
     | '/_tabs'
     | '/events'
+    | '/insights'
     | '/notes'
     | '/notifications'
     | '/onboarding'
@@ -446,6 +458,7 @@ export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   TabsRoute: typeof TabsRouteWithChildren
   EventsRoute: typeof EventsRouteWithChildren
+  InsightsRoute: typeof InsightsRoute
   NotesRoute: typeof NotesRouteWithChildren
   NotificationsRoute: typeof NotificationsRoute
   OnboardingRoute: typeof OnboardingRoute
@@ -508,6 +521,13 @@ declare module '@tanstack/react-router' {
       path: '/notes'
       fullPath: '/notes'
       preLoaderRoute: typeof NotesRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/insights': {
+      id: '/insights'
+      path: '/insights'
+      fullPath: '/insights'
+      preLoaderRoute: typeof InsightsRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/events': {
@@ -841,6 +861,7 @@ const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   TabsRoute: TabsRouteWithChildren,
   EventsRoute: EventsRouteWithChildren,
+  InsightsRoute: InsightsRoute,
   NotesRoute: NotesRouteWithChildren,
   NotificationsRoute: NotificationsRoute,
   OnboardingRoute: OnboardingRoute,
