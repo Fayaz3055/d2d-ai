@@ -129,7 +129,9 @@ function Home() {
           <p className="text-[10px] font-semibold uppercase tracking-[0.18em] text-primary/80">
             D2D AI
           </p>
-          <h1 className="mt-0.5 truncate text-xl font-semibold tracking-tight">{greet()}</h1>
+          <p className="mt-0.5 truncate text-[13px] text-muted-foreground">
+            Your intelligent daily companion
+          </p>
         </div>
         <div className="flex shrink-0 items-center gap-2">
           <Link
@@ -155,6 +157,49 @@ function Home() {
       </header>
 
       <div className="space-y-4 px-5">
+        {/* AI home: personal greeting, smart daily plan, AI suggestions */}
+        <AiBriefingCard
+          greetingPrefix={`${greet()}, ${firstName}`}
+          briefing={briefing}
+          loading={briefingLoading}
+          onRefresh={refresh}
+        />
+
+        <QuickAddRow />
+
+        {/* AI extras */}
+        <div className="grid grid-cols-2 gap-2">
+          <Link
+            to="/insights"
+            className="nova-card flex items-center gap-2.5 p-3 transition-transform active:scale-[0.98]"
+          >
+            <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-xl bg-primary/10 text-primary">
+              <LineChart className="h-4 w-4" />
+            </span>
+            <span className="min-w-0">
+              <span className="block truncate text-[13px] font-semibold tracking-tight">
+                Weekly Insights
+              </span>
+              <span className="block text-[11px] text-muted-foreground">AI review</span>
+            </span>
+          </Link>
+          <Link
+            to="/ai-memory"
+            className="nova-card flex items-center gap-2.5 p-3 transition-transform active:scale-[0.98]"
+          >
+            <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-xl bg-primary/10 text-primary">
+              <Brain className="h-4 w-4" />
+            </span>
+            <span className="min-w-0">
+              <span className="block truncate text-[13px] font-semibold tracking-tight">
+                AI Memory
+              </span>
+              <span className="block text-[11px] text-muted-foreground">What I remember</span>
+            </span>
+          </Link>
+        </div>
+
+
         {/* Compact progress + counts */}
         <div className="nova-card p-4">
           <div className="flex items-center justify-between gap-3">
