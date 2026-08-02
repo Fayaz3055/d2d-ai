@@ -3,6 +3,7 @@ import { toast } from "sonner";
 import { CapturePage, Field, fieldInputCn } from "@/features/quick-capture/capture-page";
 import { useDraft } from "@/features/quick-capture/use-draft";
 import { remindersStore } from "@/features/reminders/use-reminders";
+import { announceCapture } from "@/features/ai/capture-reply";
 
 export const Route = createFileRoute("/capture/reminder")({
   head: () => ({
@@ -29,6 +30,11 @@ function NewReminderPage() {
       title: data.title.trim(),
       date: data.date,
       time: data.time,
+    });
+    announceCapture({
+      kind: "reminder",
+      title: data.title,
+      when: `${data.date} ${data.time}`.trim(),
     });
     clear();
     toast.success("Reminder set", { description: "We'll ping you when it's time." });

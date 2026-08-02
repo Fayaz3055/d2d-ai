@@ -4,6 +4,7 @@ import { CapturePage, Field, fieldInputCn } from "@/features/quick-capture/captu
 import { AiSuggestionCard } from "@/features/ai/components/ai-suggestion-card";
 import { useDraft } from "@/features/quick-capture/use-draft";
 import { notesStore } from "@/features/notes/use-notes";
+import { announceCapture } from "@/features/ai/capture-reply";
 
 export const Route = createFileRoute("/capture/note")({
   head: () => ({
@@ -29,6 +30,7 @@ function NewNotePage() {
   const handleSave = () => {
     if (!hasContent) return;
     notesStore.add({ title: data.title.trim(), body: data.body.trim() });
+    announceCapture({ kind: "note", title: data.title, details: data.body });
     clear();
     toast.success("Note saved", { description: "Tucked away in your notes." });
     setTimeout(() => {

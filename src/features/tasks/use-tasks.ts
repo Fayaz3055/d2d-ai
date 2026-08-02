@@ -2,7 +2,7 @@ import { createCloudStore } from "@/features/storage/create-cloud-store";
 import type { Category, Priority, Task, TaskInput } from "./types";
 import { notificationsStore } from "@/features/notifications/use-notifications";
 
-const { store, useAll, useOne } = createCloudStore<Task>("tasks", {
+const { store, useAll, useOne, useLoaded } = createCloudStore<Task>("tasks", {
   fromRow: (r) => ({
     id: String(r.id),
     title: (r.title as string) ?? "",
@@ -56,4 +56,5 @@ export const tasksStore = {
 };
 
 export const useTasks = useAll;
+export const useTasksLoaded = useLoaded;
 export const useTask = useOne;

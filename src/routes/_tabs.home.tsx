@@ -10,15 +10,22 @@ import {
   BellRing,
   AlertCircle,
   Check,
+  LineChart,
+  Brain,
 } from "lucide-react";
 import { memo, useMemo, type ReactNode } from "react";
 import { cn } from "@/lib/utils";
-import { useTasks, tasksStore } from "@/features/tasks/use-tasks";
+import { useTasks, tasksStore, useTasksLoaded } from "@/features/tasks/use-tasks";
 import { useNotes } from "@/features/notes/use-notes";
 import { useThoughts } from "@/features/thoughts/use-thoughts";
 import { useEvents, eventTimestamp } from "@/features/events/use-events";
 import { useReminders } from "@/features/reminders/use-reminders";
 import { useUnreadCount } from "@/features/notifications/use-notifications";
+import { useSession, useProfile, displayNameOf } from "@/features/auth/use-auth";
+import { useLifeContext } from "@/features/ai/context";
+import { useDailyBriefing } from "@/features/ai/use-daily-briefing";
+import { AiBriefingCard } from "@/features/ai/components/ai-briefing-card";
+import { QuickAddRow } from "@/features/ai/components/quick-add-row";
 import type { Task } from "@/features/tasks/types";
 
 export const Route = createFileRoute("/_tabs/home")({
@@ -59,6 +66,15 @@ function Home() {
   const events = useEvents();
   const reminders = useReminders();
   const unread = useUnreadCount();
+  const tasksLoaded = useTasksLoaded();
+  const { user } = useSession();
+  const profile = useProfile(user);
+  const lifeContext = useLifeContext();
+  const { briefing, loading: briefingLoading, refresh } = useDailyBriefing(
+    lifeContext,
+    tasksLoaded && !!user,
+  );
+  const firstName = displayNameOf(user, profile).split(" ")[0];
 
   const { overdue, todayTasks, doneToday, totalToday } = useMemo(() => {
     const t0 = startOfToday();
@@ -113,7 +129,9 @@ function Home() {
           <p className="text-[10px] font-semibold uppercase tracking-[0.18em] text-primary/80">
             D2D AI
           </p>
-          <h1 className="mt-0.5 truncate text-xl font-semibold tracking-tight">{greet()}</h1>
+          <p className="mt-0.5 truncate text-[13px] text-muted-foreground">
+            Your intelligent daily companion
+          </p>
         </div>
         <div className="flex shrink-0 items-center gap-2">
           <Link
@@ -139,6 +157,49 @@ function Home() {
       </header>
 
       <div className="space-y-4 px-5">
+        {/* AI home: personal greeting, smart daily plan, AI suggestions */}
+        <AiBriefingCard
+          greetingPrefix={`${greet()}, ${firstName}`}
+          briefing={briefing}
+          loading={briefingLoading}
+          onRefresh={refresh}
+        />
+
+        <QuickAddRow />
+
+        {/* AI extras */}
+        <div className="grid grid-cols-2 gap-2">
+          <Link
+            to="/insights"
+            className="nova-card flex items-center gap-2.5 p-3 transition-transform active:scale-[0.98]"
+          >
+            <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-xl bg-primary/10 text-primary">
+              <LineChart className="h-4 w-4" />
+            </span>
+            <span className="min-w-0">
+              <span className="block truncate text-[13px] font-semibold tracking-tight">
+                Weekly Insights
+              </span>
+              <span className="block text-[11px] text-muted-foreground">AI review</span>
+            </span>
+          </Link>
+          <Link
+            to="/ai-memory"
+            className="nova-card flex items-center gap-2.5 p-3 transition-transform active:scale-[0.98]"
+          >
+            <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-xl bg-primary/10 text-primary">
+              <Brain className="h-4 w-4" />
+            </span>
+            <span className="min-w-0">
+              <span className="block truncate text-[13px] font-semibold tracking-tight">
+                AI Memory
+              </span>
+              <span className="block text-[11px] text-muted-foreground">What I remember</span>
+            </span>
+          </Link>
+        </div>
+
+
         {/* Compact progress + counts */}
         <div className="nova-card p-4">
           <div className="flex items-center justify-between gap-3">
