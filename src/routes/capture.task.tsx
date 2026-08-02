@@ -10,6 +10,7 @@ import {
 import { AiSuggestionCard } from "@/features/ai/components/ai-suggestion-card";
 import { useDraft } from "@/features/quick-capture/use-draft";
 import { tasksStore } from "@/features/tasks/use-tasks";
+import { announceCapture } from "@/features/ai/capture-reply";
 
 export const Route = createFileRoute("/capture/task")({
   head: () => ({
@@ -56,6 +57,12 @@ function NewTaskPage() {
       dueDate: data.dueDate,
       priority: data.priority,
       category: data.category,
+    });
+    announceCapture({
+      kind: "task",
+      title: data.title,
+      details: data.description,
+      when: data.dueDate,
     });
     clear();
     toast.success("Task saved", { description: "Added to your task list." });

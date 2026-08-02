@@ -5,6 +5,7 @@ import { CapturePage, Field, fieldInputCn } from "@/features/quick-capture/captu
 import { AiSuggestionCard } from "@/features/ai/components/ai-suggestion-card";
 import { useDraft } from "@/features/quick-capture/use-draft";
 import { thoughtsStore } from "@/features/thoughts/use-thoughts";
+import { announceCapture } from "@/features/ai/capture-reply";
 
 export const Route = createFileRoute("/capture/thought")({
   head: () => ({
@@ -28,6 +29,7 @@ function NewThoughtPage() {
   const handleSave = () => {
     if (!data.thought.trim()) return;
     thoughtsStore.add({ thought: data.thought.trim(), tag: data.tag.trim() });
+    announceCapture({ kind: "thought", title: data.thought, details: data.tag });
     clear();
     toast.success("Thought saved.", {
       description: "Now get back to what you were doing. I'll help you remember this later.",

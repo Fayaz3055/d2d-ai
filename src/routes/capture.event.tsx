@@ -4,6 +4,7 @@ import { CapturePage, Field, fieldInputCn } from "@/features/quick-capture/captu
 import { AiSuggestionCard } from "@/features/ai/components/ai-suggestion-card";
 import { useDraft } from "@/features/quick-capture/use-draft";
 import { eventsStore } from "@/features/events/use-events";
+import { announceCapture } from "@/features/ai/capture-reply";
 
 export const Route = createFileRoute("/capture/event")({
   head: () => ({
@@ -31,6 +32,12 @@ function NewEventPage() {
       date: data.date,
       time: data.time,
       notes: data.notes.trim(),
+    });
+    announceCapture({
+      kind: "event",
+      title: data.title,
+      details: data.notes,
+      when: `${data.date} ${data.time}`.trim(),
     });
     clear();
     toast.success("Event added", { description: "Saved to your calendar." });
