@@ -10,15 +10,22 @@ import {
   BellRing,
   AlertCircle,
   Check,
+  LineChart,
+  Brain,
 } from "lucide-react";
 import { memo, useMemo, type ReactNode } from "react";
 import { cn } from "@/lib/utils";
-import { useTasks, tasksStore } from "@/features/tasks/use-tasks";
+import { useTasks, tasksStore, useTasksLoaded } from "@/features/tasks/use-tasks";
 import { useNotes } from "@/features/notes/use-notes";
 import { useThoughts } from "@/features/thoughts/use-thoughts";
 import { useEvents, eventTimestamp } from "@/features/events/use-events";
 import { useReminders } from "@/features/reminders/use-reminders";
 import { useUnreadCount } from "@/features/notifications/use-notifications";
+import { useSession, useProfile, displayNameOf } from "@/features/auth/use-auth";
+import { useLifeContext } from "@/features/ai/context";
+import { useDailyBriefing } from "@/features/ai/use-daily-briefing";
+import { AiBriefingCard } from "@/features/ai/components/ai-briefing-card";
+import { QuickAddRow } from "@/features/ai/components/quick-add-row";
 import type { Task } from "@/features/tasks/types";
 
 export const Route = createFileRoute("/_tabs/home")({
