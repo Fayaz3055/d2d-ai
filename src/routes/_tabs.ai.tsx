@@ -23,6 +23,7 @@ import { CaptureProposals } from "@/features/ai/components/capture-proposals";
 import { QUICK_ACTIONS, type CaptureProposalPayload } from "@/features/ai/types";
 import { useLifeContext } from "@/features/ai/context";
 import { takeAiPrompt } from "@/features/ai/pending-prompt";
+import { avatarStore } from "@/features/ai/avatar/avatar-store";
 import companionMark from "@/assets/ai-companion.png";
 import { cn } from "@/lib/utils";
 
@@ -121,6 +122,11 @@ function ChatWindow({
   useEffect(() => {
     if (!busy) focusInput();
   }, [busy, focusInput]);
+
+  // The avatar mirrors the conversation: thinking while the model works.
+  useEffect(() => {
+    avatarStore.feel(busy ? "thinking" : "listening");
+  }, [busy]);
 
   const send = useCallback(
     (text: string) => {
