@@ -34,7 +34,28 @@ const { store, useAll, useOne } = createCloudStore<Thought>("thoughts", {
   },
 });
 
-export const thoughtsStore = store;
+export type ThoughtInput = {
+  thought: string;
+  tag?: string;
+  category?: ThoughtCategory;
+  aiReply?: string;
+  status?: ThoughtStatus;
+};
+
+export const thoughtsStore = {
+  ...store,
+  add(input: ThoughtInput): Thought {
+    return store.add({
+      thought: input.thought,
+      tag: input.tag ?? "",
+      category: input.category ?? "random",
+      aiReply: input.aiReply ?? "",
+      status: input.status ?? "idea",
+      mergedInto: null,
+    });
+  },
+};
+
 export const useThoughts = useAll;
 export const useThought = useOne;
 
