@@ -277,11 +277,12 @@ export function ThoughtAiActions({
                 </ul>
               ) : null}
             </div>
-          ) : (
+          ) : "title" in pending ? (
             <p className="mt-2 text-sm">
-              {ACTION_META[pending.kind].label}: <span className="font-semibold">{pending.title}</span>
+              {ACTION_META[pending.kind].label}:{" "}
+              <span className="font-semibold">{pending.title}</span>
             </p>
-          )}
+          ) : null}
 
           <div className="mt-4 flex gap-2">
             <button
