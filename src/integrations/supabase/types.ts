@@ -158,6 +158,39 @@ export type Database = {
         }
         Relationships: []
       }
+      projects: {
+        Row: {
+          created_at: string
+          description: string
+          id: string
+          source_thought_id: string | null
+          status: string
+          title: string
+          updated_at: string
+          user_id: string
+        }
+        Insert: {
+          created_at?: string
+          description?: string
+          id?: string
+          source_thought_id?: string | null
+          status?: string
+          title?: string
+          updated_at?: string
+          user_id?: string
+        }
+        Update: {
+          created_at?: string
+          description?: string
+          id?: string
+          source_thought_id?: string | null
+          status?: string
+          title?: string
+          updated_at?: string
+          user_id?: string
+        }
+        Relationships: []
+      }
       reminders: {
         Row: {
           created_at: string
@@ -233,26 +266,73 @@ export type Database = {
         }
         Relationships: []
       }
-      thoughts: {
+      thought_events: {
         Row: {
           created_at: string
+          detail: string
           id: string
+          kind: string
+          thought_id: string
+          user_id: string
+        }
+        Insert: {
+          created_at?: string
+          detail?: string
+          id?: string
+          kind?: string
+          thought_id: string
+          user_id?: string
+        }
+        Update: {
+          created_at?: string
+          detail?: string
+          id?: string
+          kind?: string
+          thought_id?: string
+          user_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "thought_events_thought_id_fkey"
+            columns: ["thought_id"]
+            isOneToOne: false
+            referencedRelation: "thoughts"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      thoughts: {
+        Row: {
+          ai_reply: string
+          category: string
+          created_at: string
+          id: string
+          merged_into: string | null
+          status: string
           tag: string
           thought: string
           updated_at: string
           user_id: string
         }
         Insert: {
+          ai_reply?: string
+          category?: string
           created_at?: string
           id?: string
+          merged_into?: string | null
+          status?: string
           tag?: string
           thought?: string
           updated_at?: string
           user_id?: string
         }
         Update: {
+          ai_reply?: string
+          category?: string
           created_at?: string
           id?: string
+          merged_into?: string | null
+          status?: string
           tag?: string
           thought?: string
           updated_at?: string
