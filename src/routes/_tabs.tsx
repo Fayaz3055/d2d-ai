@@ -3,6 +3,7 @@ import { BottomNav } from "@/components/nova/bottom-nav";
 import { QuickCaptureSheet } from "@/components/nova/quick-capture-fab";
 import { supabase } from "@/integrations/supabase/client";
 import { useCloudSync } from "@/features/storage/cloud-sync";
+import { AiAvatar } from "@/features/ai/avatar/ai-avatar";
 
 export const Route = createFileRoute("/_tabs")({
   ssr: false,
@@ -22,6 +23,7 @@ function TabsLayout() {
       <div className="mx-auto max-w-xl pb-32">
         <Outlet />
       </div>
+      <AiAvatar />
       <QuickCaptureSheet />
       <BottomNav />
     </div>

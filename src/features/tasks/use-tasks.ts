@@ -1,6 +1,7 @@
 import { createCloudStore } from "@/features/storage/create-cloud-store";
 import type { Category, Priority, Task, TaskInput } from "./types";
 import { notificationsStore } from "@/features/notifications/use-notifications";
+import { announceCompletion } from "@/features/ai/capture-reply";
 
 const { store, useAll, useOne, useLoaded } = createCloudStore<Task>("tasks", {
   fromRow: (r) => ({
@@ -51,6 +52,7 @@ export const tasksStore = {
         title: "Task completed",
         description: task.title,
       });
+      announceCompletion(task.title);
     }
   },
 };
