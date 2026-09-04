@@ -5,7 +5,7 @@ import { EmptyState } from "@/components/nova/empty-state";
 import { useNotes } from "@/features/notes/use-notes";
 import { quickCapture } from "@/features/quick-capture/quick-capture-store";
 
-export const Route = createFileRoute("/notes")({
+export const Route = createFileRoute("/_app/notes")({
   head: () => ({
     meta: [
       { title: "Notes — D2D AI" },

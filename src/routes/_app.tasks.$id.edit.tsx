@@ -10,7 +10,7 @@ import {
 import { tasksStore, useTask } from "@/features/tasks/use-tasks";
 import type { Category, Priority } from "@/features/tasks/types";
 
-export const Route = createFileRoute("/tasks/$id/edit")({
+export const Route = createFileRoute("/_app/tasks/$id/edit")({
   head: () => ({
     meta: [
       { title: "Edit Task — D2D AI" },

@@ -2,60 +2,57 @@ import { createFileRoute, notFound, useRouter } from "@tanstack/react-router";
 import { useState } from "react";
 import { toast } from "sonner";
 import { CapturePage, Field, fieldInputCn } from "@/features/quick-capture/capture-page";
-import { eventsStore, useEvent } from "@/features/events/use-events";
+import { remindersStore, useReminder } from "@/features/reminders/use-reminders";
 
-export const Route = createFileRoute("/events/$id/edit")({
+export const Route = createFileRoute("/_app/reminders/$id/edit")({
   head: () => ({
     meta: [
-      { title: "Edit Event — D2D AI" },
-      { name: "description", content: "Update your event." },
-      { property: "og:title", content: "Edit Event — D2D AI" },
-      { property: "og:description", content: "Update your event." },
+      { title: "Edit Reminder — D2D AI" },
+      { name: "description", content: "Update your reminder." },
+      { property: "og:title", content: "Edit Reminder — D2D AI" },
+      { property: "og:description", content: "Update your reminder." },
     ],
   }),
-  component: EditEvent,
+  component: EditReminder,
 });
 
-function EditEvent() {
+function EditReminder() {
   const { id } = Route.useParams();
-  const event = useEvent(id);
+  const reminder = useReminder(id);
   const router = useRouter();
   const [form, setForm] = useState(() =>
-    event
-      ? { title: event.title, date: event.date, time: event.time, notes: event.notes }
-      : null,
+    reminder ? { title: reminder.title, date: reminder.date, time: reminder.time } : null,
   );
-  if (!event) throw notFound();
+  if (!reminder) throw notFound();
   if (!form) return null;
-  const initial = { title: event.title, date: event.date, time: event.time, notes: event.notes };
+  const initial = { title: reminder.title, date: reminder.date, time: reminder.time };
   const isDirty = JSON.stringify(form) !== JSON.stringify(initial);
 
   const save = () => {
     if (!form.title.trim()) return;
-    eventsStore.update(event.id, {
+    remindersStore.update(reminder.id, {
       title: form.title.trim(),
       date: form.date,
       time: form.time,
-      notes: form.notes.trim(),
     });
-    toast.success("Event updated");
+    toast.success("Reminder updated");
     setTimeout(() => {
       if (window.history.length > 1) router.history.back();
-      else router.navigate({ to: "/events/$id", params: { id: event.id } });
+      else router.navigate({ to: "/reminders/$id", params: { id: reminder.id } });
     }, 100);
   };
 
   return (
     <CapturePage
       eyebrow="Edit"
-      title="Event"
+      title="Reminder"
       isDirty={isDirty}
       saveDisabled={!form.title.trim()}
       onSave={save}
       saveLabel="Save"
     >
       <div className="space-y-6">
-        <Field label="Event title" required>
+        <Field label="Reminder title" required>
           <input
             autoFocus
             value={form.title}
@@ -81,14 +78,6 @@ function EditEvent() {
             />
           </Field>
         </div>
-        <Field label="Notes" hint="Optional">
-          <textarea
-            value={form.notes}
-            onChange={(e) => setForm({ ...form, notes: e.target.value })}
-            rows={5}
-            className={`${fieldInputCn} resize-none leading-relaxed`}
-          />
-        </Field>
       </div>
     </CapturePage>
   );

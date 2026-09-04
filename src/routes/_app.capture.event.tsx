@@ -6,7 +6,7 @@ import { useDraft } from "@/features/quick-capture/use-draft";
 import { eventsStore } from "@/features/events/use-events";
 import { announceCapture } from "@/features/ai/capture-reply";
 
-export const Route = createFileRoute("/capture/event")({
+export const Route = createFileRoute("/_app/capture/event")({
   head: () => ({
     meta: [
       { title: "New Event — D2D AI" },

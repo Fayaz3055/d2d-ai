@@ -17,7 +17,7 @@ import {
 import { announceCapture } from "@/features/ai/capture-reply";
 import { avatarStore } from "@/features/ai/avatar/avatar-store";
 
-export const Route = createFileRoute("/capture/thought")({
+export const Route = createFileRoute("/_app/capture/thought")({
   head: () => ({
     meta: [
       { title: "New Thought — D2D AI" },

@@ -2,8 +2,6 @@
 export function friendlyAuthError(message: string | undefined): string {
   const m = (message ?? "").toLowerCase();
 
-  if (m.includes("email not confirmed") || m.includes("not confirmed"))
-    return "Your email hasn't been verified yet. Please verify your email before signing in.";
   if (m.includes("invalid login credentials"))
     return "That email or password doesn't look right. Please try again.";
   if (m.includes("user already registered") || m.includes("already been registered"))
@@ -26,7 +24,3 @@ export function friendlyAuthError(message: string | undefined): string {
   return "Something went wrong. Please try again.";
 }
 
-export function isUnverifiedEmailError(message: string | undefined): boolean {
-  const m = (message ?? "").toLowerCase();
-  return m.includes("email not confirmed") || m.includes("not confirmed");
-}

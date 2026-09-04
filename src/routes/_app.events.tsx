@@ -5,7 +5,7 @@ import { EmptyState } from "@/components/nova/empty-state";
 import { useEvents, eventTimestamp } from "@/features/events/use-events";
 import { quickCapture } from "@/features/quick-capture/quick-capture-store";
 
-export const Route = createFileRoute("/events")({
+export const Route = createFileRoute("/_app/events")({
   head: () => ({
     meta: [
       { title: "Events — D2D AI" },

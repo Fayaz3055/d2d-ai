@@ -6,7 +6,7 @@ import { useDraft } from "@/features/quick-capture/use-draft";
 import { notesStore } from "@/features/notes/use-notes";
 import { announceCapture } from "@/features/ai/capture-reply";
 
-export const Route = createFileRoute("/capture/note")({
+export const Route = createFileRoute("/_app/capture/note")({
   head: () => ({
     meta: [
       { title: "New Note — D2D AI" },

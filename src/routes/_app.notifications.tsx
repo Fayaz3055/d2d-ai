@@ -8,7 +8,7 @@ import {
 import { cn } from "@/lib/utils";
 import { EmptyState } from "@/components/nova/empty-state";
 
-export const Route = createFileRoute("/notifications")({
+export const Route = createFileRoute("/_app/notifications")({
   head: () => ({
     meta: [
       { title: "Notifications — D2D AI" },

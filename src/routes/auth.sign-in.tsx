@@ -1,16 +1,21 @@
-import { createFileRoute, Link, useNavigate } from "@tanstack/react-router";
+import { createFileRoute, Link, redirect, useNavigate } from "@tanstack/react-router";
 import { useState } from "react";
 import { Loader2 } from "lucide-react";
 import { toast } from "sonner";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import { AuthShell, SocialButtons, Divider } from "@/features/auth/auth-shell";
+import { AuthShell } from "@/features/auth/auth-shell";
 import { supabase } from "@/integrations/supabase/client";
-import { friendlyAuthError, isUnverifiedEmailError } from "@/features/auth/auth-errors";
+import { friendlyAuthError } from "@/features/auth/auth-errors";
 import { PasswordField } from "@/features/auth/password-field";
 
 export const Route = createFileRoute("/auth/sign-in")({
+  ssr: false,
+  beforeLoad: async () => {
+    const { data } = await supabase.auth.getUser();
+    if (data.user) throw redirect({ to: "/home" });
+  },
   head: () => ({
     meta: [
       { title: "Sign in — D2D AI" },
@@ -30,6 +35,10 @@ function SignIn() {
 
   const onSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    if (!email.trim() || !password) {
+      toast.error("Missing details", { description: "Enter your email and password." });
+      return;
+    }
     setLoading(true);
     const { error } = await supabase.auth.signInWithPassword({
       email: email.trim(),
@@ -37,14 +46,6 @@ function SignIn() {
     });
     setLoading(false);
     if (error) {
-      if (isUnverifiedEmailError(error.message)) {
-        toast.error("Email not verified", {
-          description:
-            "Your email hasn't been verified yet. Please verify your email before signing in.",
-        });
-        navigate({ to: "/auth/verify-email", search: { email: email.trim() } });
-        return;
-      }
       toast.error("Couldn't sign you in", { description: friendlyAuthError(error.message) });
       return;
     }
@@ -55,7 +56,7 @@ function SignIn() {
   return (
     <AuthShell
       title="Welcome back"
-      subtitle="Sign in to continue your journey with D2D AI."
+      subtitle="Sign in to continue with D2D AI."
       backTo="/onboarding"
       footer={
         <span className="text-muted-foreground">
@@ -66,9 +67,6 @@ function SignIn() {
         </span>
       }
     >
-      <SocialButtons />
-      <Divider />
-
       <form className="space-y-4" onSubmit={onSubmit}>
         <div className="space-y-1.5">
           <Label htmlFor="email">Email</Label>
@@ -100,7 +98,6 @@ function SignIn() {
             onChange={setPassword}
             placeholder="••••••••"
           />
-
         </div>
         <Button
           type="submit"

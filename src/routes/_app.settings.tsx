@@ -20,7 +20,7 @@ import { cn } from "@/lib/utils";
 
 export const APP_VERSION = "1.0.0";
 
-export const Route = createFileRoute("/settings")({
+export const Route = createFileRoute("/_app/settings")({
   ssr: false,
   head: () => ({
     meta: [

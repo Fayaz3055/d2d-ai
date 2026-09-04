@@ -6,7 +6,7 @@ import { PageShell } from "@/components/nova/page-shell";
 import { ConfirmDeleteDialog } from "@/components/nova/confirm-delete";
 import { eventsStore, useEvent } from "@/features/events/use-events";
 
-export const Route = createFileRoute("/events/$id")({
+export const Route = createFileRoute("/_app/events/$id")({
   head: () => ({
     meta: [
       { title: "Event — D2D AI" },

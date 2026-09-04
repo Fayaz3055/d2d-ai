@@ -4,7 +4,7 @@ import { PageShell } from "@/components/nova/page-shell";
 import { Shimmer } from "@/components/ai-elements/shimmer";
 import { MEMORY_KIND_LABELS, useMemories } from "@/features/ai/use-memories";
 
-export const Route = createFileRoute("/ai-memory")({
+export const Route = createFileRoute("/_app/ai-memory")({
   ssr: false,
   head: () => ({
     meta: [

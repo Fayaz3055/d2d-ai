@@ -12,7 +12,7 @@ import { useDraft } from "@/features/quick-capture/use-draft";
 import { tasksStore } from "@/features/tasks/use-tasks";
 import { announceCapture } from "@/features/ai/capture-reply";
 
-export const Route = createFileRoute("/capture/task")({
+export const Route = createFileRoute("/_app/capture/task")({
   head: () => ({
     meta: [
       { title: "New Task — D2D AI" },
