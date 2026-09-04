@@ -11,6 +11,7 @@
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as OnboardingRouteImport } from './routes/onboarding'
 import { Route as TabsRouteImport } from './routes/_tabs'
+import { Route as AppRouteImport } from './routes/_app'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as AuthVerifyEmailRouteImport } from './routes/auth.verify-email'
 import { Route as AuthSignUpRouteImport } from './routes/auth.sign-up'
@@ -54,6 +55,10 @@ const OnboardingRoute = OnboardingRouteImport.update({
 } as any)
 const TabsRoute = TabsRouteImport.update({
   id: '/_tabs',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AppRoute = AppRouteImport.update({
+  id: '/_app',
   getParentRoute: () => rootRouteImport,
 } as any)
 const IndexRoute = IndexRouteImport.update({
@@ -117,44 +122,44 @@ const TabsAiRoute = TabsAiRouteImport.update({
   getParentRoute: () => TabsRoute,
 } as any)
 const AppThoughtsRoute = AppThoughtsRouteImport.update({
-  id: '/_app/thoughts',
+  id: '/thoughts',
   path: '/thoughts',
-  getParentRoute: () => rootRouteImport,
+  getParentRoute: () => AppRoute,
 } as any)
 const AppSettingsRoute = AppSettingsRouteImport.update({
-  id: '/_app/settings',
+  id: '/settings',
   path: '/settings',
-  getParentRoute: () => rootRouteImport,
+  getParentRoute: () => AppRoute,
 } as any)
 const AppRemindersRoute = AppRemindersRouteImport.update({
-  id: '/_app/reminders',
+  id: '/reminders',
   path: '/reminders',
-  getParentRoute: () => rootRouteImport,
+  getParentRoute: () => AppRoute,
 } as any)
 const AppNotificationsRoute = AppNotificationsRouteImport.update({
-  id: '/_app/notifications',
+  id: '/notifications',
   path: '/notifications',
-  getParentRoute: () => rootRouteImport,
+  getParentRoute: () => AppRoute,
 } as any)
 const AppNotesRoute = AppNotesRouteImport.update({
-  id: '/_app/notes',
+  id: '/notes',
   path: '/notes',
-  getParentRoute: () => rootRouteImport,
+  getParentRoute: () => AppRoute,
 } as any)
 const AppInsightsRoute = AppInsightsRouteImport.update({
-  id: '/_app/insights',
+  id: '/insights',
   path: '/insights',
-  getParentRoute: () => rootRouteImport,
+  getParentRoute: () => AppRoute,
 } as any)
 const AppEventsRoute = AppEventsRouteImport.update({
-  id: '/_app/events',
+  id: '/events',
   path: '/events',
-  getParentRoute: () => rootRouteImport,
+  getParentRoute: () => AppRoute,
 } as any)
 const AppAiMemoryRoute = AppAiMemoryRouteImport.update({
-  id: '/_app/ai-memory',
+  id: '/ai-memory',
   path: '/ai-memory',
-  getParentRoute: () => rootRouteImport,
+  getParentRoute: () => AppRoute,
 } as any)
 const AppThoughtsIdRoute = AppThoughtsIdRouteImport.update({
   id: '/$id',
@@ -162,9 +167,9 @@ const AppThoughtsIdRoute = AppThoughtsIdRouteImport.update({
   getParentRoute: () => AppThoughtsRoute,
 } as any)
 const AppTasksIdRoute = AppTasksIdRouteImport.update({
-  id: '/_app/tasks/$id',
+  id: '/tasks/$id',
   path: '/tasks/$id',
-  getParentRoute: () => rootRouteImport,
+  getParentRoute: () => AppRoute,
 } as any)
 const AppRemindersIdRoute = AppRemindersIdRouteImport.update({
   id: '/$id',
@@ -182,29 +187,29 @@ const AppEventsIdRoute = AppEventsIdRouteImport.update({
   getParentRoute: () => AppEventsRoute,
 } as any)
 const AppCaptureThoughtRoute = AppCaptureThoughtRouteImport.update({
-  id: '/_app/capture/thought',
+  id: '/capture/thought',
   path: '/capture/thought',
-  getParentRoute: () => rootRouteImport,
+  getParentRoute: () => AppRoute,
 } as any)
 const AppCaptureTaskRoute = AppCaptureTaskRouteImport.update({
-  id: '/_app/capture/task',
+  id: '/capture/task',
   path: '/capture/task',
-  getParentRoute: () => rootRouteImport,
+  getParentRoute: () => AppRoute,
 } as any)
 const AppCaptureReminderRoute = AppCaptureReminderRouteImport.update({
-  id: '/_app/capture/reminder',
+  id: '/capture/reminder',
   path: '/capture/reminder',
-  getParentRoute: () => rootRouteImport,
+  getParentRoute: () => AppRoute,
 } as any)
 const AppCaptureNoteRoute = AppCaptureNoteRouteImport.update({
-  id: '/_app/capture/note',
+  id: '/capture/note',
   path: '/capture/note',
-  getParentRoute: () => rootRouteImport,
+  getParentRoute: () => AppRoute,
 } as any)
 const AppCaptureEventRoute = AppCaptureEventRouteImport.update({
-  id: '/_app/capture/event',
+  id: '/capture/event',
   path: '/capture/event',
-  getParentRoute: () => rootRouteImport,
+  getParentRoute: () => AppRoute,
 } as any)
 const AppThoughtsIdEditRoute = AppThoughtsIdEditRouteImport.update({
   id: '/edit',
@@ -311,6 +316,7 @@ export interface FileRoutesByTo {
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/_app': typeof AppRouteWithChildren
   '/_tabs': typeof TabsRouteWithChildren
   '/onboarding': typeof OnboardingRoute
   '/_app/ai-memory': typeof AppAiMemoryRoute
@@ -428,6 +434,7 @@ export interface FileRouteTypes {
   id:
     | '__root__'
     | '/'
+    | '/_app'
     | '/_tabs'
     | '/onboarding'
     | '/_app/ai-memory'
@@ -468,28 +475,15 @@ export interface FileRouteTypes {
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  AppRoute: typeof AppRouteWithChildren
   TabsRoute: typeof TabsRouteWithChildren
   OnboardingRoute: typeof OnboardingRoute
-  AppAiMemoryRoute: typeof AppAiMemoryRoute
-  AppEventsRoute: typeof AppEventsRouteWithChildren
-  AppInsightsRoute: typeof AppInsightsRoute
-  AppNotesRoute: typeof AppNotesRouteWithChildren
-  AppNotificationsRoute: typeof AppNotificationsRoute
-  AppRemindersRoute: typeof AppRemindersRouteWithChildren
-  AppSettingsRoute: typeof AppSettingsRoute
-  AppThoughtsRoute: typeof AppThoughtsRouteWithChildren
   ApiChatRoute: typeof ApiChatRoute
   AuthForgotPasswordRoute: typeof AuthForgotPasswordRoute
   AuthResetPasswordRoute: typeof AuthResetPasswordRoute
   AuthSignInRoute: typeof AuthSignInRoute
   AuthSignUpRoute: typeof AuthSignUpRoute
   AuthVerifyEmailRoute: typeof AuthVerifyEmailRoute
-  AppCaptureEventRoute: typeof AppCaptureEventRoute
-  AppCaptureNoteRoute: typeof AppCaptureNoteRoute
-  AppCaptureReminderRoute: typeof AppCaptureReminderRoute
-  AppCaptureTaskRoute: typeof AppCaptureTaskRoute
-  AppCaptureThoughtRoute: typeof AppCaptureThoughtRoute
-  AppTasksIdRoute: typeof AppTasksIdRouteWithChildren
 }
 
 declare module '@tanstack/react-router' {
@@ -506,6 +500,13 @@ declare module '@tanstack/react-router' {
       path: ''
       fullPath: '/'
       preLoaderRoute: typeof TabsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/_app': {
+      id: '/_app'
+      path: ''
+      fullPath: '/'
+      preLoaderRoute: typeof AppRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/': {
@@ -597,56 +598,56 @@ declare module '@tanstack/react-router' {
       path: '/thoughts'
       fullPath: '/thoughts'
       preLoaderRoute: typeof AppThoughtsRouteImport
-      parentRoute: typeof rootRouteImport
+      parentRoute: typeof AppRoute
     }
     '/_app/settings': {
       id: '/_app/settings'
       path: '/settings'
       fullPath: '/settings'
       preLoaderRoute: typeof AppSettingsRouteImport
-      parentRoute: typeof rootRouteImport
+      parentRoute: typeof AppRoute
     }
     '/_app/reminders': {
       id: '/_app/reminders'
       path: '/reminders'
       fullPath: '/reminders'
       preLoaderRoute: typeof AppRemindersRouteImport
-      parentRoute: typeof rootRouteImport
+      parentRoute: typeof AppRoute
     }
     '/_app/notifications': {
       id: '/_app/notifications'
       path: '/notifications'
       fullPath: '/notifications'
       preLoaderRoute: typeof AppNotificationsRouteImport
-      parentRoute: typeof rootRouteImport
+      parentRoute: typeof AppRoute
     }
     '/_app/notes': {
       id: '/_app/notes'
       path: '/notes'
       fullPath: '/notes'
       preLoaderRoute: typeof AppNotesRouteImport
-      parentRoute: typeof rootRouteImport
+      parentRoute: typeof AppRoute
     }
     '/_app/insights': {
       id: '/_app/insights'
       path: '/insights'
       fullPath: '/insights'
       preLoaderRoute: typeof AppInsightsRouteImport
-      parentRoute: typeof rootRouteImport
+      parentRoute: typeof AppRoute
     }
     '/_app/events': {
       id: '/_app/events'
       path: '/events'
       fullPath: '/events'
       preLoaderRoute: typeof AppEventsRouteImport
-      parentRoute: typeof rootRouteImport
+      parentRoute: typeof AppRoute
     }
     '/_app/ai-memory': {
       id: '/_app/ai-memory'
       path: '/ai-memory'
       fullPath: '/ai-memory'
       preLoaderRoute: typeof AppAiMemoryRouteImport
-      parentRoute: typeof rootRouteImport
+      parentRoute: typeof AppRoute
     }
     '/_app/thoughts/$id': {
       id: '/_app/thoughts/$id'
@@ -660,7 +661,7 @@ declare module '@tanstack/react-router' {
       path: '/tasks/$id'
       fullPath: '/tasks/$id'
       preLoaderRoute: typeof AppTasksIdRouteImport
-      parentRoute: typeof rootRouteImport
+      parentRoute: typeof AppRoute
     }
     '/_app/reminders/$id': {
       id: '/_app/reminders/$id'
@@ -688,35 +689,35 @@ declare module '@tanstack/react-router' {
       path: '/capture/thought'
       fullPath: '/capture/thought'
       preLoaderRoute: typeof AppCaptureThoughtRouteImport
-      parentRoute: typeof rootRouteImport
+      parentRoute: typeof AppRoute
     }
     '/_app/capture/task': {
       id: '/_app/capture/task'
       path: '/capture/task'
       fullPath: '/capture/task'
       preLoaderRoute: typeof AppCaptureTaskRouteImport
-      parentRoute: typeof rootRouteImport
+      parentRoute: typeof AppRoute
     }
     '/_app/capture/reminder': {
       id: '/_app/capture/reminder'
       path: '/capture/reminder'
       fullPath: '/capture/reminder'
       preLoaderRoute: typeof AppCaptureReminderRouteImport
-      parentRoute: typeof rootRouteImport
+      parentRoute: typeof AppRoute
     }
     '/_app/capture/note': {
       id: '/_app/capture/note'
       path: '/capture/note'
       fullPath: '/capture/note'
       preLoaderRoute: typeof AppCaptureNoteRouteImport
-      parentRoute: typeof rootRouteImport
+      parentRoute: typeof AppRoute
     }
     '/_app/capture/event': {
       id: '/_app/capture/event'
       path: '/capture/event'
       fullPath: '/capture/event'
       preLoaderRoute: typeof AppCaptureEventRouteImport
-      parentRoute: typeof rootRouteImport
+      parentRoute: typeof AppRoute
     }
     '/_app/thoughts/$id/edit': {
       id: '/_app/thoughts/$id/edit'
@@ -755,24 +756,6 @@ declare module '@tanstack/react-router' {
     }
   }
 }
-
-interface TabsRouteChildren {
-  TabsAiRoute: typeof TabsAiRoute
-  TabsCalendarRoute: typeof TabsCalendarRoute
-  TabsHomeRoute: typeof TabsHomeRoute
-  TabsProfileRoute: typeof TabsProfileRoute
-  TabsTasksRoute: typeof TabsTasksRoute
-}
-
-const TabsRouteChildren: TabsRouteChildren = {
-  TabsAiRoute: TabsAiRoute,
-  TabsCalendarRoute: TabsCalendarRoute,
-  TabsHomeRoute: TabsHomeRoute,
-  TabsProfileRoute: TabsProfileRoute,
-  TabsTasksRoute: TabsTasksRoute,
-}
-
-const TabsRouteWithChildren = TabsRoute._addFileChildren(TabsRouteChildren)
 
 interface AppEventsIdRouteChildren {
   AppEventsIdEditRoute: typeof AppEventsIdEditRoute
@@ -882,10 +865,24 @@ const AppTasksIdRouteWithChildren = AppTasksIdRoute._addFileChildren(
   AppTasksIdRouteChildren,
 )
 
-const rootRouteChildren: RootRouteChildren = {
-  IndexRoute: IndexRoute,
-  TabsRoute: TabsRouteWithChildren,
-  OnboardingRoute: OnboardingRoute,
+interface AppRouteChildren {
+  AppAiMemoryRoute: typeof AppAiMemoryRoute
+  AppEventsRoute: typeof AppEventsRouteWithChildren
+  AppInsightsRoute: typeof AppInsightsRoute
+  AppNotesRoute: typeof AppNotesRouteWithChildren
+  AppNotificationsRoute: typeof AppNotificationsRoute
+  AppRemindersRoute: typeof AppRemindersRouteWithChildren
+  AppSettingsRoute: typeof AppSettingsRoute
+  AppThoughtsRoute: typeof AppThoughtsRouteWithChildren
+  AppCaptureEventRoute: typeof AppCaptureEventRoute
+  AppCaptureNoteRoute: typeof AppCaptureNoteRoute
+  AppCaptureReminderRoute: typeof AppCaptureReminderRoute
+  AppCaptureTaskRoute: typeof AppCaptureTaskRoute
+  AppCaptureThoughtRoute: typeof AppCaptureThoughtRoute
+  AppTasksIdRoute: typeof AppTasksIdRouteWithChildren
+}
+
+const AppRouteChildren: AppRouteChildren = {
   AppAiMemoryRoute: AppAiMemoryRoute,
   AppEventsRoute: AppEventsRouteWithChildren,
   AppInsightsRoute: AppInsightsRoute,
@@ -894,18 +891,45 @@ const rootRouteChildren: RootRouteChildren = {
   AppRemindersRoute: AppRemindersRouteWithChildren,
   AppSettingsRoute: AppSettingsRoute,
   AppThoughtsRoute: AppThoughtsRouteWithChildren,
-  ApiChatRoute: ApiChatRoute,
-  AuthForgotPasswordRoute: AuthForgotPasswordRoute,
-  AuthResetPasswordRoute: AuthResetPasswordRoute,
-  AuthSignInRoute: AuthSignInRoute,
-  AuthSignUpRoute: AuthSignUpRoute,
-  AuthVerifyEmailRoute: AuthVerifyEmailRoute,
   AppCaptureEventRoute: AppCaptureEventRoute,
   AppCaptureNoteRoute: AppCaptureNoteRoute,
   AppCaptureReminderRoute: AppCaptureReminderRoute,
   AppCaptureTaskRoute: AppCaptureTaskRoute,
   AppCaptureThoughtRoute: AppCaptureThoughtRoute,
   AppTasksIdRoute: AppTasksIdRouteWithChildren,
+}
+
+const AppRouteWithChildren = AppRoute._addFileChildren(AppRouteChildren)
+
+interface TabsRouteChildren {
+  TabsAiRoute: typeof TabsAiRoute
+  TabsCalendarRoute: typeof TabsCalendarRoute
+  TabsHomeRoute: typeof TabsHomeRoute
+  TabsProfileRoute: typeof TabsProfileRoute
+  TabsTasksRoute: typeof TabsTasksRoute
+}
+
+const TabsRouteChildren: TabsRouteChildren = {
+  TabsAiRoute: TabsAiRoute,
+  TabsCalendarRoute: TabsCalendarRoute,
+  TabsHomeRoute: TabsHomeRoute,
+  TabsProfileRoute: TabsProfileRoute,
+  TabsTasksRoute: TabsTasksRoute,
+}
+
+const TabsRouteWithChildren = TabsRoute._addFileChildren(TabsRouteChildren)
+
+const rootRouteChildren: RootRouteChildren = {
+  IndexRoute: IndexRoute,
+  AppRoute: AppRouteWithChildren,
+  TabsRoute: TabsRouteWithChildren,
+  OnboardingRoute: OnboardingRoute,
+  ApiChatRoute: ApiChatRoute,
+  AuthForgotPasswordRoute: AuthForgotPasswordRoute,
+  AuthResetPasswordRoute: AuthResetPasswordRoute,
+  AuthSignInRoute: AuthSignInRoute,
+  AuthSignUpRoute: AuthSignUpRoute,
+  AuthVerifyEmailRoute: AuthVerifyEmailRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
