@@ -20,7 +20,7 @@ import { toast } from "sonner";
 import { ConfirmDeleteDialog } from "@/components/nova/confirm-delete";
 import type { ReactNode } from "react";
 
-export const Route = createFileRoute("/tasks/$id")({
+export const Route = createFileRoute("/_app/tasks/$id")({
   head: () => ({
     meta: [
       { title: "Task Details — D2D AI" },

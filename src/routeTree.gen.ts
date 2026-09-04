@@ -9,27 +9,9 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
-import { Route as ThoughtsRouteImport } from './routes/thoughts'
-import { Route as SettingsRouteImport } from './routes/settings'
-import { Route as RemindersRouteImport } from './routes/reminders'
 import { Route as OnboardingRouteImport } from './routes/onboarding'
-import { Route as NotificationsRouteImport } from './routes/notifications'
-import { Route as NotesRouteImport } from './routes/notes'
-import { Route as InsightsRouteImport } from './routes/insights'
-import { Route as EventsRouteImport } from './routes/events'
-import { Route as AiMemoryRouteImport } from './routes/ai-memory'
 import { Route as TabsRouteImport } from './routes/_tabs'
 import { Route as IndexRouteImport } from './routes/index'
-import { Route as ThoughtsIdRouteImport } from './routes/thoughts.$id'
-import { Route as TasksIdRouteImport } from './routes/tasks.$id'
-import { Route as RemindersIdRouteImport } from './routes/reminders.$id'
-import { Route as NotesIdRouteImport } from './routes/notes.$id'
-import { Route as EventsIdRouteImport } from './routes/events.$id'
-import { Route as CaptureThoughtRouteImport } from './routes/capture.thought'
-import { Route as CaptureTaskRouteImport } from './routes/capture.task'
-import { Route as CaptureReminderRouteImport } from './routes/capture.reminder'
-import { Route as CaptureNoteRouteImport } from './routes/capture.note'
-import { Route as CaptureEventRouteImport } from './routes/capture.event'
 import { Route as AuthVerifyEmailRouteImport } from './routes/auth.verify-email'
 import { Route as AuthSignUpRouteImport } from './routes/auth.sign-up'
 import { Route as AuthSignInRouteImport } from './routes/auth.sign-in'
@@ -41,55 +23,33 @@ import { Route as TabsProfileRouteImport } from './routes/_tabs.profile'
 import { Route as TabsHomeRouteImport } from './routes/_tabs.home'
 import { Route as TabsCalendarRouteImport } from './routes/_tabs.calendar'
 import { Route as TabsAiRouteImport } from './routes/_tabs.ai'
-import { Route as ThoughtsIdEditRouteImport } from './routes/thoughts.$id.edit'
-import { Route as TasksIdEditRouteImport } from './routes/tasks.$id.edit'
-import { Route as RemindersIdEditRouteImport } from './routes/reminders.$id.edit'
-import { Route as NotesIdEditRouteImport } from './routes/notes.$id.edit'
-import { Route as EventsIdEditRouteImport } from './routes/events.$id.edit'
+import { Route as AppThoughtsRouteImport } from './routes/_app.thoughts'
+import { Route as AppSettingsRouteImport } from './routes/_app.settings'
+import { Route as AppRemindersRouteImport } from './routes/_app.reminders'
+import { Route as AppNotificationsRouteImport } from './routes/_app.notifications'
+import { Route as AppNotesRouteImport } from './routes/_app.notes'
+import { Route as AppInsightsRouteImport } from './routes/_app.insights'
+import { Route as AppEventsRouteImport } from './routes/_app.events'
+import { Route as AppAiMemoryRouteImport } from './routes/_app.ai-memory'
+import { Route as AppThoughtsIdRouteImport } from './routes/_app.thoughts.$id'
+import { Route as AppTasksIdRouteImport } from './routes/_app.tasks.$id'
+import { Route as AppRemindersIdRouteImport } from './routes/_app.reminders.$id'
+import { Route as AppNotesIdRouteImport } from './routes/_app.notes.$id'
+import { Route as AppEventsIdRouteImport } from './routes/_app.events.$id'
+import { Route as AppCaptureThoughtRouteImport } from './routes/_app.capture.thought'
+import { Route as AppCaptureTaskRouteImport } from './routes/_app.capture.task'
+import { Route as AppCaptureReminderRouteImport } from './routes/_app.capture.reminder'
+import { Route as AppCaptureNoteRouteImport } from './routes/_app.capture.note'
+import { Route as AppCaptureEventRouteImport } from './routes/_app.capture.event'
+import { Route as AppThoughtsIdEditRouteImport } from './routes/_app.thoughts.$id.edit'
+import { Route as AppTasksIdEditRouteImport } from './routes/_app.tasks.$id.edit'
+import { Route as AppRemindersIdEditRouteImport } from './routes/_app.reminders.$id.edit'
+import { Route as AppNotesIdEditRouteImport } from './routes/_app.notes.$id.edit'
+import { Route as AppEventsIdEditRouteImport } from './routes/_app.events.$id.edit'
 
-const ThoughtsRoute = ThoughtsRouteImport.update({
-  id: '/thoughts',
-  path: '/thoughts',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const SettingsRoute = SettingsRouteImport.update({
-  id: '/settings',
-  path: '/settings',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const RemindersRoute = RemindersRouteImport.update({
-  id: '/reminders',
-  path: '/reminders',
-  getParentRoute: () => rootRouteImport,
-} as any)
 const OnboardingRoute = OnboardingRouteImport.update({
   id: '/onboarding',
   path: '/onboarding',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const NotificationsRoute = NotificationsRouteImport.update({
-  id: '/notifications',
-  path: '/notifications',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const NotesRoute = NotesRouteImport.update({
-  id: '/notes',
-  path: '/notes',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const InsightsRoute = InsightsRouteImport.update({
-  id: '/insights',
-  path: '/insights',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const EventsRoute = EventsRouteImport.update({
-  id: '/events',
-  path: '/events',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const AiMemoryRoute = AiMemoryRouteImport.update({
-  id: '/ai-memory',
-  path: '/ai-memory',
   getParentRoute: () => rootRouteImport,
 } as any)
 const TabsRoute = TabsRouteImport.update({
@@ -99,56 +59,6 @@ const TabsRoute = TabsRouteImport.update({
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const ThoughtsIdRoute = ThoughtsIdRouteImport.update({
-  id: '/$id',
-  path: '/$id',
-  getParentRoute: () => ThoughtsRoute,
-} as any)
-const TasksIdRoute = TasksIdRouteImport.update({
-  id: '/tasks/$id',
-  path: '/tasks/$id',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const RemindersIdRoute = RemindersIdRouteImport.update({
-  id: '/$id',
-  path: '/$id',
-  getParentRoute: () => RemindersRoute,
-} as any)
-const NotesIdRoute = NotesIdRouteImport.update({
-  id: '/$id',
-  path: '/$id',
-  getParentRoute: () => NotesRoute,
-} as any)
-const EventsIdRoute = EventsIdRouteImport.update({
-  id: '/$id',
-  path: '/$id',
-  getParentRoute: () => EventsRoute,
-} as any)
-const CaptureThoughtRoute = CaptureThoughtRouteImport.update({
-  id: '/capture/thought',
-  path: '/capture/thought',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const CaptureTaskRoute = CaptureTaskRouteImport.update({
-  id: '/capture/task',
-  path: '/capture/task',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const CaptureReminderRoute = CaptureReminderRouteImport.update({
-  id: '/capture/reminder',
-  path: '/capture/reminder',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const CaptureNoteRoute = CaptureNoteRouteImport.update({
-  id: '/capture/note',
-  path: '/capture/note',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const CaptureEventRoute = CaptureEventRouteImport.update({
-  id: '/capture/event',
-  path: '/capture/event',
   getParentRoute: () => rootRouteImport,
 } as any)
 const AuthVerifyEmailRoute = AuthVerifyEmailRouteImport.update({
@@ -206,43 +116,133 @@ const TabsAiRoute = TabsAiRouteImport.update({
   path: '/ai',
   getParentRoute: () => TabsRoute,
 } as any)
-const ThoughtsIdEditRoute = ThoughtsIdEditRouteImport.update({
-  id: '/edit',
-  path: '/edit',
-  getParentRoute: () => ThoughtsIdRoute,
+const AppThoughtsRoute = AppThoughtsRouteImport.update({
+  id: '/_app/thoughts',
+  path: '/thoughts',
+  getParentRoute: () => rootRouteImport,
 } as any)
-const TasksIdEditRoute = TasksIdEditRouteImport.update({
-  id: '/edit',
-  path: '/edit',
-  getParentRoute: () => TasksIdRoute,
+const AppSettingsRoute = AppSettingsRouteImport.update({
+  id: '/_app/settings',
+  path: '/settings',
+  getParentRoute: () => rootRouteImport,
 } as any)
-const RemindersIdEditRoute = RemindersIdEditRouteImport.update({
-  id: '/edit',
-  path: '/edit',
-  getParentRoute: () => RemindersIdRoute,
+const AppRemindersRoute = AppRemindersRouteImport.update({
+  id: '/_app/reminders',
+  path: '/reminders',
+  getParentRoute: () => rootRouteImport,
 } as any)
-const NotesIdEditRoute = NotesIdEditRouteImport.update({
-  id: '/edit',
-  path: '/edit',
-  getParentRoute: () => NotesIdRoute,
+const AppNotificationsRoute = AppNotificationsRouteImport.update({
+  id: '/_app/notifications',
+  path: '/notifications',
+  getParentRoute: () => rootRouteImport,
 } as any)
-const EventsIdEditRoute = EventsIdEditRouteImport.update({
+const AppNotesRoute = AppNotesRouteImport.update({
+  id: '/_app/notes',
+  path: '/notes',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AppInsightsRoute = AppInsightsRouteImport.update({
+  id: '/_app/insights',
+  path: '/insights',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AppEventsRoute = AppEventsRouteImport.update({
+  id: '/_app/events',
+  path: '/events',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AppAiMemoryRoute = AppAiMemoryRouteImport.update({
+  id: '/_app/ai-memory',
+  path: '/ai-memory',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AppThoughtsIdRoute = AppThoughtsIdRouteImport.update({
+  id: '/$id',
+  path: '/$id',
+  getParentRoute: () => AppThoughtsRoute,
+} as any)
+const AppTasksIdRoute = AppTasksIdRouteImport.update({
+  id: '/_app/tasks/$id',
+  path: '/tasks/$id',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AppRemindersIdRoute = AppRemindersIdRouteImport.update({
+  id: '/$id',
+  path: '/$id',
+  getParentRoute: () => AppRemindersRoute,
+} as any)
+const AppNotesIdRoute = AppNotesIdRouteImport.update({
+  id: '/$id',
+  path: '/$id',
+  getParentRoute: () => AppNotesRoute,
+} as any)
+const AppEventsIdRoute = AppEventsIdRouteImport.update({
+  id: '/$id',
+  path: '/$id',
+  getParentRoute: () => AppEventsRoute,
+} as any)
+const AppCaptureThoughtRoute = AppCaptureThoughtRouteImport.update({
+  id: '/_app/capture/thought',
+  path: '/capture/thought',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AppCaptureTaskRoute = AppCaptureTaskRouteImport.update({
+  id: '/_app/capture/task',
+  path: '/capture/task',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AppCaptureReminderRoute = AppCaptureReminderRouteImport.update({
+  id: '/_app/capture/reminder',
+  path: '/capture/reminder',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AppCaptureNoteRoute = AppCaptureNoteRouteImport.update({
+  id: '/_app/capture/note',
+  path: '/capture/note',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AppCaptureEventRoute = AppCaptureEventRouteImport.update({
+  id: '/_app/capture/event',
+  path: '/capture/event',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AppThoughtsIdEditRoute = AppThoughtsIdEditRouteImport.update({
   id: '/edit',
   path: '/edit',
-  getParentRoute: () => EventsIdRoute,
+  getParentRoute: () => AppThoughtsIdRoute,
+} as any)
+const AppTasksIdEditRoute = AppTasksIdEditRouteImport.update({
+  id: '/edit',
+  path: '/edit',
+  getParentRoute: () => AppTasksIdRoute,
+} as any)
+const AppRemindersIdEditRoute = AppRemindersIdEditRouteImport.update({
+  id: '/edit',
+  path: '/edit',
+  getParentRoute: () => AppRemindersIdRoute,
+} as any)
+const AppNotesIdEditRoute = AppNotesIdEditRouteImport.update({
+  id: '/edit',
+  path: '/edit',
+  getParentRoute: () => AppNotesIdRoute,
+} as any)
+const AppEventsIdEditRoute = AppEventsIdEditRouteImport.update({
+  id: '/edit',
+  path: '/edit',
+  getParentRoute: () => AppEventsIdRoute,
 } as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
-  '/ai-memory': typeof AiMemoryRoute
-  '/events': typeof EventsRouteWithChildren
-  '/insights': typeof InsightsRoute
-  '/notes': typeof NotesRouteWithChildren
-  '/notifications': typeof NotificationsRoute
   '/onboarding': typeof OnboardingRoute
-  '/reminders': typeof RemindersRouteWithChildren
-  '/settings': typeof SettingsRoute
-  '/thoughts': typeof ThoughtsRouteWithChildren
+  '/ai-memory': typeof AppAiMemoryRoute
+  '/events': typeof AppEventsRouteWithChildren
+  '/insights': typeof AppInsightsRoute
+  '/notes': typeof AppNotesRouteWithChildren
+  '/notifications': typeof AppNotificationsRoute
+  '/reminders': typeof AppRemindersRouteWithChildren
+  '/settings': typeof AppSettingsRoute
+  '/thoughts': typeof AppThoughtsRouteWithChildren
   '/ai': typeof TabsAiRoute
   '/calendar': typeof TabsCalendarRoute
   '/home': typeof TabsHomeRoute
@@ -254,33 +254,33 @@ export interface FileRoutesByFullPath {
   '/auth/sign-in': typeof AuthSignInRoute
   '/auth/sign-up': typeof AuthSignUpRoute
   '/auth/verify-email': typeof AuthVerifyEmailRoute
-  '/capture/event': typeof CaptureEventRoute
-  '/capture/note': typeof CaptureNoteRoute
-  '/capture/reminder': typeof CaptureReminderRoute
-  '/capture/task': typeof CaptureTaskRoute
-  '/capture/thought': typeof CaptureThoughtRoute
-  '/events/$id': typeof EventsIdRouteWithChildren
-  '/notes/$id': typeof NotesIdRouteWithChildren
-  '/reminders/$id': typeof RemindersIdRouteWithChildren
-  '/tasks/$id': typeof TasksIdRouteWithChildren
-  '/thoughts/$id': typeof ThoughtsIdRouteWithChildren
-  '/events/$id/edit': typeof EventsIdEditRoute
-  '/notes/$id/edit': typeof NotesIdEditRoute
-  '/reminders/$id/edit': typeof RemindersIdEditRoute
-  '/tasks/$id/edit': typeof TasksIdEditRoute
-  '/thoughts/$id/edit': typeof ThoughtsIdEditRoute
+  '/capture/event': typeof AppCaptureEventRoute
+  '/capture/note': typeof AppCaptureNoteRoute
+  '/capture/reminder': typeof AppCaptureReminderRoute
+  '/capture/task': typeof AppCaptureTaskRoute
+  '/capture/thought': typeof AppCaptureThoughtRoute
+  '/events/$id': typeof AppEventsIdRouteWithChildren
+  '/notes/$id': typeof AppNotesIdRouteWithChildren
+  '/reminders/$id': typeof AppRemindersIdRouteWithChildren
+  '/tasks/$id': typeof AppTasksIdRouteWithChildren
+  '/thoughts/$id': typeof AppThoughtsIdRouteWithChildren
+  '/events/$id/edit': typeof AppEventsIdEditRoute
+  '/notes/$id/edit': typeof AppNotesIdEditRoute
+  '/reminders/$id/edit': typeof AppRemindersIdEditRoute
+  '/tasks/$id/edit': typeof AppTasksIdEditRoute
+  '/thoughts/$id/edit': typeof AppThoughtsIdEditRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
-  '/ai-memory': typeof AiMemoryRoute
-  '/events': typeof EventsRouteWithChildren
-  '/insights': typeof InsightsRoute
-  '/notes': typeof NotesRouteWithChildren
-  '/notifications': typeof NotificationsRoute
   '/onboarding': typeof OnboardingRoute
-  '/reminders': typeof RemindersRouteWithChildren
-  '/settings': typeof SettingsRoute
-  '/thoughts': typeof ThoughtsRouteWithChildren
+  '/ai-memory': typeof AppAiMemoryRoute
+  '/events': typeof AppEventsRouteWithChildren
+  '/insights': typeof AppInsightsRoute
+  '/notes': typeof AppNotesRouteWithChildren
+  '/notifications': typeof AppNotificationsRoute
+  '/reminders': typeof AppRemindersRouteWithChildren
+  '/settings': typeof AppSettingsRoute
+  '/thoughts': typeof AppThoughtsRouteWithChildren
   '/ai': typeof TabsAiRoute
   '/calendar': typeof TabsCalendarRoute
   '/home': typeof TabsHomeRoute
@@ -292,35 +292,35 @@ export interface FileRoutesByTo {
   '/auth/sign-in': typeof AuthSignInRoute
   '/auth/sign-up': typeof AuthSignUpRoute
   '/auth/verify-email': typeof AuthVerifyEmailRoute
-  '/capture/event': typeof CaptureEventRoute
-  '/capture/note': typeof CaptureNoteRoute
-  '/capture/reminder': typeof CaptureReminderRoute
-  '/capture/task': typeof CaptureTaskRoute
-  '/capture/thought': typeof CaptureThoughtRoute
-  '/events/$id': typeof EventsIdRouteWithChildren
-  '/notes/$id': typeof NotesIdRouteWithChildren
-  '/reminders/$id': typeof RemindersIdRouteWithChildren
-  '/tasks/$id': typeof TasksIdRouteWithChildren
-  '/thoughts/$id': typeof ThoughtsIdRouteWithChildren
-  '/events/$id/edit': typeof EventsIdEditRoute
-  '/notes/$id/edit': typeof NotesIdEditRoute
-  '/reminders/$id/edit': typeof RemindersIdEditRoute
-  '/tasks/$id/edit': typeof TasksIdEditRoute
-  '/thoughts/$id/edit': typeof ThoughtsIdEditRoute
+  '/capture/event': typeof AppCaptureEventRoute
+  '/capture/note': typeof AppCaptureNoteRoute
+  '/capture/reminder': typeof AppCaptureReminderRoute
+  '/capture/task': typeof AppCaptureTaskRoute
+  '/capture/thought': typeof AppCaptureThoughtRoute
+  '/events/$id': typeof AppEventsIdRouteWithChildren
+  '/notes/$id': typeof AppNotesIdRouteWithChildren
+  '/reminders/$id': typeof AppRemindersIdRouteWithChildren
+  '/tasks/$id': typeof AppTasksIdRouteWithChildren
+  '/thoughts/$id': typeof AppThoughtsIdRouteWithChildren
+  '/events/$id/edit': typeof AppEventsIdEditRoute
+  '/notes/$id/edit': typeof AppNotesIdEditRoute
+  '/reminders/$id/edit': typeof AppRemindersIdEditRoute
+  '/tasks/$id/edit': typeof AppTasksIdEditRoute
+  '/thoughts/$id/edit': typeof AppThoughtsIdEditRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
   '/_tabs': typeof TabsRouteWithChildren
-  '/ai-memory': typeof AiMemoryRoute
-  '/events': typeof EventsRouteWithChildren
-  '/insights': typeof InsightsRoute
-  '/notes': typeof NotesRouteWithChildren
-  '/notifications': typeof NotificationsRoute
   '/onboarding': typeof OnboardingRoute
-  '/reminders': typeof RemindersRouteWithChildren
-  '/settings': typeof SettingsRoute
-  '/thoughts': typeof ThoughtsRouteWithChildren
+  '/_app/ai-memory': typeof AppAiMemoryRoute
+  '/_app/events': typeof AppEventsRouteWithChildren
+  '/_app/insights': typeof AppInsightsRoute
+  '/_app/notes': typeof AppNotesRouteWithChildren
+  '/_app/notifications': typeof AppNotificationsRoute
+  '/_app/reminders': typeof AppRemindersRouteWithChildren
+  '/_app/settings': typeof AppSettingsRoute
+  '/_app/thoughts': typeof AppThoughtsRouteWithChildren
   '/_tabs/ai': typeof TabsAiRoute
   '/_tabs/calendar': typeof TabsCalendarRoute
   '/_tabs/home': typeof TabsHomeRoute
@@ -332,32 +332,32 @@ export interface FileRoutesById {
   '/auth/sign-in': typeof AuthSignInRoute
   '/auth/sign-up': typeof AuthSignUpRoute
   '/auth/verify-email': typeof AuthVerifyEmailRoute
-  '/capture/event': typeof CaptureEventRoute
-  '/capture/note': typeof CaptureNoteRoute
-  '/capture/reminder': typeof CaptureReminderRoute
-  '/capture/task': typeof CaptureTaskRoute
-  '/capture/thought': typeof CaptureThoughtRoute
-  '/events/$id': typeof EventsIdRouteWithChildren
-  '/notes/$id': typeof NotesIdRouteWithChildren
-  '/reminders/$id': typeof RemindersIdRouteWithChildren
-  '/tasks/$id': typeof TasksIdRouteWithChildren
-  '/thoughts/$id': typeof ThoughtsIdRouteWithChildren
-  '/events/$id/edit': typeof EventsIdEditRoute
-  '/notes/$id/edit': typeof NotesIdEditRoute
-  '/reminders/$id/edit': typeof RemindersIdEditRoute
-  '/tasks/$id/edit': typeof TasksIdEditRoute
-  '/thoughts/$id/edit': typeof ThoughtsIdEditRoute
+  '/_app/capture/event': typeof AppCaptureEventRoute
+  '/_app/capture/note': typeof AppCaptureNoteRoute
+  '/_app/capture/reminder': typeof AppCaptureReminderRoute
+  '/_app/capture/task': typeof AppCaptureTaskRoute
+  '/_app/capture/thought': typeof AppCaptureThoughtRoute
+  '/_app/events/$id': typeof AppEventsIdRouteWithChildren
+  '/_app/notes/$id': typeof AppNotesIdRouteWithChildren
+  '/_app/reminders/$id': typeof AppRemindersIdRouteWithChildren
+  '/_app/tasks/$id': typeof AppTasksIdRouteWithChildren
+  '/_app/thoughts/$id': typeof AppThoughtsIdRouteWithChildren
+  '/_app/events/$id/edit': typeof AppEventsIdEditRoute
+  '/_app/notes/$id/edit': typeof AppNotesIdEditRoute
+  '/_app/reminders/$id/edit': typeof AppRemindersIdEditRoute
+  '/_app/tasks/$id/edit': typeof AppTasksIdEditRoute
+  '/_app/thoughts/$id/edit': typeof AppThoughtsIdEditRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
   fullPaths:
     | '/'
+    | '/onboarding'
     | '/ai-memory'
     | '/events'
     | '/insights'
     | '/notes'
     | '/notifications'
-    | '/onboarding'
     | '/reminders'
     | '/settings'
     | '/thoughts'
@@ -390,12 +390,12 @@ export interface FileRouteTypes {
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
+    | '/onboarding'
     | '/ai-memory'
     | '/events'
     | '/insights'
     | '/notes'
     | '/notifications'
-    | '/onboarding'
     | '/reminders'
     | '/settings'
     | '/thoughts'
@@ -429,15 +429,15 @@ export interface FileRouteTypes {
     | '__root__'
     | '/'
     | '/_tabs'
-    | '/ai-memory'
-    | '/events'
-    | '/insights'
-    | '/notes'
-    | '/notifications'
     | '/onboarding'
-    | '/reminders'
-    | '/settings'
-    | '/thoughts'
+    | '/_app/ai-memory'
+    | '/_app/events'
+    | '/_app/insights'
+    | '/_app/notes'
+    | '/_app/notifications'
+    | '/_app/reminders'
+    | '/_app/settings'
+    | '/_app/thoughts'
     | '/_tabs/ai'
     | '/_tabs/calendar'
     | '/_tabs/home'
@@ -449,112 +449,56 @@ export interface FileRouteTypes {
     | '/auth/sign-in'
     | '/auth/sign-up'
     | '/auth/verify-email'
-    | '/capture/event'
-    | '/capture/note'
-    | '/capture/reminder'
-    | '/capture/task'
-    | '/capture/thought'
-    | '/events/$id'
-    | '/notes/$id'
-    | '/reminders/$id'
-    | '/tasks/$id'
-    | '/thoughts/$id'
-    | '/events/$id/edit'
-    | '/notes/$id/edit'
-    | '/reminders/$id/edit'
-    | '/tasks/$id/edit'
-    | '/thoughts/$id/edit'
+    | '/_app/capture/event'
+    | '/_app/capture/note'
+    | '/_app/capture/reminder'
+    | '/_app/capture/task'
+    | '/_app/capture/thought'
+    | '/_app/events/$id'
+    | '/_app/notes/$id'
+    | '/_app/reminders/$id'
+    | '/_app/tasks/$id'
+    | '/_app/thoughts/$id'
+    | '/_app/events/$id/edit'
+    | '/_app/notes/$id/edit'
+    | '/_app/reminders/$id/edit'
+    | '/_app/tasks/$id/edit'
+    | '/_app/thoughts/$id/edit'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   TabsRoute: typeof TabsRouteWithChildren
-  AiMemoryRoute: typeof AiMemoryRoute
-  EventsRoute: typeof EventsRouteWithChildren
-  InsightsRoute: typeof InsightsRoute
-  NotesRoute: typeof NotesRouteWithChildren
-  NotificationsRoute: typeof NotificationsRoute
   OnboardingRoute: typeof OnboardingRoute
-  RemindersRoute: typeof RemindersRouteWithChildren
-  SettingsRoute: typeof SettingsRoute
-  ThoughtsRoute: typeof ThoughtsRouteWithChildren
+  AppAiMemoryRoute: typeof AppAiMemoryRoute
+  AppEventsRoute: typeof AppEventsRouteWithChildren
+  AppInsightsRoute: typeof AppInsightsRoute
+  AppNotesRoute: typeof AppNotesRouteWithChildren
+  AppNotificationsRoute: typeof AppNotificationsRoute
+  AppRemindersRoute: typeof AppRemindersRouteWithChildren
+  AppSettingsRoute: typeof AppSettingsRoute
+  AppThoughtsRoute: typeof AppThoughtsRouteWithChildren
   ApiChatRoute: typeof ApiChatRoute
   AuthForgotPasswordRoute: typeof AuthForgotPasswordRoute
   AuthResetPasswordRoute: typeof AuthResetPasswordRoute
   AuthSignInRoute: typeof AuthSignInRoute
   AuthSignUpRoute: typeof AuthSignUpRoute
   AuthVerifyEmailRoute: typeof AuthVerifyEmailRoute
-  CaptureEventRoute: typeof CaptureEventRoute
-  CaptureNoteRoute: typeof CaptureNoteRoute
-  CaptureReminderRoute: typeof CaptureReminderRoute
-  CaptureTaskRoute: typeof CaptureTaskRoute
-  CaptureThoughtRoute: typeof CaptureThoughtRoute
-  TasksIdRoute: typeof TasksIdRouteWithChildren
+  AppCaptureEventRoute: typeof AppCaptureEventRoute
+  AppCaptureNoteRoute: typeof AppCaptureNoteRoute
+  AppCaptureReminderRoute: typeof AppCaptureReminderRoute
+  AppCaptureTaskRoute: typeof AppCaptureTaskRoute
+  AppCaptureThoughtRoute: typeof AppCaptureThoughtRoute
+  AppTasksIdRoute: typeof AppTasksIdRouteWithChildren
 }
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
-    '/thoughts': {
-      id: '/thoughts'
-      path: '/thoughts'
-      fullPath: '/thoughts'
-      preLoaderRoute: typeof ThoughtsRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/settings': {
-      id: '/settings'
-      path: '/settings'
-      fullPath: '/settings'
-      preLoaderRoute: typeof SettingsRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/reminders': {
-      id: '/reminders'
-      path: '/reminders'
-      fullPath: '/reminders'
-      preLoaderRoute: typeof RemindersRouteImport
-      parentRoute: typeof rootRouteImport
-    }
     '/onboarding': {
       id: '/onboarding'
       path: '/onboarding'
       fullPath: '/onboarding'
       preLoaderRoute: typeof OnboardingRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/notifications': {
-      id: '/notifications'
-      path: '/notifications'
-      fullPath: '/notifications'
-      preLoaderRoute: typeof NotificationsRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/notes': {
-      id: '/notes'
-      path: '/notes'
-      fullPath: '/notes'
-      preLoaderRoute: typeof NotesRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/insights': {
-      id: '/insights'
-      path: '/insights'
-      fullPath: '/insights'
-      preLoaderRoute: typeof InsightsRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/events': {
-      id: '/events'
-      path: '/events'
-      fullPath: '/events'
-      preLoaderRoute: typeof EventsRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/ai-memory': {
-      id: '/ai-memory'
-      path: '/ai-memory'
-      fullPath: '/ai-memory'
-      preLoaderRoute: typeof AiMemoryRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/_tabs': {
@@ -569,76 +513,6 @@ declare module '@tanstack/react-router' {
       path: '/'
       fullPath: '/'
       preLoaderRoute: typeof IndexRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/thoughts/$id': {
-      id: '/thoughts/$id'
-      path: '/$id'
-      fullPath: '/thoughts/$id'
-      preLoaderRoute: typeof ThoughtsIdRouteImport
-      parentRoute: typeof ThoughtsRoute
-    }
-    '/tasks/$id': {
-      id: '/tasks/$id'
-      path: '/tasks/$id'
-      fullPath: '/tasks/$id'
-      preLoaderRoute: typeof TasksIdRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/reminders/$id': {
-      id: '/reminders/$id'
-      path: '/$id'
-      fullPath: '/reminders/$id'
-      preLoaderRoute: typeof RemindersIdRouteImport
-      parentRoute: typeof RemindersRoute
-    }
-    '/notes/$id': {
-      id: '/notes/$id'
-      path: '/$id'
-      fullPath: '/notes/$id'
-      preLoaderRoute: typeof NotesIdRouteImport
-      parentRoute: typeof NotesRoute
-    }
-    '/events/$id': {
-      id: '/events/$id'
-      path: '/$id'
-      fullPath: '/events/$id'
-      preLoaderRoute: typeof EventsIdRouteImport
-      parentRoute: typeof EventsRoute
-    }
-    '/capture/thought': {
-      id: '/capture/thought'
-      path: '/capture/thought'
-      fullPath: '/capture/thought'
-      preLoaderRoute: typeof CaptureThoughtRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/capture/task': {
-      id: '/capture/task'
-      path: '/capture/task'
-      fullPath: '/capture/task'
-      preLoaderRoute: typeof CaptureTaskRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/capture/reminder': {
-      id: '/capture/reminder'
-      path: '/capture/reminder'
-      fullPath: '/capture/reminder'
-      preLoaderRoute: typeof CaptureReminderRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/capture/note': {
-      id: '/capture/note'
-      path: '/capture/note'
-      fullPath: '/capture/note'
-      preLoaderRoute: typeof CaptureNoteRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/capture/event': {
-      id: '/capture/event'
-      path: '/capture/event'
-      fullPath: '/capture/event'
-      preLoaderRoute: typeof CaptureEventRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/auth/verify-email': {
@@ -718,40 +592,166 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof TabsAiRouteImport
       parentRoute: typeof TabsRoute
     }
-    '/thoughts/$id/edit': {
-      id: '/thoughts/$id/edit'
+    '/_app/thoughts': {
+      id: '/_app/thoughts'
+      path: '/thoughts'
+      fullPath: '/thoughts'
+      preLoaderRoute: typeof AppThoughtsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/_app/settings': {
+      id: '/_app/settings'
+      path: '/settings'
+      fullPath: '/settings'
+      preLoaderRoute: typeof AppSettingsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/_app/reminders': {
+      id: '/_app/reminders'
+      path: '/reminders'
+      fullPath: '/reminders'
+      preLoaderRoute: typeof AppRemindersRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/_app/notifications': {
+      id: '/_app/notifications'
+      path: '/notifications'
+      fullPath: '/notifications'
+      preLoaderRoute: typeof AppNotificationsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/_app/notes': {
+      id: '/_app/notes'
+      path: '/notes'
+      fullPath: '/notes'
+      preLoaderRoute: typeof AppNotesRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/_app/insights': {
+      id: '/_app/insights'
+      path: '/insights'
+      fullPath: '/insights'
+      preLoaderRoute: typeof AppInsightsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/_app/events': {
+      id: '/_app/events'
+      path: '/events'
+      fullPath: '/events'
+      preLoaderRoute: typeof AppEventsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/_app/ai-memory': {
+      id: '/_app/ai-memory'
+      path: '/ai-memory'
+      fullPath: '/ai-memory'
+      preLoaderRoute: typeof AppAiMemoryRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/_app/thoughts/$id': {
+      id: '/_app/thoughts/$id'
+      path: '/$id'
+      fullPath: '/thoughts/$id'
+      preLoaderRoute: typeof AppThoughtsIdRouteImport
+      parentRoute: typeof AppThoughtsRoute
+    }
+    '/_app/tasks/$id': {
+      id: '/_app/tasks/$id'
+      path: '/tasks/$id'
+      fullPath: '/tasks/$id'
+      preLoaderRoute: typeof AppTasksIdRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/_app/reminders/$id': {
+      id: '/_app/reminders/$id'
+      path: '/$id'
+      fullPath: '/reminders/$id'
+      preLoaderRoute: typeof AppRemindersIdRouteImport
+      parentRoute: typeof AppRemindersRoute
+    }
+    '/_app/notes/$id': {
+      id: '/_app/notes/$id'
+      path: '/$id'
+      fullPath: '/notes/$id'
+      preLoaderRoute: typeof AppNotesIdRouteImport
+      parentRoute: typeof AppNotesRoute
+    }
+    '/_app/events/$id': {
+      id: '/_app/events/$id'
+      path: '/$id'
+      fullPath: '/events/$id'
+      preLoaderRoute: typeof AppEventsIdRouteImport
+      parentRoute: typeof AppEventsRoute
+    }
+    '/_app/capture/thought': {
+      id: '/_app/capture/thought'
+      path: '/capture/thought'
+      fullPath: '/capture/thought'
+      preLoaderRoute: typeof AppCaptureThoughtRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/_app/capture/task': {
+      id: '/_app/capture/task'
+      path: '/capture/task'
+      fullPath: '/capture/task'
+      preLoaderRoute: typeof AppCaptureTaskRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/_app/capture/reminder': {
+      id: '/_app/capture/reminder'
+      path: '/capture/reminder'
+      fullPath: '/capture/reminder'
+      preLoaderRoute: typeof AppCaptureReminderRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/_app/capture/note': {
+      id: '/_app/capture/note'
+      path: '/capture/note'
+      fullPath: '/capture/note'
+      preLoaderRoute: typeof AppCaptureNoteRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/_app/capture/event': {
+      id: '/_app/capture/event'
+      path: '/capture/event'
+      fullPath: '/capture/event'
+      preLoaderRoute: typeof AppCaptureEventRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/_app/thoughts/$id/edit': {
+      id: '/_app/thoughts/$id/edit'
       path: '/edit'
       fullPath: '/thoughts/$id/edit'
-      preLoaderRoute: typeof ThoughtsIdEditRouteImport
-      parentRoute: typeof ThoughtsIdRoute
+      preLoaderRoute: typeof AppThoughtsIdEditRouteImport
+      parentRoute: typeof AppThoughtsIdRoute
     }
-    '/tasks/$id/edit': {
-      id: '/tasks/$id/edit'
+    '/_app/tasks/$id/edit': {
+      id: '/_app/tasks/$id/edit'
       path: '/edit'
       fullPath: '/tasks/$id/edit'
-      preLoaderRoute: typeof TasksIdEditRouteImport
-      parentRoute: typeof TasksIdRoute
+      preLoaderRoute: typeof AppTasksIdEditRouteImport
+      parentRoute: typeof AppTasksIdRoute
     }
-    '/reminders/$id/edit': {
-      id: '/reminders/$id/edit'
+    '/_app/reminders/$id/edit': {
+      id: '/_app/reminders/$id/edit'
       path: '/edit'
       fullPath: '/reminders/$id/edit'
-      preLoaderRoute: typeof RemindersIdEditRouteImport
-      parentRoute: typeof RemindersIdRoute
+      preLoaderRoute: typeof AppRemindersIdEditRouteImport
+      parentRoute: typeof AppRemindersIdRoute
     }
-    '/notes/$id/edit': {
-      id: '/notes/$id/edit'
+    '/_app/notes/$id/edit': {
+      id: '/_app/notes/$id/edit'
       path: '/edit'
       fullPath: '/notes/$id/edit'
-      preLoaderRoute: typeof NotesIdEditRouteImport
-      parentRoute: typeof NotesIdRoute
+      preLoaderRoute: typeof AppNotesIdEditRouteImport
+      parentRoute: typeof AppNotesIdRoute
     }
-    '/events/$id/edit': {
-      id: '/events/$id/edit'
+    '/_app/events/$id/edit': {
+      id: '/_app/events/$id/edit'
       path: '/edit'
       fullPath: '/events/$id/edit'
-      preLoaderRoute: typeof EventsIdEditRouteImport
-      parentRoute: typeof EventsIdRoute
+      preLoaderRoute: typeof AppEventsIdEditRouteImport
+      parentRoute: typeof AppEventsIdRoute
     }
   }
 }
@@ -774,133 +774,138 @@ const TabsRouteChildren: TabsRouteChildren = {
 
 const TabsRouteWithChildren = TabsRoute._addFileChildren(TabsRouteChildren)
 
-interface EventsIdRouteChildren {
-  EventsIdEditRoute: typeof EventsIdEditRoute
+interface AppEventsIdRouteChildren {
+  AppEventsIdEditRoute: typeof AppEventsIdEditRoute
 }
 
-const EventsIdRouteChildren: EventsIdRouteChildren = {
-  EventsIdEditRoute: EventsIdEditRoute,
+const AppEventsIdRouteChildren: AppEventsIdRouteChildren = {
+  AppEventsIdEditRoute: AppEventsIdEditRoute,
 }
 
-const EventsIdRouteWithChildren = EventsIdRoute._addFileChildren(
-  EventsIdRouteChildren,
+const AppEventsIdRouteWithChildren = AppEventsIdRoute._addFileChildren(
+  AppEventsIdRouteChildren,
 )
 
-interface EventsRouteChildren {
-  EventsIdRoute: typeof EventsIdRouteWithChildren
+interface AppEventsRouteChildren {
+  AppEventsIdRoute: typeof AppEventsIdRouteWithChildren
 }
 
-const EventsRouteChildren: EventsRouteChildren = {
-  EventsIdRoute: EventsIdRouteWithChildren,
+const AppEventsRouteChildren: AppEventsRouteChildren = {
+  AppEventsIdRoute: AppEventsIdRouteWithChildren,
 }
 
-const EventsRouteWithChildren =
-  EventsRoute._addFileChildren(EventsRouteChildren)
-
-interface NotesIdRouteChildren {
-  NotesIdEditRoute: typeof NotesIdEditRoute
-}
-
-const NotesIdRouteChildren: NotesIdRouteChildren = {
-  NotesIdEditRoute: NotesIdEditRoute,
-}
-
-const NotesIdRouteWithChildren =
-  NotesIdRoute._addFileChildren(NotesIdRouteChildren)
-
-interface NotesRouteChildren {
-  NotesIdRoute: typeof NotesIdRouteWithChildren
-}
-
-const NotesRouteChildren: NotesRouteChildren = {
-  NotesIdRoute: NotesIdRouteWithChildren,
-}
-
-const NotesRouteWithChildren = NotesRoute._addFileChildren(NotesRouteChildren)
-
-interface RemindersIdRouteChildren {
-  RemindersIdEditRoute: typeof RemindersIdEditRoute
-}
-
-const RemindersIdRouteChildren: RemindersIdRouteChildren = {
-  RemindersIdEditRoute: RemindersIdEditRoute,
-}
-
-const RemindersIdRouteWithChildren = RemindersIdRoute._addFileChildren(
-  RemindersIdRouteChildren,
+const AppEventsRouteWithChildren = AppEventsRoute._addFileChildren(
+  AppEventsRouteChildren,
 )
 
-interface RemindersRouteChildren {
-  RemindersIdRoute: typeof RemindersIdRouteWithChildren
+interface AppNotesIdRouteChildren {
+  AppNotesIdEditRoute: typeof AppNotesIdEditRoute
 }
 
-const RemindersRouteChildren: RemindersRouteChildren = {
-  RemindersIdRoute: RemindersIdRouteWithChildren,
+const AppNotesIdRouteChildren: AppNotesIdRouteChildren = {
+  AppNotesIdEditRoute: AppNotesIdEditRoute,
 }
 
-const RemindersRouteWithChildren = RemindersRoute._addFileChildren(
-  RemindersRouteChildren,
+const AppNotesIdRouteWithChildren = AppNotesIdRoute._addFileChildren(
+  AppNotesIdRouteChildren,
 )
 
-interface ThoughtsIdRouteChildren {
-  ThoughtsIdEditRoute: typeof ThoughtsIdEditRoute
+interface AppNotesRouteChildren {
+  AppNotesIdRoute: typeof AppNotesIdRouteWithChildren
 }
 
-const ThoughtsIdRouteChildren: ThoughtsIdRouteChildren = {
-  ThoughtsIdEditRoute: ThoughtsIdEditRoute,
+const AppNotesRouteChildren: AppNotesRouteChildren = {
+  AppNotesIdRoute: AppNotesIdRouteWithChildren,
 }
 
-const ThoughtsIdRouteWithChildren = ThoughtsIdRoute._addFileChildren(
-  ThoughtsIdRouteChildren,
+const AppNotesRouteWithChildren = AppNotesRoute._addFileChildren(
+  AppNotesRouteChildren,
 )
 
-interface ThoughtsRouteChildren {
-  ThoughtsIdRoute: typeof ThoughtsIdRouteWithChildren
+interface AppRemindersIdRouteChildren {
+  AppRemindersIdEditRoute: typeof AppRemindersIdEditRoute
 }
 
-const ThoughtsRouteChildren: ThoughtsRouteChildren = {
-  ThoughtsIdRoute: ThoughtsIdRouteWithChildren,
+const AppRemindersIdRouteChildren: AppRemindersIdRouteChildren = {
+  AppRemindersIdEditRoute: AppRemindersIdEditRoute,
 }
 
-const ThoughtsRouteWithChildren = ThoughtsRoute._addFileChildren(
-  ThoughtsRouteChildren,
+const AppRemindersIdRouteWithChildren = AppRemindersIdRoute._addFileChildren(
+  AppRemindersIdRouteChildren,
 )
 
-interface TasksIdRouteChildren {
-  TasksIdEditRoute: typeof TasksIdEditRoute
+interface AppRemindersRouteChildren {
+  AppRemindersIdRoute: typeof AppRemindersIdRouteWithChildren
 }
 
-const TasksIdRouteChildren: TasksIdRouteChildren = {
-  TasksIdEditRoute: TasksIdEditRoute,
+const AppRemindersRouteChildren: AppRemindersRouteChildren = {
+  AppRemindersIdRoute: AppRemindersIdRouteWithChildren,
 }
 
-const TasksIdRouteWithChildren =
-  TasksIdRoute._addFileChildren(TasksIdRouteChildren)
+const AppRemindersRouteWithChildren = AppRemindersRoute._addFileChildren(
+  AppRemindersRouteChildren,
+)
+
+interface AppThoughtsIdRouteChildren {
+  AppThoughtsIdEditRoute: typeof AppThoughtsIdEditRoute
+}
+
+const AppThoughtsIdRouteChildren: AppThoughtsIdRouteChildren = {
+  AppThoughtsIdEditRoute: AppThoughtsIdEditRoute,
+}
+
+const AppThoughtsIdRouteWithChildren = AppThoughtsIdRoute._addFileChildren(
+  AppThoughtsIdRouteChildren,
+)
+
+interface AppThoughtsRouteChildren {
+  AppThoughtsIdRoute: typeof AppThoughtsIdRouteWithChildren
+}
+
+const AppThoughtsRouteChildren: AppThoughtsRouteChildren = {
+  AppThoughtsIdRoute: AppThoughtsIdRouteWithChildren,
+}
+
+const AppThoughtsRouteWithChildren = AppThoughtsRoute._addFileChildren(
+  AppThoughtsRouteChildren,
+)
+
+interface AppTasksIdRouteChildren {
+  AppTasksIdEditRoute: typeof AppTasksIdEditRoute
+}
+
+const AppTasksIdRouteChildren: AppTasksIdRouteChildren = {
+  AppTasksIdEditRoute: AppTasksIdEditRoute,
+}
+
+const AppTasksIdRouteWithChildren = AppTasksIdRoute._addFileChildren(
+  AppTasksIdRouteChildren,
+)
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   TabsRoute: TabsRouteWithChildren,
-  AiMemoryRoute: AiMemoryRoute,
-  EventsRoute: EventsRouteWithChildren,
-  InsightsRoute: InsightsRoute,
-  NotesRoute: NotesRouteWithChildren,
-  NotificationsRoute: NotificationsRoute,
   OnboardingRoute: OnboardingRoute,
-  RemindersRoute: RemindersRouteWithChildren,
-  SettingsRoute: SettingsRoute,
-  ThoughtsRoute: ThoughtsRouteWithChildren,
+  AppAiMemoryRoute: AppAiMemoryRoute,
+  AppEventsRoute: AppEventsRouteWithChildren,
+  AppInsightsRoute: AppInsightsRoute,
+  AppNotesRoute: AppNotesRouteWithChildren,
+  AppNotificationsRoute: AppNotificationsRoute,
+  AppRemindersRoute: AppRemindersRouteWithChildren,
+  AppSettingsRoute: AppSettingsRoute,
+  AppThoughtsRoute: AppThoughtsRouteWithChildren,
   ApiChatRoute: ApiChatRoute,
   AuthForgotPasswordRoute: AuthForgotPasswordRoute,
   AuthResetPasswordRoute: AuthResetPasswordRoute,
   AuthSignInRoute: AuthSignInRoute,
   AuthSignUpRoute: AuthSignUpRoute,
   AuthVerifyEmailRoute: AuthVerifyEmailRoute,
-  CaptureEventRoute: CaptureEventRoute,
-  CaptureNoteRoute: CaptureNoteRoute,
-  CaptureReminderRoute: CaptureReminderRoute,
-  CaptureTaskRoute: CaptureTaskRoute,
-  CaptureThoughtRoute: CaptureThoughtRoute,
-  TasksIdRoute: TasksIdRouteWithChildren,
+  AppCaptureEventRoute: AppCaptureEventRoute,
+  AppCaptureNoteRoute: AppCaptureNoteRoute,
+  AppCaptureReminderRoute: AppCaptureReminderRoute,
+  AppCaptureTaskRoute: AppCaptureTaskRoute,
+  AppCaptureThoughtRoute: AppCaptureThoughtRoute,
+  AppTasksIdRoute: AppTasksIdRouteWithChildren,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)

@@ -6,7 +6,7 @@ import { PageShell } from "@/components/nova/page-shell";
 import { ConfirmDeleteDialog } from "@/components/nova/confirm-delete";
 import { notesStore, useNote } from "@/features/notes/use-notes";
 
-export const Route = createFileRoute("/notes/$id")({
+export const Route = createFileRoute("/_app/notes/$id")({
   head: () => ({
     meta: [
       { title: "Note — D2D AI" },

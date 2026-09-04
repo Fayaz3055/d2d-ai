@@ -4,7 +4,7 @@ import { toast } from "sonner";
 import { CapturePage, Field, fieldInputCn } from "@/features/quick-capture/capture-page";
 import { remindersStore, useReminder } from "@/features/reminders/use-reminders";
 
-export const Route = createFileRoute("/reminders/$id/edit")({
+export const Route = createFileRoute("/_app/reminders/$id/edit")({
   head: () => ({
     meta: [
       { title: "Edit Reminder — D2D AI" },

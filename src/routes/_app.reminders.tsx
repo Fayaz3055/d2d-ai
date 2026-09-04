@@ -6,7 +6,7 @@ import { useReminders, remindersStore, reminderTimestamp } from "@/features/remi
 import { quickCapture } from "@/features/quick-capture/quick-capture-store";
 import { cn } from "@/lib/utils";
 
-export const Route = createFileRoute("/reminders")({
+export const Route = createFileRoute("/_app/reminders")({
   head: () => ({
     meta: [
       { title: "Reminders — D2D AI" },

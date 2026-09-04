@@ -5,7 +5,7 @@ import { useDraft } from "@/features/quick-capture/use-draft";
 import { remindersStore } from "@/features/reminders/use-reminders";
 import { announceCapture } from "@/features/ai/capture-reply";
 
-export const Route = createFileRoute("/capture/reminder")({
+export const Route = createFileRoute("/_app/capture/reminder")({
   head: () => ({
     meta: [
       { title: "New Reminder — D2D AI" },

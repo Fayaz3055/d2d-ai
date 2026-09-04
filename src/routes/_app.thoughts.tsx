@@ -8,7 +8,7 @@ import { CATEGORY_META, THOUGHT_CATEGORIES, categoryMeta } from "@/features/thou
 import { quickCapture } from "@/features/quick-capture/quick-capture-store";
 import { queueAiPrompt } from "@/features/ai/pending-prompt";
 
-export const Route = createFileRoute("/thoughts")({
+export const Route = createFileRoute("/_app/thoughts")({
   head: () => ({
     meta: [
       { title: "Thought Inbox — D2D AI" },

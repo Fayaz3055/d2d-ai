@@ -4,7 +4,7 @@ import { toast } from "sonner";
 import { CapturePage, Field, fieldInputCn } from "@/features/quick-capture/capture-page";
 import { thoughtsStore, useThought } from "@/features/thoughts/use-thoughts";
 
-export const Route = createFileRoute("/thoughts/$id/edit")({
+export const Route = createFileRoute("/_app/thoughts/$id/edit")({
   head: () => ({
     meta: [
       { title: "Edit Thought — D2D AI" },

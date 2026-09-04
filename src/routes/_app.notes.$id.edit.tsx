@@ -4,7 +4,7 @@ import { toast } from "sonner";
 import { CapturePage, Field, fieldInputCn } from "@/features/quick-capture/capture-page";
 import { notesStore, useNote } from "@/features/notes/use-notes";
 
-export const Route = createFileRoute("/notes/$id/edit")({
+export const Route = createFileRoute("/_app/notes/$id/edit")({
   head: () => ({
     meta: [
       { title: "Edit Note — D2D AI" },

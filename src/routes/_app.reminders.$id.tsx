@@ -7,7 +7,7 @@ import { ConfirmDeleteDialog } from "@/components/nova/confirm-delete";
 import { remindersStore, useReminder } from "@/features/reminders/use-reminders";
 import { cn } from "@/lib/utils";
 
-export const Route = createFileRoute("/reminders/$id")({
+export const Route = createFileRoute("/_app/reminders/$id")({
   head: () => ({
     meta: [
       { title: "Reminder — D2D AI" },

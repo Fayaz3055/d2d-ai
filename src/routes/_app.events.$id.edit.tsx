@@ -4,7 +4,7 @@ import { toast } from "sonner";
 import { CapturePage, Field, fieldInputCn } from "@/features/quick-capture/capture-page";
 import { eventsStore, useEvent } from "@/features/events/use-events";
 
-export const Route = createFileRoute("/events/$id/edit")({
+export const Route = createFileRoute("/_app/events/$id/edit")({
   head: () => ({
     meta: [
       { title: "Edit Event — D2D AI" },

@@ -7,7 +7,7 @@ import { useLifeContext } from "@/features/ai/context";
 import { getWeeklyInsights, type WeeklyInsights } from "@/features/ai/ai-insights.functions";
 import { useTasks } from "@/features/tasks/use-tasks";
 
-export const Route = createFileRoute("/insights")({
+export const Route = createFileRoute("/_app/insights")({
   ssr: false,
   head: () => ({
     meta: [

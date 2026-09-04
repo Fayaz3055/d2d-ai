@@ -16,7 +16,7 @@ import {
 import { TIMELINE_LABEL, logThoughtEvent, useThoughtTimeline } from "@/features/thoughts/timeline";
 import { ThoughtAiActions } from "@/features/thoughts/thought-ai-actions";
 
-export const Route = createFileRoute("/thoughts/$id")({
+export const Route = createFileRoute("/_app/thoughts/$id")({
   head: () => ({
     meta: [
       { title: "Thought — D2D AI" },
